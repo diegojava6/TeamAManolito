@@ -19,6 +19,8 @@ public class Roles {
 	private String descRol;
 	private Set<Tareas> tareas;
 	private Set<Usuarios> usuarios;
+	
+	
 	public Roles() {
 		super();
 	}
@@ -59,6 +61,13 @@ public class Roles {
 	}
 	public void setTareas(Set<Tareas> tareas) {
 		this.tareas = tareas;
+	}
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+	public Set<Usuarios> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(Set<Usuarios> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
 	
