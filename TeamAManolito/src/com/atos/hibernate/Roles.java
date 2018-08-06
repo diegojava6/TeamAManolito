@@ -1,7 +1,7 @@
 package com.atos.hibernate;
 
-import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,76 +11,56 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- * Roles entity. @author MyEclipse Persistence Tools
- */
+
 @Entity
-@Table(name = "ROLES")
-public class Roles implements java.io.Serializable {
-
-	// Fields
-
-	private Byte codigoRol;
-	private String descripcionRol;
-	private Set<Tareas> tareases = new HashSet<Tareas>(0);
-	private Set<Usuarios> usuarioses = new HashSet<Usuarios>(0);
-
-	// Constructors
-
-	/** default constructor */
+@Table(name = "roles")
+public class Roles {
+	private Integer codRol;
+	private String descRol;
+	private Set<Tareas> tareas;
+	private Set<Usuarios> usuarios;
 	public Roles() {
+		super();
 	}
-
-	/** minimal constructor */
-	public Roles(Byte codigoRol) {
-		this.codigoRol = codigoRol;
+	public Roles(Integer codRol) {
+		super();
+		this.codRol = codRol;
 	}
-
-	/** full constructor */
-	public Roles(Byte codigoRol, String descripcionRol, Set<Tareas> tareases,
-			Set<Usuarios> usuarioses) {
-		this.codigoRol = codigoRol;
-		this.descripcionRol = descripcionRol;
-		this.tareases = tareases;
-		this.usuarioses = usuarioses;
+	public Roles(Integer codRol, Set<Tareas> tareas) {
+		super();
+		this.codRol = codRol;
+		this.tareas = tareas;
 	}
-
-	// Property accessors
+	public Roles(Integer codRol, String descRol, Set<Tareas> tareas) {
+		super();
+		this.codRol = codRol;
+		this.descRol = descRol;
+		this.tareas = tareas;
+	}
+	
 	@Id
-	@Column(name = "CODIGO_ROL", unique = true, nullable = false, precision = 2, scale = 0)
-	public Byte getCodigoRol() {
-		return this.codigoRol;
+	@Column(name = "codigo_rol", unique = true, nullable = false, precision = 11, scale = 0)
+	public Integer getCodRol() {
+		return codRol;
 	}
-
-	public void setCodigoRol(Byte codigoRol) {
-		this.codigoRol = codigoRol;
+	public void setCodRol(Integer codRol) {
+		this.codRol = codRol;
 	}
-
-	@Column(name = "DESCRIPCION_ROL", length = 100)
-	public String getDescripcionRol() {
-		return this.descripcionRol;
+	@Column(name = "rol", length = 100)
+	public String getDescRol() {
+		return descRol;
 	}
-
-	public void setDescripcionRol(String descripcionRol) {
-		this.descripcionRol = descripcionRol;
+	public void setDescRol(String descRol) {
+		this.descRol = descRol;
 	}
-
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roleses")
-	public Set<Tareas> getTareases() {
-		return this.tareases;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+	public Set<Tareas> getTareas() {
+		return tareas;
 	}
-
-	public void setTareases(Set<Tareas> tareases) {
-		this.tareases = tareases;
+	public void setTareas(Set<Tareas> tareas) {
+		this.tareas = tareas;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
-	public Set<Usuarios> getUsuarioses() {
-		return this.usuarioses;
-	}
-
-	public void setUsuarioses(Set<Usuarios> usuarioses) {
-		this.usuarioses = usuarioses;
-	}
+	
+	
 
 }
