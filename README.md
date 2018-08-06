@@ -1,0 +1,2 @@
+# TeamAManolito
+Proyecto para Atos.
