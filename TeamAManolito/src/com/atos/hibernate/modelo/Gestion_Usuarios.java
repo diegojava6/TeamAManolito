@@ -21,5 +21,12 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		return usuariosdao.findAll();
 	}
 
+	@Override
+	public Usuarios consultar_correo(String correo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
 	
 }
