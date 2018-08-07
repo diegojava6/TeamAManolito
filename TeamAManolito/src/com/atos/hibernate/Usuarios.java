@@ -1,124 +1,114 @@
 package com.atos.hibernate;
 
-import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- * Usuarios entity. @author MyEclipse Persistence Tools
- */
 @Entity
-@Table(name = "USUARIOS")
-public class Usuarios implements java.io.Serializable {
-
-	// Fields
-
-	private String nombreUsuario;
-	private Roles roles;
+@Table(name = "usuarios")
+public class Usuarios {
+	private String nombre;
+	private String apellidos;
+	private String correo;
 	private String password;
-	private Date fechaAlta;
-	private Date fechaBaja;
-	private String carpetaDocumentacion;
-	private String idioma;
+	private boolean primerLogin;
+	private boolean accesoAplicacion;
+	private Set<Roles> roles;
+	
+	
 
-	// Constructors
-
-	/** default constructor */
+	
 	public Usuarios() {
+		super();
 	}
-
-	/** minimal constructor */
-	public Usuarios(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	/** full constructor */
-	public Usuarios(String nombreUsuario, Roles roles, String password,
-			Date fechaAlta, Date fechaBaja, String carpetaDocumentacion,
-			String idioma) {
-		this.nombreUsuario = nombreUsuario;
-		this.roles = roles;
+	
+	
+	public Usuarios(String correo, String password) {
+		super();
+		this.correo = correo;
 		this.password = password;
-		this.fechaAlta = fechaAlta;
-		this.fechaBaja = fechaBaja;
-		this.carpetaDocumentacion = carpetaDocumentacion;
-		this.idioma = idioma;
 	}
+	
+	
 
-	// Property accessors
-	@Id
-	@Column(name = "NOMBRE_USUARIO", unique = true, nullable = false, length = 20)
-	public String getNombreUsuario() {
-		return this.nombreUsuario;
-	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CODIGO_ROL")
-	public Roles getRoles() {
-		return this.roles;
-	}
-
-	public void setRoles(Roles roles) {
+	public Usuarios(String nombre, String apellidos, String correo, String password, boolean primerLogin,
+			boolean accesoAplicacion, Set<Roles> roles) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.correo = correo;
+		this.password = password;
+		this.primerLogin = primerLogin;
+		this.accesoAplicacion = accesoAplicacion;
 		this.roles = roles;
 	}
 
-	@Column(name = "PASSWORD", length = 10)
-	public String getPassword() {
-		return this.password;
+	@Column(name = "nombre", nullable = false, length = 100)
+	public String getNombre() {
+		return nombre;
 	}
-
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
+	@Column(name = "apellido", nullable = false, length = 50)
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	
+	@Id
+	@Column(name = "correo", unique = true, nullable = false, length = 50)
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	
+	@Column(name = "password", nullable = false, length = 50)
+	public String getPassword() {
+		return password;
+	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "FECHA_ALTA", length = 7)
-	public Date getFechaAlta() {
-		return this.fechaAlta;
+	@Column(name = "primer_registro", nullable = false, columnDefinition="boolean default true")
+	public boolean isPrimerLogin() {
+		return primerLogin;
 	}
-
-	public void setFechaAlta(Date fechaAlta) {
-		this.fechaAlta = fechaAlta;
+	public void setPrimerLogin(boolean primerLogin) {
+		this.primerLogin = primerLogin;
 	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "FECHA_BAJA", length = 7)
-	public Date getFechaBaja() {
-		return this.fechaBaja;
+	@Column(name = "acceso", nullable = false, columnDefinition="boolean default false")
+	public boolean isAccesoAplicacion() {
+		return accesoAplicacion;
 	}
-
-	public void setFechaBaja(Date fechaBaja) {
-		this.fechaBaja = fechaBaja;
+	public void setAccesoAplicacion(boolean accesoAplicacion) {
+		this.accesoAplicacion = accesoAplicacion;
 	}
-
-	@Column(name = "CARPETA_DOCUMENTACION", length = 250)
-	public String getCarpetaDocumentacion() {
-		return this.carpetaDocumentacion;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codigo_rol")
+	public Set<Roles> getRoles() {
+		return roles;
 	}
-
-	public void setCarpetaDocumentacion(String carpetaDocumentacion) {
-		this.carpetaDocumentacion = carpetaDocumentacion;
+	public void setRoles(Set<Roles> roles) {
+		this.roles = roles;
 	}
-
-	@Column(name = "IDIOMA", length = 2)
-	public String getIdioma() {
-		return this.idioma;
-	}
-
-	public void setIdioma(String idioma) {
-		this.idioma = idioma;
-	}
-
+	
+	
 }
