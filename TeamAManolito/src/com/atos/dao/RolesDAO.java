@@ -124,7 +124,7 @@ public class RolesDAO {
 	public List findAll() {
 		log.debug("finding all Roles instances");
 		try {
-			String queryString = "from Roles";
+			String queryString = "from roles";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
