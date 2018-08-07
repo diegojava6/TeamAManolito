@@ -14,7 +14,7 @@ public class Tareas {
 	private Set<Roles> roles;
 	private Integer codigo_tarea;
 	private String desc;
-	
+
 	
 	
 	public Tareas() {
@@ -57,15 +57,22 @@ public class Tareas {
 
 
 
-	// ojito aqui hay que revisar esta mierda
+	// ojito aqui hay que revisar esta mierda campo schema dentro a la anotacion
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "rol_tarea", schema = "", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
+	@JoinTable(name = "rol_tarea", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
 	public Set<Roles> getRoles() {
 		return roles;
 	}
-
+	
 	public void setRoles(Set<Roles> roles) {
 		this.roles = roles;
 	}
-	
+
+
+
+
+
+
+
+
 }
