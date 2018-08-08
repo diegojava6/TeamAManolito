@@ -23,11 +23,14 @@ public class Usuarios {
 	private String password;
 	private boolean primerLogin;
 	private boolean accesoAplicacion;
-	private Set<Roles> roles;
+	private Roles roles;
 	
 	
 
 	
+	
+
+
 	public Usuarios() {
 		super();
 	}
@@ -43,7 +46,7 @@ public class Usuarios {
 
 
 	public Usuarios(String nombre, String apellidos, String correo, String password, boolean primerLogin,
-			boolean accesoAplicacion, Set<Roles> roles) {
+			boolean accesoAplicacion, Roles roles) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -103,12 +106,13 @@ public class Usuarios {
 	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "codigo_rol")
-	public Set<Roles> getRoles() {
+	public Roles getRoles() {
 		return roles;
 	}
-	public void setRoles(Set<Roles> roles) {
+
+
+	public void setRoles(Roles roles) {
 		this.roles = roles;
 	}
-	
 	
 }

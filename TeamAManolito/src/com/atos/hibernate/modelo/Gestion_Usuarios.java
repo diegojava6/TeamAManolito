@@ -17,6 +17,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Usuarios> consultar_Todos() {
+		System.out.println("todos");
 		// TODO Auto-generated method stub
 		return usuariosdao.findAll();
 	}
@@ -24,7 +25,11 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Override
 	public Usuarios consultar_correo(String correo) {
 		// TODO Auto-generated method stub
-		return null;
+		return usuariosdao.findById(correo);
+	}
+
+	public void setUsuariosdao(UsuariosDAO usuariosdao) {
+		this.usuariosdao = usuariosdao;
 	}
 	
 

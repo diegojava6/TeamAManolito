@@ -1,17 +1,22 @@
 package com.atos.hibernate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TAREAS_A")
 public class Tareas {
-	private Set<Roles> roles;
+	private Set<Roles> roles = new HashSet<Roles>(0);
 	private Integer codigo_tarea;
 	private String desc;
 
@@ -59,7 +64,7 @@ public class Tareas {
 
 	// ojito aqui hay que revisar esta mierda campo schema dentro a la anotacion
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "rol_tarea", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
+	@JoinTable(name = "ROLES_A_TAREAS_A", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
 	public Set<Roles> getRoles() {
 		return roles;
 	}
