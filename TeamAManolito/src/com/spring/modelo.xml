@@ -14,7 +14,7 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<!-- RUTA Y NOMBRE DE PROPERTIES A LEER -->
 		<property name="location"
-			value="classpath:com/atos/spring/datos-conexion.properties" />
+			value="classpath:com/spring/datos-conexion.properties" />
 	</bean>
 
 	<!-- *** CONEXION CON LA BASE DE DATOS *** -->

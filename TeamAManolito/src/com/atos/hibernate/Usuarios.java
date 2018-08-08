@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "USUARIOS_A")
 public class Usuarios {
 	private String nombre;
 	private String apellidos;
