@@ -4,24 +4,118 @@
   <artifactId>TeamAManolito</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  
+  
+
+	<!-- VARIABLES PARA LAS VERSIONES -->
+	<properties>
+		<version-servlet>2.5</version-servlet>
+		<version-el>2.2</version-el>
+		<version-spring>4.3.11.RELEASE</version-spring>
+		<version-hibernate>4.1.4.Final</version-hibernate>
+		<version-datasource>1.4</version-datasource>
+		<version-log4j>1.2.17</version-log4j>
+		<version-slf4>1.7.13</version-slf4>
+	</properties>
+
+
+	<!-- REPOSITORIO ADICIONAL PARA LA DESCARGA DE DEPENDENCIAS -->
+	<repositories>
+		<repository>
+			<id>codelds</id>
+			<url>https://code.lds.org/nexus/content/groups/main-repo</url>
+		</repository>
+	</repositories>
+
+
+	<!-- RESOLUCION DE DEPENDENCIAS -->
+	<dependencies>
+		<!-- *** SPRING *** -->
+		<!-- ENTORNO DE SPRING -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<!-- CONTEXTO DE ARRANQUE PARA SPRING -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<!-- MODULO DE PERSISTENCIA -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<!-- *** HIBERNATE *** -->
+		<!-- VERSION DE HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${version-hibernate}</version>
+		</dependency>
+		<!--  version spring-web para webappcontext -->
+		<dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>2.5.6</version>
+    </dependency>
+		<!-- DATASOURCE PARA LA GESTION DE LA TRANSACCION -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${version-datasource}</version>
+		</dependency>
+
+		<!-- DRIVER PARA ORACLE -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
+
+		<!-- TRAZAS -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.16</version>
+		</dependency>
+		<!-- COLOR A LAS TRAZAS -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.16</version>
+		</dependency>
+		<!-- VERSION DE JSF -->
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+	</dependencies>
+
+	<!-- CONSTRUCCION DEL PROYECTO -->
+	<build>
+		<plugins>
+			<!-- VERSION DE JDK (1.8) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerVersion>1.8</compilerVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

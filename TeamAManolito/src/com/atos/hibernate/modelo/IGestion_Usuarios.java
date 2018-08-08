@@ -1,0 +1,12 @@
+package com.atos.hibernate.modelo;
+
+import java.util.List;
+
+import com.atos.hibernate.Usuarios;
+
+public interface IGestion_Usuarios {
+
+	public List<Usuarios> consultar_Todos();
+	public Usuarios consultar_correo(String correo);
+	public boolean consultar_login(String correo, String password);
+}
