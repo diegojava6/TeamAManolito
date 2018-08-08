@@ -1,37 +1,70 @@
 package com.atos.hibernate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "TAREAS_A")
 public class Tareas {
+	private Set<Roles> roles = new HashSet<Roles>(0);
+	private Integer codigo_tarea;
+	private String desc;
 
-	private Integer codigoTarea;
-	private String tarea;
-	private Set<Roles> roles;
-
+	
+	
 	public Tareas() {
 		super();
 	}
+	
+	
 
-	public Tareas(Integer codigoTarea) {
+	public Tareas(Set<Roles> roles, Integer codigo_tarea, String desc) {
 		super();
-		this.codigoTarea = codigoTarea;
+		this.roles = roles;
+		this.codigo_tarea = codigo_tarea;
+		this.desc = desc;
 	}
 
-	public Tareas(Integer codigoTarea, String tarea, Set<Roles> roles) {
-		super();
-		this.codigoTarea = codigoTarea;
-		this.tarea = tarea;
-		this.roles = roles;
-	
-	// ojito aqui hay que revisar esta mierda
+
+	@Id
+	@Column ( name = "codigo_tarea" ,unique = true, nullable = false, precision = 200, scale = 0)
+	public Integer getCodigo_tarea() {
+		return codigo_tarea;
+	}
+
+
+
+	public void setCodigo_tarea(Integer codigo_tarea) {
+		this.codigo_tarea = codigo_tarea;
+	}
+
+
+	@Column(name = "tarea", length = 100)
+	public String getDesc() {
+		return desc;
+	}
+
+
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+
+
+	// ojito aqui hay que revisar esta mierda campo schema dentro a la anotacion
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "rol_tarea", schema = "", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
+	@JoinTable(name = "ROLES_A_TAREAS_A", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
 	public Set<Roles> getRoles() {
 		return roles;
 	}
@@ -40,22 +73,11 @@ public class Tareas {
 		this.roles = roles;
 	}
 
-	@id 
-	@column (name="codigo_tarea"  unique = true, nullable = false, precision = 200, scale = 0)
-	public Integer getCodigoTarea() {
-		return codigoTarea;
-	}
 
-	public void setCodigoTarea(Integer codigoTarea) {
-		this.codigoTarea = codigoTarea;
-	}
-	@column (name="tarea" nullable = false, length = 100)
-	public String getTarea() {
-		return tarea;
-	}
 
-	public void setTarea(String tarea) {
-		this.tarea = tarea;
-	}
+
+
+
+
 
 }
