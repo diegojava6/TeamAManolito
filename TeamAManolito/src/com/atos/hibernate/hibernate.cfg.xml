@@ -6,15 +6,7 @@
 <hibernate-configuration>
 
 	<session-factory>
-		<!-- DATOS DE CONEXION -->
-		<property name="connection.url">
-			jdbc:oracle:thin:@servicios.grupoatrium.com:1521:XE
-		</property>
-		<property name="connection.username">atos</property>
-		<property name="connection.password">atos</property>
-		<property name="connection.driver_class">
-			oracle.jdbc.driver.OracleDriver
-		</property>
+		
 		<!-- AJUSTES -->
 		<property name="dialect">
 			org.hibernate.dialect.Oracle10gDialect
