@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "roles")
+@Table(name = "ROLES_A")
 public class Roles {
 	private Integer codRol;
 	private String descRol;
