@@ -56,7 +56,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		return credenciales;
 	}
 
-	// ACCESORES PARA SPRING
+	// ACCESOR PARA SPRING
 	public void setUsuariosdao(UsuariosDAO usuariosdao) {
 		this.usuariosdao = usuariosdao;
 	}
