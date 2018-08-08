@@ -27,7 +27,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Override
 	@Transactional(readOnly = true)
 	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
-	public Usuarios consultar_correo(String correo) {
+	public Usuarios consultar_Correo(String correo) {
 		// TODO Auto-generated method stub
 		
 		return usuariosdao.findById(correo);
@@ -38,7 +38,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Transactional(readOnly = true)
 	// Metodo para comprobar si el correo y la password existe en la BBDD y devolver
 	// un true o false en su comprobacion
-	public boolean consultar_login(String correo, String password) {
+	public boolean consultar_Login(String correo, String password) {
 		// TODO Auto-generated method stub
 		Usuarios usu = usuariosdao.findById(correo);
 		
@@ -56,6 +56,28 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		return credenciales;
 	}
 
+	
+	@Override
+	@Transactional
+	public void alta_Usuario(Usuarios usuario) {
+		usuariosdao.save(usuario);
+	}
+
+	@Override
+	@Transactional
+	public void baja_Usuario(Usuarios usuario) {
+		usuariosdao.attachDirty(usuario);
+	}
+
+	@Override
+	@Transactional
+	public void modificacion_Usuario(Usuarios usuario) {
+		usuariosdao.attachDirty(usuario);
+	}
+	
+	
+	
+	
 	// ACCESOR PARA SPRING
 	public void setUsuariosdao(UsuariosDAO usuariosdao) {
 		this.usuariosdao = usuariosdao;
