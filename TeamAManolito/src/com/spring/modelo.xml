@@ -44,8 +44,7 @@
 	<!-- PAQUETES CON ANOTACIONES PARA SPRING PARA LA GESTION DEL MODELO -->
 	<context:component-scan
 		base-package="com.atos.dao" />
-	<context:component-scan 
-		base-package="com.atos.util" />
+	
 	<context:component-scan
 		base-package="com.atos.hibernate.modelo" />
 		<context:component-scan
