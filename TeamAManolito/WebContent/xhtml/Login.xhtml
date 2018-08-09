@@ -11,7 +11,7 @@
 	<h:outputText>Login</h:outputText>
 	<h:form id="formu_login">
 		<!-- CONTENEDOR DE LOS COMPONENTES -->
-		<h:panelGrid id="panel_formu" columns="2">
+		<h:panelGrid id="panel_formu" columns="1">
 			<!-- COMPONENTES DEL FORMULARIO -->
 			<h:outputText id="texto_mail" value="Email :" />
 			<h:outputText id="texto_email">Email: </h:outputText>
@@ -30,6 +30,8 @@
 
 			<h:commandButton id="boton" value="Comprobar"
 				actionListener="#{login_bean.metodo_Accion}" />
+				
+				<h:message for="mensaje" />
 		</h:panelGrid>
 	</h:form>
 </h:body>

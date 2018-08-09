@@ -11,13 +11,17 @@ import com.atos.dao.UsuariosDAO;
 import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.Gestion_Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
+import com.atos.util.IAcceso_Contextos;
 
 @ManagedBean(name = "login_bean")
 @ViewScoped
 public class Login_bean {
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
-
+	
+	
+	@ManagedProperty("#{accesos_contextos}")
+	private IAcceso_Contextos accesos_contextos;
 	/*
 	 * private String correo_usuario; private String clave_usuario;
 	 */
@@ -43,16 +47,16 @@ public class Login_bean {
 
 	public void metodo_Accion(ActionEvent evento) {
 
-		boolean resultado = gestion_usuarios.consultar_login(usuario_login.getCorreo(),
-				usuario_login.getPassword());
-		System.out.println(resultado);
-		/*
-		 * if(resultado!=false) { System.out.println("el correo existe"); } else {
-		 * System.out.println("el correo no existe"); }
-		 * 
-		 * 
-		 * return "";
-		 */
+		boolean resultado = gestion_usuarios.consultar_Login(usuario_login.getCorreo(), usuario_login.getPassword());
+
+		if (resultado == false) {
+			accesos_contextos.addMensaje("Usuario y/o contraseña incorrectos", "mensaje");
+		} else {
+			Usuarios usuario_navegacion=gestion_usuarios.consultar_Correo(usuario_login.getCorreo());
+			
+			
+		}
+
 	}
 
 	public void metodo_EventoCambioClave(ValueChangeEvent evento) {
@@ -62,13 +66,7 @@ public class Login_bean {
 	public void metodo_EventoCambioCorreo(ValueChangeEvent evento) {
 		System.out.println("SOY EL EVENTO DEL CAMBIO DE CORREO");
 
-		// this.usuario_login=this.InterfazGestionUsuarios.consultar_correo(this.correo_usuario);
-
-		if (this.usuario_login != null) {
-			System.out.println("el correo existe");
-		} else {
-			System.out.println("el correo no existe");
-		}
+		// this.usuario_login=this.InterfazGestionUsuarios.consultar_correo(this.correo_usuario)
 
 		// this.usuario_Login.setCorreo(correo_usuario);
 		// if(usuario_Login.consultarCorreo())
@@ -90,4 +88,12 @@ public class Login_bean {
 		this.usuario_login = usuario_login;
 	}
 
+	public IAcceso_Contextos getAccesos_contextos() {
+		return accesos_contextos;
+	}
+
+	public void setAccesos_contextos(IAcceso_Contextos accesos_contextos) {
+		this.accesos_contextos = accesos_contextos;
+	}
+	
 }

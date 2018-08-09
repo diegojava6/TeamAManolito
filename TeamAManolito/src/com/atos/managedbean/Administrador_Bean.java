@@ -1,4 +1,4 @@
-package com.atos.managedBean;
+package com.atos.managedbean;
 
 import java.io.Serializable;
 
