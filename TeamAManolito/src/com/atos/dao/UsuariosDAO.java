@@ -171,4 +171,5 @@ public class UsuariosDAO {
 	public static UsuariosDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (UsuariosDAO) ctx.getBean("UsuariosDAO");
 	}
+	
 }

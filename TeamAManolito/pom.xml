@@ -16,6 +16,7 @@
 		<version-datasource>1.4</version-datasource>
 		<version-log4j>1.2.17</version-log4j>
 		<version-slf4>1.7.13</version-slf4>
+		<version-icefaces>4.2.0</version-icefaces>
 	</properties>
 
 	
@@ -47,6 +48,17 @@
 			<version>${version-spring}</version>
 		</dependency>
 		
+		<!-- VERSION DE ICEFACES -->
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces</artifactId>
+			<version>${version-icefaces}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.icefaces</groupId>
+			<artifactId>icefaces-ace</artifactId>
+			<version>${version-icefaces}</version>
+		</dependency>
 		
 		
 		
