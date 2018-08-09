@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -12,11 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atos.hibernate.Usuarios;
 import com.atos.dao.UsuariosDAO;
 
-
+@Repository("usuariosdao")
+@Scope("prototype")
 public class UsuarioDAO_EXT extends UsuariosDAO {
-
 	
-	@Transactional(readOnly = true)
+	
+	
 	public Usuarios consultar_ConRol(String correo_usuario) {
 		// APERTURA DE CRITERIA PARA LA CONSULTA
 		Criteria consulta = getCurrentSession().createCriteria(Usuarios.class);

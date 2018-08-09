@@ -96,8 +96,9 @@ public class Administrador_Bean implements Serializable {
 		try {
 			// llama al metodo de alta de usuario
 
-			usuario = gestion_usuarios.consultar_Correo(usuario.getCorreo());
-			// desc_rol =usuario.getRoles().getDescRol();
+			//  usuario = gestion_usuarios.consultar_Correo(usuario.getCorreo());
+			usuario = gestion_usuarios.consultar_conRol(usuario.getCorreo());
+			 desc_rol =usuario.getRoles().getDescRol();
 			System.out.println("ok");
 			// mensaje = new FacesMessage("consulta correcta", "mensaje");
 		} catch (Exception e) {

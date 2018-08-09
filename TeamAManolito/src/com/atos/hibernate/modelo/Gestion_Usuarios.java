@@ -17,7 +17,8 @@ import com.atos.hibernate.Usuarios;
 public class Gestion_Usuarios implements IGestion_Usuarios {
 
 	
-	private UsuariosDAO usuariosdao;
+	
+	private UsuarioDAO_EXT usuariosdao;
 	private boolean credenciales;
 
 	@Override
@@ -60,11 +61,12 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	}
 	
 	@Override
+	@Transactional
 	public Usuarios consultar_conRol(String correo) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("aqui");
-		return null;
+		return usuariosdao.consultar_ConRol(correo);
 	}
 
 
@@ -86,29 +88,20 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		usuariosdao.attachDirty(usuario);
 	}
 
-	public UsuariosDAO getUsuariosdao() {
+	public UsuarioDAO_EXT getUsuariosdao() {
 		return usuariosdao;
 	}
 
+	public void setUsuariosdao(UsuarioDAO_EXT usuariosdao) {
+		this.usuariosdao = usuariosdao;
+	}
+
+	
 	
 
 	// ACCESOR PARA SPRING
 
 	
 
-	public void setUsuariosdao(UsuariosDAO usuariosdao) {
-		this.usuariosdao = usuariosdao;
-	}
 
-	public boolean isCredenciales() {
-		return credenciales;
-	}
-
-	
-
-	public void setCredenciales(boolean credenciales) {
-		this.credenciales = credenciales;
-	}
-
-	
 }
