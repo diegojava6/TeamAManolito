@@ -1,5 +1,6 @@
 package com.atos.hibernate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,12 +14,12 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "roles")
+@Table(name = "ROLES_A")
 public class Roles {
 	private Integer codRol;
 	private String descRol;
-	private Set<Tareas> tareas;
-	private Set<Usuarios> usuarios;
+	private Set<Tareas> tareas = new HashSet<Tareas>(0);
+	private Set<Usuarios> usuarios = new HashSet<Usuarios>(0);
 	
 	
 	public Roles() {
@@ -28,20 +29,28 @@ public class Roles {
 		super();
 		this.codRol = codRol;
 	}
-	public Roles(Integer codRol, Set<Tareas> tareas) {
+	
+	public Roles(Integer codRol, String descRol) {
 		super();
 		this.codRol = codRol;
-		this.tareas = tareas;
+		this.descRol = descRol;
 	}
-	public Roles(Integer codRol, String descRol, Set<Tareas> tareas) {
+	public Roles(Integer codRol, String descRol, Set<Usuarios> usuarios) {
+		super();
+		this.codRol = codRol;
+		this.descRol = descRol;
+		this.usuarios = usuarios;
+	}
+	/*public Roles(Integer codRol, String descRol, Set<Tareas> tareas, Set<Usuarios> usuarios) {
 		super();
 		this.codRol = codRol;
 		this.descRol = descRol;
 		this.tareas = tareas;
-	}
+		this.usuarios = usuarios;
+	}*/
 	
 	@Id
-	@Column(name = "codigo_rol", unique = true, nullable = false, precision = 11, scale = 0)
+	@Column(name = "codigo_rol", unique = true, nullable = false, precision = 5, scale = 0)
 	public Integer getCodRol() {
 		return codRol;
 	}
@@ -69,6 +78,8 @@ public class Roles {
 	public void setUsuarios(Set<Usuarios> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	
 	
 	
 
