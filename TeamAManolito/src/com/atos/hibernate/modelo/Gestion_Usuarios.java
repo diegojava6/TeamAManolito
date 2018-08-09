@@ -24,7 +24,6 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		return usuariosdao.findAll();
 	}
 
-	@Override
 	@Transactional(readOnly = true)
 	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
 	public Usuarios consultar_correo(String correo) {

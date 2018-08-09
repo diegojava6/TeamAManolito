@@ -30,6 +30,10 @@ public class Usuarios {
 		this.correo = correo;
 		this.password = password;
 	}
+	public Usuarios(String correo) {
+		super();
+		this.correo = correo;
+	}
 
 	public Usuarios(String nombre, String apellidos, String correo, String password, Integer primerLogin,
 			Integer accesoAplicacion) {

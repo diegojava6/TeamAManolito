@@ -1,37 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
- <html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
 </head>
 <h:body style="text-align:center">
-<h:outputText>Login</h:outputText>
-<h:form id="formu_login">
+	<h:outputText>Login</h:outputText>
+	<h:form id="formu_login">
 		<!-- CONTENEDOR DE LOS COMPONENTES -->
-		<h:panelGrid id="panel_formu" columns="1">
+		<h:panelGrid id="panel_formu" columns="2">
 			<!-- COMPONENTES DEL FORMULARIO -->
-			<h:outputText id="texto_mail" value="Email:" />
-			<h:outputText  id="texto_email">Email: </h:outputText>
-			
-			<h:inputText id="email_usuario" value="#{login_bean.nombre_usuario}"
-				valueChangeListener="#{login_bean.metodo_EventoCambioValor}" ></h:inputText>
-				
+			<h:outputText id="texto_mail" value="Email :" />
+			<h:outputText id="texto_email">Email: </h:outputText>
+
+			<h:inputText id="correo_usuario"
+				value="#{login_bean.usuario_login.correo}"></h:inputText>
+
 			<h:outputText id="texto_clave" value="Clave:" />
-			
-		
-			
-			<h:inputText id="clave_cliente" value="#{login_bean.clave_usuario}" ></h:inputText>
-			
-			
-			
-			
-			
+
+
+
+			<h:inputText id="clave_usuario"
+				value="#{login_bean.usuario_login.password}"></h:inputText>
+
+
+
 			<h:commandButton id="boton" value="Comprobar"
-				actionListener="#{login_bean.metodo_Evento}"
-				action="#{login_bean.metodo_Accion}" />
+				actionListener="#{login_bean.metodo_Accion}" />
 		</h:panelGrid>
 	</h:form>
 </h:body>
