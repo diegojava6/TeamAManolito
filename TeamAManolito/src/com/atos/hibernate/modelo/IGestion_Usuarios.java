@@ -12,5 +12,6 @@ public interface IGestion_Usuarios {
 	public void alta_Usuario(Usuarios usuario);
 	public void baja_Usuario(Usuarios usuario);
 	public void modificacion_Usuario(Usuarios usuario);
+	public Usuarios consultar_conRol(String correo);
 	
 }

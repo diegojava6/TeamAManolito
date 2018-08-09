@@ -2,19 +2,22 @@ package com.atos.hibernate.modelo;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.atos.dao.UsuariosDAO;
+import com.atos.dao_ext.UsuarioDAO_EXT;
 import com.atos.hibernate.Usuarios;
 
 @Component("gestion_usuarios")
 @Scope("prototype")
 public class Gestion_Usuarios implements IGestion_Usuarios {
+
 	
 	private UsuariosDAO usuariosdao;
-	
 	private boolean credenciales;
 
 	@Override
@@ -31,7 +34,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		// TODO Auto-generated method stub
 		
 		return usuariosdao.findById(correo);
-		
+
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	public boolean consultar_Login(String correo, String password) {
 		// TODO Auto-generated method stub
 		Usuarios usu = usuariosdao.findById(correo);
-		
+
 		credenciales = false;
 
 		if (usu != null) {
@@ -51,12 +54,20 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 				credenciales = true;
 
 			}
-		} 
-		
+		}
+
 		return credenciales;
 	}
-
 	
+	@Override
+	public Usuarios consultar_conRol(String correo) {
+		// TODO Auto-generated method stub
+		
+		System.out.println("aqui");
+		return null;
+	}
+
+
 	@Override
 	@Transactional
 	public void alta_Usuario(Usuarios usuario) {
@@ -74,14 +85,30 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	public void modificacion_Usuario(Usuarios usuario) {
 		usuariosdao.attachDirty(usuario);
 	}
+
+	public UsuariosDAO getUsuariosdao() {
+		return usuariosdao;
+	}
+
 	
-	
-	
-	
+
 	// ACCESOR PARA SPRING
+
+	
+
 	public void setUsuariosdao(UsuariosDAO usuariosdao) {
 		this.usuariosdao = usuariosdao;
 	}
 
+	public boolean isCredenciales() {
+		return credenciales;
+	}
 
+	
+
+	public void setCredenciales(boolean credenciales) {
+		this.credenciales = credenciales;
+	}
+
+	
 }

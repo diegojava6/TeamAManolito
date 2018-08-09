@@ -1,5 +1,6 @@
 package com.atos.hibernate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,8 +18,8 @@ import javax.persistence.Table;
 public class Roles {
 	private Integer codRol;
 	private String descRol;
-	private Set<Tareas> tareas;
-	private Set<Usuarios> usuarios;
+	private Set<Tareas> tareas = new HashSet<Tareas>(0);
+	private Set<Usuarios> usuarios = new HashSet<Usuarios>(0);
 	
 	
 	public Roles() {
@@ -69,6 +70,8 @@ public class Roles {
 	public void setUsuarios(Set<Usuarios> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	
 	
 	
 
