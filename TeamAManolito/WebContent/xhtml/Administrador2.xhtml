@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+
+</h:head>
+<h:body>
+<h:form id="formu_usuario">
+
+	<h:panelGrid id="panel_articulo" columns="3">
+	
+	
+			<!-- 1º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_correo" value="correo: " />
+			<h:inputText id="correo"
+				disabled="#{administrador_bean.correo}"
+				value="#{administrador_bean.usuario.correo}"
+				validatorMessage="El numero maximo de caracteres son 50"
+				converterMessage="No valen caracteres especiales">
+				<f:validateLength maximum="50" />
+			</h:inputText>
+			<h:message for="eti_correo" />
+			
+			<!-- 2º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_nombre" value="nombre: " />
+			<h:inputText id="nombre"
+				value="#{administrador_bean.usuario.nombre}"
+				validatorMessage="El maximo de caracteres permitidos son 10">
+				<f:validateLength maximum="10" />
+			</h:inputText>
+			<h:message for="eti_nombre" />
+			
+			<!-- 3º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_apellidos" value="apellidos: " />
+			<h:inputText id="apellido"
+				value="#{administrador_bean.usuario.apellidos}"
+				validatorMessage="El maximo de caracteres permitidos son 10">
+				<f:validateLength maximum="10" />
+			</h:inputText>
+			<h:message for="eti_apellidos" />
+			
+			<!-- 4º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_acceso" value="acceso: " />
+			<h:inputText id="acceso"
+				value="#{administrador_bean.usuario.accesoAplicacion}"
+				validatorMessage="0 o 1 si o no">
+				<f:convertNumber type="number" integerOnly="true" />
+				<f:validateLongRange maximum="1" />
+			</h:inputText>
+			<h:message for="eti_acceso" />
+			
+			<!-- 5º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_roles" value="roles: " />
+			<h:inputText id="roles"
+				value="#{administrador_bean.desc_rol}"
+				validatorMessage="0 o 1 si o no">
+				<f:convertNumber type="number" integerOnly="true" />
+				<f:validateLongRange maximum="1" />
+			</h:inputText>
+			<h:message for="eti_roles" />
+		</h:panelGrid>
+		
+		<h:panelGrid id="panel_botones" columns="4">
+			<h:commandButton id="boton_alta" value="Alta"
+				disabled="#{administrador_bean.bot_alt}"
+				actionListener="#{administrador_bean.alta}" />
+			<h:commandButton id="boton_baja" value="Baja"
+				disabled="#{administrador_bean.bot_bm}"
+				actionListener="#{administrador_bean.baja}" />
+			<h:commandButton id="boton_modificacion" value="Modificacion"
+				disabled="#{administrador_bean.bot_bm}"
+				actionListener="#{administrador_bean.modificacion}" />
+			<h:commandButton id="boton_consulta" value="Consulta"
+				actionListener="#{administrador_bean.consulta}" />
+		</h:panelGrid>
+
+
+
+</h:form>
+</h:body>
+
+</html>
