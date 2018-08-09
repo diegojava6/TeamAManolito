@@ -31,8 +31,10 @@ public class Usuarios {
 		this.password = password;
 	}
 
+	
+
 	public Usuarios(String nombre, String apellidos, String correo, String password, Integer primerLogin,
-			Integer accesoAplicacion) {
+			Integer accesoAplicacion, Roles roles) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -40,7 +42,7 @@ public class Usuarios {
 		this.password = password;
 		this.primerLogin = primerLogin;
 		this.accesoAplicacion = accesoAplicacion;
-
+		this.roles = roles;
 	}
 
 	@Column(name = "nombre", nullable = false, length = 10)
@@ -107,5 +109,8 @@ public class Usuarios {
 	public void setRoles(Roles roles) {
 		this.roles = roles;
 	}
+
+	
+	
 
 }
