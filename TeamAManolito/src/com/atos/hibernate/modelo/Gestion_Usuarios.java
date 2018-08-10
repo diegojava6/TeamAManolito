@@ -25,7 +25,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Transactional(readOnly = true)
 	public List<Usuarios> consultar_Todos() {
 		// TODO Auto-generated method stub
-		return usuariosdao.findAll();
+		return usuariosdao.consultar_all();
 	}
 
 	@Override
