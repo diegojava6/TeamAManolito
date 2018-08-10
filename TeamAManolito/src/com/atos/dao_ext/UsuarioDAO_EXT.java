@@ -30,20 +30,19 @@ public class UsuarioDAO_EXT extends UsuariosDAO {
 		Usuarios usuario = (Usuarios) consulta.uniqueResult();
 		return usuario;
 	}
-	/*
-	 * @Override
-	 * 
-	 * @Transactional(readOnly = true) 
-	 * public Usuarios consultar_Tareas(String
-	 * correo_usuario) { // APERTURA DE CRITERIA PARA LA CONSULTA Criteria consulta
-	 * = getCurrentSession().createCriteria(Usuarios.class); // MODO DE RESOLUCION
-	 * DE CARGA VAGA consulta.setFetchMode("roles", FetchMode.JOIN);
-	 * consulta.setFetchMode("roles.tareases", FetchMode.JOIN); // CONDICIONES DE LA
-	 * CONSULTA consulta.add(Restrictions.idEq(correo_usuario)); // TRATAMIENTO DEL
-	 * PRODUCTO CARTESIANO DE LA CONSULTA
-	 * consulta.setResultTransformer(consulta.DISTINCT_ROOT_ENTITY); // SE EJECUTA
-	 * LA CONSULTA Usuarios usuario = (Usuarios) consulta.uniqueResult(); return
-	 * usuario; }
-	 */
+	
+	public List<Usuarios> consultar_all() {
+		// APERTURA DE CRITERIA PARA LA CONSULTA
+		Criteria consulta = getCurrentSession().createCriteria(Usuarios.class);
+		// MODO DE RESOLUCION DE CARGA VAGA
+		consulta.setFetchMode("roles", FetchMode.JOIN);
+
+		// SE EJECUTA LA CONSULTA
+		
+		List<Usuarios> usuarios = (List<Usuarios>) consulta.list();
+		return usuarios;
+	}
+	 
+	 
 
 }
