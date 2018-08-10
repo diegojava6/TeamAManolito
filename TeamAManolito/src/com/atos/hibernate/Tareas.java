@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TAREAS_A")
+@Table(name = "tareas")
 public class Tareas {
 	private Set<Roles> roles = new HashSet<Roles>(0);
 	private Integer codigo_tarea;

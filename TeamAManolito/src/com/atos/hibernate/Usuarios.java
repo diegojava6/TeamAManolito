@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USUARIOS_A")
+@Table(name = "usuarios")
 public class Usuarios {
 	private String nombre;
 	private String apellidos;
