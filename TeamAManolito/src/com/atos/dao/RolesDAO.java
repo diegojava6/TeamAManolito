@@ -1,37 +1,20 @@
 package com.atos.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import static org.hibernate.criterion.Example.create;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.atos.hibernate.Roles;
 
 
-
-/**
- * A data access object (DAO) providing persistence and search support for Roles
- * entities. Transaction control of the save(), update() and delete() operations
- * can directly support Spring container-managed transactions or they can be
- * augmented to handle user-managed Spring transactions. Each of these methods
- * provides additional information for how to configure it for the desired type
- * of transaction control.
- * 
- * @see com.atrium.hibernate.Roles
- * @author MyEclipse Persistence Tools
- */
 @Repository("roles_dao")
 @Scope("prototype")
 public class RolesDAO {

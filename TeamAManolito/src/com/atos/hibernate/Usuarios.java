@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 public class Usuarios {
+	private String das;
 	private String nombre;
 	private String apellidos;
 	private String correo;
@@ -33,9 +34,10 @@ public class Usuarios {
 
 	
 
-	public Usuarios(String nombre, String apellidos, String correo, String password, Integer primerLogin,
+	public Usuarios(String das,String nombre, String apellidos, String correo, String password, Integer primerLogin,
 			Integer accesoAplicacion, Roles roles) {
 		super();
+		this.das = das;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
@@ -64,6 +66,15 @@ public class Usuarios {
 	}
 
 	@Id
+	@Column(name = "das", unique = true, nullable = false, length = 7)
+	public String getDas() {
+		return das;
+	}
+	
+	public void setDas(String das) {
+		this.das = das;
+	}
+
 	@Column(name = "correo", unique = true, nullable = false, length = 50)
 	public String getCorreo() {
 		return correo;

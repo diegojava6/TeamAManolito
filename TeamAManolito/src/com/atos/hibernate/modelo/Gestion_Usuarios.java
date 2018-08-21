@@ -16,10 +16,10 @@ import com.atos.hibernate.Usuarios;
 @Scope("prototype")
 public class Gestion_Usuarios implements IGestion_Usuarios {
 
-	
-	
 	private UsuarioDAO_EXT usuariosdao;
 	private boolean credenciales;
+	private boolean acceso;
+	private boolean cambio_pass;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -33,7 +33,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
 	public Usuarios consultar_Correo(String correo) {
 		// TODO Auto-generated method stub
-		
+
 		return usuariosdao.findById(correo);
 
 	}
@@ -47,28 +47,39 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		Usuarios usu = usuariosdao.findById(correo);
 
 		credenciales = false;
+		acceso=false;
+		cambio_pass=false;
 
 		if (usu != null) {
 
-			if (usu.getCorreo().equals(correo) && usu.getPassword().equals(password)) {
+			if (usu.getAccesoAplicacion() != 0) {
+				acceso = true;
+				
+				if (usu.getPrimerLogin()!=1) {
+					cambio_pass=true;
+				}
+				if (usu.getCorreo().equals(correo) && usu.getPassword().equals(password)) {
 
-				credenciales = true;
-
+					credenciales = true;
+				}
 			}
 		}
-
-		return credenciales;
+		boolean[] resultado = new Array[3];
+		resultado[0]= credenciales;
+		resultado[1]= acceso;
+		resultado[2]= cambio_pass;
+		
+		return resultado;
 	}
-	
+
 	@Override
 	@Transactional
 	public Usuarios consultar_conRol(String correo) {
 		// TODO Auto-generated method stub
-		
+
 		System.out.println("aqui");
 		return usuariosdao.consultar_ConRol(correo);
 	}
-
 
 	@Override
 	@Transactional
@@ -96,12 +107,6 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		this.usuariosdao = usuariosdao;
 	}
 
-	
-	
-
 	// ACCESOR PARA SPRING
-
-	
-
 
 }

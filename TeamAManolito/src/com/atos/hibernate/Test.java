@@ -22,8 +22,10 @@ public class Test {
 		Usuarios cliente = gestion_cliente.consultar_Correo("admin@admin.com");
 		 		
 		//COMPROBAR METODO CONSULTAR LOGIN
-		boolean credencial = gestion_cliente.consultar_Login("admin@admin.com","admin");
+		/*boolean credencial = gestion_cliente.consultar_Login("admin@admin.com","admin");
 		System.out.println(credencial);
+		*/
+		boolean[] array = gestion_cliente.consultar_Login("admin@admin.com","admin");
 		/*
 		//COMPROBAR GENERACION DE PASS AUTO
 		String pass = generar_pass.generar_Pass(); 
