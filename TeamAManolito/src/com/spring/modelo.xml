@@ -41,11 +41,11 @@
 	<!-- **** DATASOURCE REQUERIDO POR TRANSACTION MANAGER **** -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="${driver.oracle}" />
-		<property name="url" value="${url.oracle}" />
+		<property name="driverClassName" value="${spring.datasource.driver}" />
+		<property name="url" value="${spring.datasource.url}" />
 
-		<property name="username" value="${usuario.oracle}" />
-		<property name="password" value="${clave.usuario}" />
+		<property name="username" value="${spring.datasource.nombre}" />
+		<property name="password" value="${spring.datasource.clave}" />
 	</bean>
 
 	<!-- PAQUETES CON ANOTACIONES PARA SPRING PARA LA GESTION DEL MODELO -->

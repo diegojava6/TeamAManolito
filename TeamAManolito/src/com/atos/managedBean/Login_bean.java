@@ -1,12 +1,15 @@
 package com.atos.managedBean;
+
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
@@ -17,20 +20,25 @@ import com.atos.util.IAcceso_Contextos;
 
 @ManagedBean(name = "login_bean")
 @SessionScoped
+
 public class Login_bean {
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
 
 	@ManagedProperty("#{accesos_contextos}")
 	private IAcceso_Contextos accesos_contextos;
+
 	
 	@ManagedProperty("#{navegacionBean}")
     private Navegacion_Bean navegacion_Bean;
+
 	/*
 	 * private String correo_usuario; private String clave_usuario;
 	 */
 	private Usuarios usuario_login;
+
 	private boolean loggedin;
+
 
 	// ********** METODOS DEL CICLO DE VIDA (CDI)
 	@PostConstruct
@@ -50,12 +58,14 @@ public class Login_bean {
 
 	}
 
+
 	public String metodo_Accion(ActionEvent evento) throws IOException {
 
 		boolean resultado = gestion_usuarios.consultar_Login(usuario_login.getCorreo(), usuario_login.getPassword());
 
 		if (resultado == false) {
-			accesos_contextos.addMensaje("Usuario y/o contraseña incorrectos", "mensaje");
+			accesos_contextos.addMensaje("Usuario y/o contraseÃ±a incorrectos", "mensaje");
+
 			 FacesMessage msg = new FacesMessage("Login error!", "ERROR MSG");
 		        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 		        FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -71,6 +81,7 @@ public class Login_bean {
 		}
 		
 
+
 	}
 
 	public void metodo_EventoCambioClave(ValueChangeEvent evento) {
@@ -85,8 +96,7 @@ public class Login_bean {
 		// this.usuario_Login.setCorreo(correo_usuario);
 		// if(usuario_Login.consultarCorreo())
 	}
-	
-	
+
 
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
@@ -111,6 +121,7 @@ public class Login_bean {
 	public void setAccesos_contextos(IAcceso_Contextos accesos_contextos) {
 		this.accesos_contextos = accesos_contextos;
 	}
+
 
 	public boolean isLoggedin() {
 		return loggedin;

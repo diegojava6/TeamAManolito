@@ -61,7 +61,7 @@ public class Administrador_Bean implements Serializable {
 		usuario = new Usuarios();
 		roles = new Roles();
 		// generar pass no funciona por el momento
-		//generar_pass = new Generar_Pass();
+		generar_pass = new Generar_Pass();
 		lista_usuarios = gestion_usuarios.consultar_Todos();
 		modo_seleccion = 1;
 
@@ -77,7 +77,7 @@ public class Administrador_Bean implements Serializable {
 		System.out.println("soy el alta");
 		try {
 			
-			usuario.setPassword("1111");
+			usuario.setPassword(generar_pass.generar_Pass());
 			usuario.setAccesoAplicacion(1);
 			// hacer consulta de codigo rol para descripcion del rol
 			roles.setCodRol(1);

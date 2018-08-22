@@ -25,6 +25,11 @@
 		<url-pattern>/xmlhttp/*</url-pattern>
 	</servlet-mapping>
 	
+	<!-- SPRING SECURITY -->
+	<!--<filter>
+	<filter-name>springSecurityFilterChain</filter-name>
+	</filter>-->
+	
 	<!-- PARAMETROS DE INICIO DE LA APLICACION -->
 	<!-- INTERESANTES PARA JSF -->
 	<context-param>
