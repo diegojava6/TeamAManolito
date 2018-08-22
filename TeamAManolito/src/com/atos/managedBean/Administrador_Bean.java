@@ -8,8 +8,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.servlet.ServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -69,6 +71,7 @@ public class Administrador_Bean implements Serializable {
 		
 	}
 
+	
 	// opcion de alta
 	public void alta(ActionEvent evento) {
 		System.out.println("soy el alta");
@@ -134,6 +137,9 @@ public class Administrador_Bean implements Serializable {
 		System.out.println("soy el alta");
 		try {
 			// llama al metodo de alta de usuario
+			// mensaje para validacion de correo
+			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "el email vale, OK", "ok");  
+		        FacesContext.getCurrentInstance().addMessage(null, msg);
 
 			//  usuario = gestion_usuarios.consultar_Correo(usuario.getCorreo());
 			usuario = gestion_usuarios.consultar_conRol(usuario.getCorreo());

@@ -97,7 +97,18 @@
 	<!-- ***** FIN MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION -->
   
   
+  <!-- Login filter -->
+	<filter>
+		<filter-name>Login_Filtro</filter-name>
+		<filter-class>com.atos.managedBean.Login_Filtro</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>Login_Filter</filter-name>
+		<url-pattern>/Secured/*</url-pattern>
+	</filter-mapping> 
   
+  <!-- ***** esto luego se quita para la seguridad -->
   <welcome-file-list>
     <welcome-file>xhtml/Login.xhtml</welcome-file>
   </welcome-file-list>
