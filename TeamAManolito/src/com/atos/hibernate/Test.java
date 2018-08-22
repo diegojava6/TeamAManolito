@@ -19,13 +19,12 @@ public class Test {
 		
 		
 		//COMPROBAR METODO CONSULTAR CORREO 
-		Usuarios cliente = gestion_cliente.consultar_Correo("admin@admin.com");
+		Usuarios cliente = gestion_cliente.consultar_Das("M000001");
 		 		
 		//COMPROBAR METODO CONSULTAR LOGIN
-		/*boolean credencial = gestion_cliente.consultar_Login("admin@admin.com","admin");
-		System.out.println(credencial);
-		*/
-		boolean[] array = gestion_cliente.consultar_Login("admin@admin.com","admin");
+		Usuarios usuario = gestion_cliente.consultar_Login("M000001","admin");
+		System.out.println(usuario);
+
 		/*
 		//COMPROBAR GENERACION DE PASS AUTO
 		String pass = generar_pass.generar_Pass(); 

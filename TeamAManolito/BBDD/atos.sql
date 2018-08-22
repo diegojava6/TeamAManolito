@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2018 a las 14:33:44
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.7
+-- Tiempo de generación: 22-08-2018 a las 10:18:14
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -80,6 +80,7 @@ INSERT INTO `tareas` (`codigo_tarea`, `tarea`) VALUES
 --
 
 CREATE TABLE `usuarios` (
+  `DAS` varchar(7) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
@@ -93,9 +94,9 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`correo`, `nombre`, `apellido`, `password`, `primer_registro`, `acceso`, `codigo_rol`) VALUES
-('admin@admin.com', 'Diego', 'Sánchez Fernández', 'admin', 0, 0, 1),
-('usuario@usuario.com', 'Miguel', 'Carrasco González', 'usuario', 0, 0, 2);
+INSERT INTO `usuarios` (`DAS`, `correo`, `nombre`, `apellido`, `password`, `primer_registro`, `acceso`, `codigo_rol`) VALUES
+('M000001', 'admin@admin.com', 'Diego', 'Sánchez Fernández', 'admin', 0, 0, 1),
+('M000002', 'usuario@usuario.com', 'Miguel', 'Carrasco González', 'usuario', 0, 0, 2);
 
 --
 -- Índices para tablas volcadas
@@ -124,7 +125,8 @@ ALTER TABLE `tareas`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`correo`),
+  ADD PRIMARY KEY (`DAS`),
+  ADD UNIQUE KEY `correo` (`correo`),
   ADD KEY `codigo_rol` (`codigo_rol`);
 
 --

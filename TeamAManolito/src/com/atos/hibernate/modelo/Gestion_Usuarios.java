@@ -17,9 +17,6 @@ import com.atos.hibernate.Usuarios;
 public class Gestion_Usuarios implements IGestion_Usuarios {
 
 	private UsuarioDAO_EXT usuariosdao;
-	private boolean credenciales;
-	private boolean acceso;
-	private boolean cambio_pass;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -31,10 +28,10 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Override
 	@Transactional(readOnly = true)
 	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
-	public Usuarios consultar_Correo(String correo) {
+	public Usuarios consultar_Das(String das) {
 		// TODO Auto-generated method stub
 
-		return usuariosdao.findById(correo);
+		return usuariosdao.findById(das);
 
 	}
 
@@ -42,34 +39,21 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Transactional(readOnly = true)
 	// Metodo para comprobar si el correo y la password existe en la BBDD y devolver
 	// un true o false en su comprobacion
-	public boolean consultar_Login(String correo, String password) {
+	public Usuarios consultar_Login(String das, String password) {
 		// TODO Auto-generated method stub
-		Usuarios usu = usuariosdao.findById(correo);
-
-		credenciales = false;
-		acceso=false;
-		cambio_pass=false;
+		Usuarios usu = usuariosdao.findById(das);
+		Usuarios usu2 = null;
 
 		if (usu != null) {
 
-			if (usu.getAccesoAplicacion() != 0) {
-				acceso = true;
-				
-				if (usu.getPrimerLogin()!=1) {
-					cambio_pass=true;
-				}
-				if (usu.getCorreo().equals(correo) && usu.getPassword().equals(password)) {
+			if (usu.getDas().equals(das) && usu.getPassword().equals(password)) {
 
-					credenciales = true;
-				}
+				return usu;
+
 			}
+
 		}
-		boolean[] resultado = new Array[3];
-		resultado[0]= credenciales;
-		resultado[1]= acceso;
-		resultado[2]= cambio_pass;
-		
-		return resultado;
+		return usu2;
 	}
 
 	@Override

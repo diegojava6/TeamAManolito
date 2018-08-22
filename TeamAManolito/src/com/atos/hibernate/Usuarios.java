@@ -34,7 +34,7 @@ public class Usuarios {
 
 	
 
-	public Usuarios(String das,String nombre, String apellidos, String correo, String password, Integer primerLogin,
+	public Usuarios(String das, String nombre, String apellidos, String correo, String password, Integer primerLogin,
 			Integer accesoAplicacion, Roles roles) {
 		super();
 		this.das = das;
@@ -70,6 +70,7 @@ public class Usuarios {
 	public String getDas() {
 		return das;
 	}
+
 	
 	public void setDas(String das) {
 		this.das = das;

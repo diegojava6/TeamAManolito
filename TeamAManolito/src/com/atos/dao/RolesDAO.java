@@ -62,7 +62,7 @@ public class RolesDAO {
 		log.debug("getting Roles instance with id: " + id);
 		try {
 			Roles instance = (Roles) getCurrentSession().get(
-					"com.atrium.hibernate.Roles", id);
+					"com.atos.hibernate.Roles", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -74,7 +74,7 @@ public class RolesDAO {
 		log.debug("finding Roles instance by example");
 		try {
 			List<Roles> results = (List<Roles>) getCurrentSession()
-					.createCriteria("com.atrium.hibernate.Roles")
+					.createCriteria("com.atos.hibernate.Roles")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
