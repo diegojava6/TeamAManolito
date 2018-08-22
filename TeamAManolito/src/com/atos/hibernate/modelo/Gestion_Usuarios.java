@@ -35,6 +35,13 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 
 	}
 
+	public Usuarios consultar_Correo(String correo) {
+		// TODO Auto-generated method stub
+
+		return usuariosdao.findById(correo);
+
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	// Metodo para comprobar si el correo y la password existe en la BBDD y devolver
@@ -50,10 +57,14 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 
 				return usu;
 
+			} else {
+				return usu2;
 			}
 
+		} else {
+			return usu2;
 		}
-		return usu2;
+
 	}
 
 	@Override
