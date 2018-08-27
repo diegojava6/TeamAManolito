@@ -68,7 +68,7 @@ public class Login_bean implements Serializable, Validator {
 			FacesMessage msg = new FacesMessage("Usuario y/o contraseña incorrectos", "ERROR MSG");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			
+
 			return navegacion_Bean.redirectToLogin();
 
 		} else {
@@ -76,7 +76,10 @@ public class Login_bean implements Serializable, Validator {
 			if (resultado.getAccesoAplicacion() == 0) {
 				accesos_contextos.addMensaje("No tienes permisos de acceso!!", "mensaje");
 			} else if (resultado.getPrimerLogin() == 1) {
-				accesos_contextos.addMensaje("Welcome!! "+ resultado.getRoles().getDescRol(), "mensaje");
+				Usuarios usu= gestion_usuarios.consultar_conRol(resultado.getDas());
+				accesos_contextos.addMensaje(
+						"Welcome!! " + usu.getRoles().getDescRol(),
+						"mensaje");
 			} else {
 				accesos_contextos.addMensaje("Reedireccionar a cambiar la pass!!", "mensaje");
 			}
@@ -86,7 +89,6 @@ public class Login_bean implements Serializable, Validator {
 
 	}
 
-
 	public void metodo_EventoCambioClave(ValueChangeEvent evento) {
 		System.out.println("SOY EL EVENTO DEL CAMBIO DE CLAVE");
 	}
@@ -94,10 +96,6 @@ public class Login_bean implements Serializable, Validator {
 	public void metodo_EventoCambioCorreo(ValueChangeEvent evento) {
 		System.out.println("SOY EL EVENTO DEL CAMBIO DE CORREO");
 
-		// this.usuario_login=this.InterfazGestionUsuarios.consultar_correo(this.correo_usuario)
-
-		// this.usuario_Login.setCorreo(correo_usuario);
-		// if(usuario_Login.consultarCorreo())
 	}
 
 	public IGestion_Usuarios getGestion_usuarios() {
