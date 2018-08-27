@@ -6,6 +6,7 @@ import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -84,6 +85,7 @@ public class RolesDAO {
 			throw re;
 		}
 	}
+
 
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Roles instance with property: " + propertyName

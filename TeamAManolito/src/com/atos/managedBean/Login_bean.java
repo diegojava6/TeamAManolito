@@ -1,6 +1,7 @@
 package com.atos.managedBean;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -9,10 +10,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
 
 import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
@@ -21,16 +24,15 @@ import com.atos.util.IAcceso_Contextos;
 @ManagedBean(name = "login_bean")
 @SessionScoped
 
-public class Login_bean {
+public class Login_bean implements Serializable, Validator {
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
 
 	@ManagedProperty("#{accesos_contextos}")
 	private IAcceso_Contextos accesos_contextos;
 
-	
 	@ManagedProperty("#{navegacionBean}")
-    private Navegacion_Bean navegacion_Bean;
+	private Navegacion_Bean navegacion_Bean;
 
 	/*
 	 * private String correo_usuario; private String clave_usuario;
@@ -38,7 +40,6 @@ public class Login_bean {
 	private Usuarios usuario_login;
 
 	private boolean loggedin;
-
 
 	// ********** METODOS DEL CICLO DE VIDA (CDI)
 	@PostConstruct
@@ -58,31 +59,33 @@ public class Login_bean {
 
 	}
 
-
 	public String metodo_Accion(ActionEvent evento) throws IOException {
 
-		boolean resultado = gestion_usuarios.consultar_Login(usuario_login.getCorreo(), usuario_login.getPassword());
+		Usuarios resultado = gestion_usuarios.consultar_Login(usuario_login.getDas(), usuario_login.getPassword());
 
-		if (resultado == false) {
-			accesos_contextos.addMensaje("Usuario y/o contraseÃ±a incorrectos", "mensaje");
+		if (resultado == null) {
 
-			 FacesMessage msg = new FacesMessage("Login error!", "ERROR MSG");
-		        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-		        FacesContext.getCurrentInstance().addMessage(null, msg);
-			 return navegacion_Bean.redirectToLogin();
+			FacesMessage msg = new FacesMessage("Usuario y/o contraseña incorrectos", "ERROR MSG");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			
+			return navegacion_Bean.redirectToLogin();
+
 		} else {
-			//Usuarios usuario_navegacion = gestion_usuarios.consultar_Correo(usuario_login.getCorreo());
-			/* FacesMessage msg = new FacesMessage("Login error!", "ERROR MSG");
-		        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-		        FacesContext.getCurrentInstance().addMessage(null, msg);*/
-				loggedin=true;
-               return navegacion_Bean.redirectToAdministrador2();
+
+			if (resultado.getAccesoAplicacion() == 0) {
+				accesos_contextos.addMensaje("No tienes permisos de acceso!!", "mensaje");
+			} else if (resultado.getPrimerLogin() == 1) {
+				accesos_contextos.addMensaje("Welcome!! "+ resultado.getRoles().getDescRol(), "mensaje");
+			} else {
+				accesos_contextos.addMensaje("Reedireccionar a cambiar la pass!!", "mensaje");
+			}
 
 		}
-		
-
+		return navegacion_Bean.redirectToAdministrador2();
 
 	}
+
 
 	public void metodo_EventoCambioClave(ValueChangeEvent evento) {
 		System.out.println("SOY EL EVENTO DEL CAMBIO DE CLAVE");
@@ -96,7 +99,6 @@ public class Login_bean {
 		// this.usuario_Login.setCorreo(correo_usuario);
 		// if(usuario_Login.consultarCorreo())
 	}
-
 
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
@@ -122,7 +124,6 @@ public class Login_bean {
 		this.accesos_contextos = accesos_contextos;
 	}
 
-
 	public boolean isLoggedin() {
 		return loggedin;
 	}
@@ -138,6 +139,11 @@ public class Login_bean {
 	public void setNavegacion_Bean(Navegacion_Bean navegacion_Bean) {
 		this.navegacion_Bean = navegacion_Bean;
 	}
-	
-	
+
+	@Override
+	public void validate(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
+		// TODO Auto-generated method stub
+
+	}
+
 }
