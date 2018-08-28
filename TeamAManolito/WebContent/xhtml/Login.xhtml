@@ -13,25 +13,27 @@
 		<!-- CONTENEDOR DE LOS COMPONENTES -->
 		<h:panelGrid id="panel_formu" columns="1">
 			<!-- COMPONENTES DEL FORMULARIO -->
-			<h:outputText id="texto_mail" value="Email :" />
-			<h:outputText id="texto_email">Email: </h:outputText>
+			<h:outputText id="texto_mail" value="DAS :" />
 
-			<h:inputText id="correo_usuario"
-				value="#{login_bean.usuario_login.correo}"></h:inputText>
+			<h:inputText id="das_usuario" value="#{login_bean.usuario_login.das}"
+				validatorMessage="El DAS no es válido.">
+				<f:validateLength maximum="7" minimum="7" />
+			</h:inputText>
+			<h:message for="das_usuario" />
 
 			<h:outputText id="texto_clave" value="Clave:" />
 
-
-
 			<h:inputSecret id="clave_usuario"
-				value="#{login_bean.usuario_login.password}"></h:inputSecret>
-
-
+				value="#{login_bean.usuario_login.password}"
+				validatorMessage="La contraseña no puede estar vacia.">
+				<f:validateLength minimum="1" />
+				</h:inputSecret>
+				<h:message for="clave_usuario" />
 
 			<h:commandButton id="boton" value="Comprobar"
 				actionListener="#{login_bean.metodo_Accion}" />
-				
-				<h:message for="mensaje" />
+
+			<h:message for="mensaje" />
 		</h:panelGrid>
 	</h:form>
 </h:body>
