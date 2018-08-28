@@ -17,18 +17,19 @@ public class Test {
 		Generar_Pass generar_pass = new Generar_Pass();
 	
 		
-		/*
+		
 		//COMPROBAR METODO CONSULTAR CORREO 
-		Usuarios cliente = gestion_cliente.consultar_correo("admin@admin.com");
+		Usuarios cliente = gestion_cliente.consultar_Das("M000001");
 		 		
 		//COMPROBAR METODO CONSULTAR LOGIN
-		boolean credencial = gestion_cliente.consultar_login("admin@admin.com","admin");
-		System.out.println(credencial);
-		*/
+		Usuarios usuario = gestion_cliente.consultar_Login("M000001","admin");
+		System.out.println(usuario);
+
+		/*
 		//COMPROBAR GENERACION DE PASS AUTO
 		String pass = generar_pass.generar_Pass(); 
 		System.out.println(pass);
-
+*/
 		
 		
 		
