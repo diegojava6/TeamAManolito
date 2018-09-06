@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:icecore="http://www.icefaces.org/icefaces/core"
+	xmlns:ace="http://www.icefaces.org/icefaces/components">
+
+<h:head>
+
+</h:head>
+<h:body>
+	<h:form id="formu_tarea">
+
+		<h:panelGrid id="panel_articulo" columns="3">
+
+
+			<!-- 1º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_cod" value="Código: " />
+			<h:inputText id="das" value="#{administrador_bean2.tarea.codigo_tarea}"
+				disabled="#{administrador_bean2.campo_das}">
+				<f:validateLength minimum="7" maximum="7" />
+			</h:inputText>
+			<h:message for="eti_cod" />
+
+			<!-- 2º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_name" value="Tarea: " />
+			<h:inputText id="name" value="#{administrador_bean22.tarea.tarea}"
+				converterMessage="No valen caracteres especiales">
+				<!-- no te hace consulta sin haber puesto el correo
+				<f:validator validatorId="validador_Email" />
+				-->
+				<f:validateLength maximum="50" />
+			</h:inputText>
+			<h:message for="eti_name" />
+
+			<!-- 3º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_desc" value="Descripcion: " />
+			<h:inputText id="desc" value="#{administrador_bean2.tarea.desc}"
+				validatorMessage="Nombre: El maximo de caracteres permitidos son 200 y solo se permiten letras">
+				<f:validateLength maximum="200" />
+				<f:validateRegex pattern="[a-zA-Z ]*$" />
+			</h:inputText>
+			<h:message for="eti_desc" />
+
+			<!-- 4º FILA DEL FORMULARIO -->
+			<h:outputText id="eti_estado" value="Estado: " />
+			<h:inputText id="estado"
+				value="#{administrador_bean2.tarea.estado}"
+				validatorMessage="Solo admite un único numero">
+				<f:validateRegex pattern="[0-3]*$" />
+				<f:validateLength maximum="1" />
+			</h:inputText>
+			<h:message for="eti_estado" />
+
+		</h:panelGrid>
+		<h:panelGrid id="panel_botones" columns="5">
+			<h:commandButton id="boton_alta" value="Alta"
+				disabled="#{administrador_bean2.bot_alt}"
+				actionListener="#{administrador_bean2.altaTarea}" />
+			<h:commandButton id="boton_baja" value="Baja"
+				disabled="#{administrador_bean2.bot_bm}"
+				actionListener="#{administrador_bean2.bajaTarea}" />
+			<h:commandButton id="boton_modificacion" value="Modificacion"
+				disabled="#{administrador_bean2.bot_bm}"
+				actionListener="#{administrador_bean2.modificacionTarea}" />
+			<h:commandButton id="boton_consulta" value="Consulta"
+				actionListener="#{administrador_bean2.consultaTarea}" />
+			<h:commandButton id="boton_clear" value="Clear"
+				actionListener="#{administrador_bean2.clear}">
+				<f:ajax execute="@this" render="formu_tarea" />
+			</h:commandButton>
+
+		</h:panelGrid>
+
+
+	</h:form>
+</h:body>
+
+</html>

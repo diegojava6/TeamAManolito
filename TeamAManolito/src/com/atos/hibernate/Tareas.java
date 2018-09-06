@@ -18,7 +18,9 @@ import javax.persistence.Table;
 public class Tareas {
 	private Set<Roles> roles = new HashSet<Roles>(0);
 	private Integer codigo_tarea;
+	private String tarea;
 	private String desc;
+	private Integer estado;
 
 	
 	
@@ -26,7 +28,10 @@ public class Tareas {
 		super();
 	}
 	
-	
+	public Tareas(Integer codigo_tarea, String tarea) {
+		this.codigo_tarea = codigo_tarea;
+		this.tarea = tarea;
+	}
 
 	public Tareas(Set<Roles> roles, Integer codigo_tarea, String desc) {
 		super();
@@ -50,17 +55,33 @@ public class Tareas {
 
 
 	@Column(name = "tarea", length = 100)
-	public String getDesc() {
-		return desc;
+	public String getTarea() {
+		return tarea;
 	}
 
 
+
+	public void setTarea(String tarea) {
+		this.tarea = tarea;
+	}
+
+	@Column(name = "descTarea", length = 200)
+	public String getDesc() {
+		return desc;
+	}
 
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
+	@Column ( name = "estado", nullable = false, precision = 1, scale = 0)
+	public Integer getEstado() {
+		return estado;
+	}
 
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
 
 	// ojito aqui hay que revisar esta mierda campo schema dentro a la anotacion
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
