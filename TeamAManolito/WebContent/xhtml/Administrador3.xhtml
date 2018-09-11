@@ -18,20 +18,20 @@
 
 			<!-- 1º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_cod" value="Código: " />
-			<h:inputText id="das" value="#{administrador_bean2.tarea.codigo_tarea}"
-				disabled="#{administrador_bean2.campo_das}">
-				<f:validateLength minimum="7" maximum="7" />
+			<h:inputText id="cod"
+				value="#{administrador_bean2.tarea.codigo_tarea}"
+				disabled="#{administrador_bean2.campo_cod}"
+				validatorMessage="Solo admite numeros y como máximo 5 cifras">
+				<f:convertNumber type="number" maxIntegerDigits="5" integerOnly="true" />
 			</h:inputText>
 			<h:message for="eti_cod" />
 
 			<!-- 2º FILA DEL FORMULARIO -->
-			<h:outputText id="eti_name" value="Tarea: " />
-			<h:inputText id="name" value="#{administrador_bean22.tarea.tarea}"
-				converterMessage="No valen caracteres especiales">
-				<!-- no te hace consulta sin haber puesto el correo
-				<f:validator validatorId="validador_Email" />
-				-->
-				<f:validateLength maximum="50" />
+			<h:outputText id="eti_name" value="Nombre tarea: " />
+			<h:inputText id="name"
+				value="#{administrador_bean2.tarea.nombre_tarea}"
+				converterMessage="Máximo 100 caracteres">
+				<f:validateLength maximum="100" />
 			</h:inputText>
 			<h:message for="eti_name" />
 
@@ -40,33 +40,30 @@
 			<h:inputText id="desc" value="#{administrador_bean2.tarea.desc}"
 				validatorMessage="Nombre: El maximo de caracteres permitidos son 200 y solo se permiten letras">
 				<f:validateLength maximum="200" />
-				<f:validateRegex pattern="[a-zA-Z ]*$" />
 			</h:inputText>
 			<h:message for="eti_desc" />
 
 			<!-- 4º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_estado" value="Estado: " />
-			<h:inputText id="estado"
-				value="#{administrador_bean2.tarea.estado}"
-				validatorMessage="Solo admite un único numero">
-				<f:validateRegex pattern="[0-3]*$" />
-				<f:validateLength maximum="1" />
-			</h:inputText>
+			<h:selectOneRadio value="#{administrador_bean2.tarea.estado}">
+				<f:selectItem itemLabel="Deshabilitada" itemValue="0" />
+				<f:selectItem itemLabel="Habilitada" itemValue="1" />
+			</h:selectOneRadio>
 			<h:message for="eti_estado" />
 
 		</h:panelGrid>
 		<h:panelGrid id="panel_botones" columns="5">
 			<h:commandButton id="boton_alta" value="Alta"
 				disabled="#{administrador_bean2.bot_alt}"
-				actionListener="#{administrador_bean2.altaTarea}" />
+				actionListener="#{administrador_bean2.alta}" />
 			<h:commandButton id="boton_baja" value="Baja"
 				disabled="#{administrador_bean2.bot_bm}"
-				actionListener="#{administrador_bean2.bajaTarea}" />
+				actionListener="#{administrador_bean2.baja}" />
 			<h:commandButton id="boton_modificacion" value="Modificacion"
 				disabled="#{administrador_bean2.bot_bm}"
-				actionListener="#{administrador_bean2.modificacionTarea}" />
+				actionListener="#{administrador_bean2.modificacion}" />
 			<h:commandButton id="boton_consulta" value="Consulta"
-				actionListener="#{administrador_bean2.consultaTarea}" />
+				actionListener="#{administrador_bean2.consulta}" />
 			<h:commandButton id="boton_clear" value="Clear"
 				actionListener="#{administrador_bean2.clear}">
 				<f:ajax execute="@this" render="formu_tarea" />
@@ -74,6 +71,35 @@
 
 		</h:panelGrid>
 
+		<ace:dataTable id="tabla" value="#{administrador_bean2.lista_tareas}"
+			var="tarea" rows="#{administrador_bean2.numero_filas}"
+			paginator="true" paginatorPosition="bottom">
+
+			<ace:column id="col_cod" headerText="Codigo"
+				filterBy="#{tarea.codigo_tarea}">
+				<h:outputText id="codigo" value="#{tarea.codigo_tarea}" />
+			</ace:column>
+
+			<ace:column id="col_nombre" headerText="Tarea"
+				filterBy="#{tarea.nombre_tarea}">
+				<h:outputText id="tarea" value="#{tarea.nombre_tarea}" />
+			</ace:column>
+
+			<ace:column headerText="Descripción" filterBy="#{tarea.desc}">
+				<h:outputText id="desc" value="#{tarea.desc}" />
+			</ace:column>
+
+			<ace:column headerText="Estado" filterBy="#{tarea.estado}">
+				<h:outputText id="estado" value="#{tarea.estado}">
+				</h:outputText>
+			</ace:column>
+
+		</ace:dataTable>
+
+		<h:commandButton id="boton_tabla" value="refresh table"
+			actionListener="#{administrador_bean2.refresh_tabla}">
+			<f:ajax execute="@this" render="tabla" />
+		</h:commandButton>
 
 	</h:form>
 </h:body>

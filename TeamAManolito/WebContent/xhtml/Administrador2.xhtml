@@ -13,78 +13,80 @@
 <h:body>
 	<h:form id="formu_usuario">
 
-		<h:panelGrid id="panel_articulo" columns="3">
+		<h:panelGrid id="panel_articulo" columns="2">
 
 
 			<!-- 1º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_das" value="DAS: " />
 			<h:inputText id="das" value="#{administrador_bean.usuario.das}"
 				converterMessage="No tiene la longitud de caracteres correcta"
-				disabled="#{administrador_bean.campo_das}">
-				<f:validateLength minimum="7" maximum="7" />
+				disabled="#{administrador_bean.campo_das}"
+				validatorMessage="El DAS introducido no es válido">
+				<f:validateRegex pattern="^[Mm]\d{6}" />
 			</h:inputText>
-			<h:message for="eti_das" />
+			<h:message for="das" style="color:red"/>
 
 			<!-- 2º FILA DEL FORMULARIO -->
-			<h:outputText id="eti_correo" value="correo: " />
+			<h:outputText id="eti_correo" value="Correo: " />
 			<h:inputText id="correo" value="#{administrador_bean.usuario.correo}"
-				converterMessage="No valen caracteres especiales">
-				<!-- no te hace consulta sin haber puesto el correo
-				<f:validator validatorId="validador_Email" />
-				-->
+				validatorMessage="Correo inválido" valueChangeListener="#{administrador_bean.actualizacion_correo}">
 				<f:validateLength maximum="50" />
+				<f:validateRegex
+					pattern="(^[_\w\d-]+(.[_\w\d-]+)*@[\w\d-]+(.[\w\d-]+)*(.[\w]{2,4})$)?" />
 			</h:inputText>
-			<h:message for="eti_correo" />
+			<h:message for="correo" style="color:red"/>
 
 			<!-- 3º FILA DEL FORMULARIO -->
-			<h:outputText id="eti_nombre" value="nombre: " />
+			<h:outputText id="eti_nombre" value="Nombre: " />
 			<h:inputText id="nombre" value="#{administrador_bean.usuario.nombre}"
-				validatorMessage="Nombre: El maximo de caracteres permitidos son 10 y solo se permiten letras">
+				validatorMessage="El nombre como máximo ha de tener 10 caracteres y solo se permiten letras">
 				<f:validateLength maximum="10" />
-				<f:validateRegex pattern="[a-zA-Z ]*$" />
+				<f:validateRegex pattern="[a-zA-Z]*$" />
 			</h:inputText>
-			<h:message for="eti_nombre" />
+			<h:message for="nombre" style="color:red"/>
 
 			<!-- 4º FILA DEL FORMULARIO -->
-			<h:outputText id="eti_apellidos" value="apellidos: " />
+			<h:outputText id="eti_apellidos" value="Apellidos: " />
 			<h:inputText id="apellido"
 				value="#{administrador_bean.usuario.apellidos}"
-				validatorMessage=" Apellido: El maximo de caracteres permitidos son 10 y solo se permiten letras">
+				validatorMessage="El nombre como máximo ha de tener 10 caracteres y solo se permiten letras">
 				<f:validateRegex pattern="[a-zA-Z ]*$" />
 				<f:validateLength maximum="10" />
 			</h:inputText>
-			<h:message for="eti_apellidos" />
+			<h:message for="apellido" style="color:red"/>
 
 			<!-- 5º FILA DEL FORMULARIO -->
-			<h:outputText id="eti_acceso" value="acceso a aplicacion: " />
+			<h:outputText id="eti_acceso" value="Acceso a aplicacion: " />
 			<h:selectOneRadio
 				value="#{administrador_bean.usuario.accesoAplicacion}">
 				<f:selectItem itemLabel="No" itemValue="0" />
 				<f:selectItem itemLabel="Si" itemValue="1" />
 			</h:selectOneRadio>
-			<h:message for="eti_acceso" />
+			<h:message for="eti_acceso" style="color:red"/>
 
 			<!-- 6º FILA DEL FORMULARIO -->
 			<!-- COMANDO RADIO BUTTON -->
-			<h:outputText id="eti_roles" value="Rol desarollado: " />
+			<!-- <h:outputText id="eti_roles" value="Rol desarollado: " />
 			<h:selectOneRadio value="#{administrador_bean.seleccionRol}"
 				valueChangeListener="#{administrador_bean.carga_Roles}">
 				<f:selectItems value="#{administrador_bean.lista_roles}"
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
 			</h:selectOneRadio>
-			
-			<!-- COMANDO SELECT 
+			<h:message for="eti_roles" style="color:red"/> -->
+
+			<!-- COMANDO SELECT  -->
 			<h:outputText id="eti_roles" value="Rol desarollado: " />
-			<ace:simpleSelectOneMenu id="selectRol"
+			<h:selectOneMenu id="selectRol"
 				value="#{administrador_bean.seleccionRol}"
 				valueChangeListener="#{administrador_bean.carga_Roles}">
+				<f:selectItem itemLabel="Seleccione un rol" itemValue="0" />
 				<f:selectItems value="#{administrador_bean.lista_roles}"
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
-				<ace:ajax event="valueChange" />
-			</ace:simpleSelectOneMenu> 
-			-->
+			</h:selectOneMenu> 
+			<h:message for="eti_roles" style="color:red"/>
+			
 
 		</h:panelGrid>
 		<h:panelGrid id="panel_botones" columns="5">

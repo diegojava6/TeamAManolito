@@ -19,19 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.atos.hibernate.Tareas;
 
-/**
- * A data access object (DAO) providing persistence and search support for
- * Tareas entities. Transaction control of the save(), update() and delete()
- * operations can directly support Spring container-managed transactions or they
- * can be augmented to handle user-managed Spring transactions. Each of these
- * methods provides additional information for how to configure it for the
- * desired type of transaction control.
- * 
- * @see com.atrium.hibernate.Tareas
- * @author MyEclipse Persistence Tools
- */
-@Repository("tareas_dao")
-@Scope("prototype")
+
+
 public class TareasDAO {
 	private static final Logger log = LoggerFactory.getLogger(TareasDAO.class);
 	// property constants
@@ -61,10 +50,10 @@ public class TareasDAO {
 		}
 	}
 
-	public void delete(Tareas persistentInstance) {
+	public void delete(Tareas tarea) {
 		log.debug("deleting Tareas instance");
 		try {
-			getCurrentSession().delete(persistentInstance);
+			getCurrentSession().delete(tarea);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);

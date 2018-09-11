@@ -6,15 +6,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.atos.dao.TareasDAO;
+import com.atos.dao_ext.TareasDAO_EXT;
 import com.atos.hibernate.Tareas;
 
 @Component("gestion_tareas")
 @Scope("prototype")
 public class Gestion_Tareas implements IGestion_Tareas {
 
-	private TareasDAO tareasdao;
+	private TareasDAO_EXT tareasdao;
 
+	private List<Tareas> resultado;
+
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public List<Tareas> consultar_Todos() {
@@ -24,10 +27,8 @@ public class Gestion_Tareas implements IGestion_Tareas {
 
 	@Override
 	@Transactional(readOnly = true)
-	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
 	public Tareas consultar_Codigo(Integer codigo) {
 		// TODO Auto-generated method stub
-
 		return tareasdao.findById(codigo);
 
 	}
@@ -50,11 +51,11 @@ public class Gestion_Tareas implements IGestion_Tareas {
 		tareasdao.attachDirty(tarea);
 	}
 
-	public TareasDAO getTareasdao() {
+	public TareasDAO_EXT getTareasdao() {
 		return tareasdao;
 	}
 
-	public void setTareasdao(TareasDAO tareasdao) {
+	public void setTareasdao(TareasDAO_EXT tareasdao) {
 		this.tareasdao = tareasdao;
 	}
 

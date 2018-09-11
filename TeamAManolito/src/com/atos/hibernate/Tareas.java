@@ -3,66 +3,63 @@ package com.atos.hibernate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tareas")
 public class Tareas {
 	private Set<Roles> roles = new HashSet<Roles>(0);
 	private Integer codigo_tarea;
-	private String tarea;
+	private String nombre_tarea;
 	private String desc;
 	private Integer estado;
 
-	
-	
 	public Tareas() {
 		super();
 	}
-	
-	public Tareas(Integer codigo_tarea, String tarea) {
-		this.codigo_tarea = codigo_tarea;
-		this.tarea = tarea;
-	}
 
-	public Tareas(Set<Roles> roles, Integer codigo_tarea, String desc) {
+	public Tareas(String nombre_tarea, String desc, Integer estado) {
 		super();
-		this.roles = roles;
-		this.codigo_tarea = codigo_tarea;
+		this.nombre_tarea = nombre_tarea;
 		this.desc = desc;
+		this.estado = estado;
 	}
 
+	public Tareas(Integer codigo_tarea, String nombre_tarea, String desc, Integer estado) {
+		super();
+		this.codigo_tarea = codigo_tarea;
+		this.nombre_tarea = nombre_tarea;
+		this.desc = desc;
+		this.estado = estado;
+	}
+
+	public Tareas(Integer codigo_tarea, String nombre_tarea, String desc, Integer estado, Set<Roles> roles) {
+		super();
+		this.codigo_tarea = codigo_tarea;
+		this.nombre_tarea = nombre_tarea;
+		this.desc = desc;
+		this.estado = estado;
+		this.roles = roles;
+	}
 
 	@Id
-	@Column ( name = "codigo_tarea" ,unique = true, nullable = false, precision = 200, scale = 0)
+	@Column(name = "codigo_tarea", unique = true, nullable = false, precision = 5, scale = 0)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer getCodigo_tarea() {
 		return codigo_tarea;
 	}
-
-
 
 	public void setCodigo_tarea(Integer codigo_tarea) {
 		this.codigo_tarea = codigo_tarea;
 	}
 
-
 	@Column(name = "tarea", length = 100)
-	public String getTarea() {
-		return tarea;
+	public String getNombre_tarea() {
+		return nombre_tarea;
 	}
 
-
-
-	public void setTarea(String tarea) {
-		this.tarea = tarea;
+	public void setNombre_tarea(String nombre_tarea) {
+		this.nombre_tarea = nombre_tarea;
 	}
 
 	@Column(name = "descTarea", length = 200)
@@ -74,7 +71,7 @@ public class Tareas {
 		this.desc = desc;
 	}
 
-	@Column ( name = "estado", nullable = false, precision = 1, scale = 0)
+	@Column(name = "estado", nullable = false, precision = 1, scale = 0)
 	public Integer getEstado() {
 		return estado;
 	}
@@ -83,22 +80,19 @@ public class Tareas {
 		this.estado = estado;
 	}
 
+	
+	
 	// ojito aqui hay que revisar esta mierda campo schema dentro a la anotacion
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ROLES_A_TAREAS_A", joinColumns = { @JoinColumn(name = "codigo_tarea", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "codigo_rol", nullable = false, updatable = false) })
+	@JoinTable(name = "roles_tareas", joinColumns = {
+			@JoinColumn(name = "codigo_tarea", nullable = false, updatable = true) }, inverseJoinColumns = {
+					@JoinColumn(name = "codigo_rol", nullable = false, updatable = true) })
 	public Set<Roles> getRoles() {
 		return roles;
 	}
-	
+
 	public void setRoles(Set<Roles> roles) {
 		this.roles = roles;
 	}
-
-
-
-
-
-
-
 
 }

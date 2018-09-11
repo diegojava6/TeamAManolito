@@ -47,7 +47,7 @@ public class Usuarios {
 		this.roles = roles;
 	}
 
-	@Column(name = "nombre", nullable = false, length = 10)
+	@Column(name = "nombre", nullable = false, length = 20)
 	public String getNombre() {
 		return nombre;
 	}
@@ -56,7 +56,7 @@ public class Usuarios {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "apellido", nullable = false, length = 10)
+	@Column(name = "apellido", nullable = false, length = 100)
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -85,7 +85,7 @@ public class Usuarios {
 		this.correo = correo;
 	}
 
-	@Column(name = "password", nullable = false, length = 10)
+	@Column(name = "password", nullable = false, length = 20)
 	public String getPassword() {
 		return password;
 	}

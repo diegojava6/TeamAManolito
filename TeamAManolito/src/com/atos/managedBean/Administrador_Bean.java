@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
@@ -35,6 +37,7 @@ public class Administrador_Bean implements Serializable {
 	private String filtrado_apellido;
 	private String filtrado_rol;
 	private Integer seleccionRol;
+	private String correo;
 	// -----------------------------------
 
 	@ManagedProperty("#{gestion_usuarios}")
@@ -55,8 +58,6 @@ public class Administrador_Bean implements Serializable {
 	@ManagedProperty("#{accesos_contextos}")
 	private IAcceso_Contextos accesos_contextos;
 
-	// private FacesMessage mensaje;
-
 	@PostConstruct
 	public void valores_Iniciales() {
 		usuario = new Usuarios();
@@ -67,7 +68,7 @@ public class Administrador_Bean implements Serializable {
 		lista_usuarios = gestion_usuarios.consultar_Todos();
 		lista_roles = gestion_roles.consultar_Roles();
 		modo_seleccion = 1;
-
+		correo = "";
 		// ESTADO INICIAL DE LOS BOTONES DEL FORMULARIO
 		bot_bm = true;
 		bot_alt = false;
@@ -78,20 +79,28 @@ public class Administrador_Bean implements Serializable {
 	// opcion de alta
 	public void alta(ActionEvent evento) {
 
-		try {
+		
 
-			usuario.setPassword(generar_pass.generar_Pass());
-			usuario.setPrimerLogin(0);
-			usuario.setRoles(roles);
-			// llama al metodo de alta de usuario
-			gestion_usuarios.alta_Usuario(usuario);
-			System.out.println("correcta alta");
-			bot_alt = true;
-			bot_bm = false;
+		if (correo.hashCode() != 0) {
 
-		} catch (Exception e) {
-			System.out.println("error alta");
+			try {
 
+				usuario.setPassword(generar_pass.generar_Pass());
+				usuario.setPrimerLogin(0);
+				usuario.setRoles(roles);
+				// llama al metodo de alta de usuario
+				gestion_usuarios.alta_Usuario(usuario);
+				System.out.println("correcta alta");
+				bot_alt = true;
+				bot_bm = false;
+
+			} catch (Exception e) {
+				System.out.println("error alta");
+
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage("correo necesario", 
+			        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Correo necesario", correo));
 		}
 
 	}
@@ -104,18 +113,25 @@ public class Administrador_Bean implements Serializable {
 			usuario.setAccesoAplicacion(0);
 			gestion_usuarios.baja_Usuario(usuario);
 			System.out.println("Baja correcta");
-			// accesos_contextos.addMensaje("baja correcta", "mensaje");
+
 		} catch (Exception e) {
 			System.out.println("Baja incorrecta");
-			// accesos_contextos.addMensaje("baja incorrecta", "mensaje");
+
 		}
 
 	}
 
+	public void actualizacion_correo(ValueChangeEvent evento) {
+
+		// SE RECIBE EL VALOR SELECCIONADO POR EL EVENTO
+		correo = (String) evento.getNewValue();
+		
+	}
+	
 	public void carga_Roles(ValueChangeEvent evento) {
+
 		// SE RECIBE EL VALOR SELECCIONADO POR EL EVENTO
 		seleccionRol = (Integer) evento.getNewValue();
-
 		roles = gestion_roles.consultar_ID(seleccionRol);
 
 	}
@@ -163,7 +179,7 @@ public class Administrador_Bean implements Serializable {
 		try {
 			usuario = new Usuarios();
 			roles = new Roles();
-
+			seleccionRol = 0;
 			bot_bm = true;
 			bot_alt = false;
 			setCampo_das(false);
@@ -212,8 +228,6 @@ public class Administrador_Bean implements Serializable {
 	public void refresh_tabla(ActionEvent event) {
 		lista_usuarios = gestion_usuarios.consultar_Todos();
 	}
-	
-	
 
 	public Usuarios getUsuario() {
 		return usuario;
@@ -266,7 +280,6 @@ public class Administrador_Bean implements Serializable {
 	public void setGestion_usuarios(IGestion_Usuarios gestion_usuarios) {
 		this.gestion_usuarios = gestion_usuarios;
 	}
-
 
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
