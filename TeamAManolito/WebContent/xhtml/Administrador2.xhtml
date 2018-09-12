@@ -57,23 +57,23 @@
 
 			<!-- 5º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_acceso" value="Acceso a aplicacion: " />
-			<h:selectOneRadio
+			<h:selectOneRadio id="acceso"
 				value="#{administrador_bean.usuario.accesoAplicacion}">
 				<f:selectItem itemLabel="No" itemValue="0" />
 				<f:selectItem itemLabel="Si" itemValue="1" />
 			</h:selectOneRadio>
-			<h:message for="eti_acceso" style="color:red"/>
+			<h:message for="acceso" style="color:red"/>
 
 			<!-- 6º FILA DEL FORMULARIO -->
 			<!-- COMANDO RADIO BUTTON -->
 			<!-- <h:outputText id="eti_roles" value="Rol desarollado: " />
-			<h:selectOneRadio value="#{administrador_bean.seleccionRol}"
+			<h:selectOneRadio id="selectRol" value="#{administrador_bean.seleccionRol}"
 				valueChangeListener="#{administrador_bean.carga_Roles}">
 				<f:selectItems value="#{administrador_bean.lista_roles}"
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
 			</h:selectOneRadio>
-			<h:message for="eti_roles" style="color:red"/> -->
+			<h:message for="selectRol" style="color:red"/> -->
 
 			<!-- COMANDO SELECT  -->
 			<h:outputText id="eti_roles" value="Rol desarollado: " />
@@ -85,7 +85,7 @@
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
 			</h:selectOneMenu> 
-			<h:message for="eti_roles" style="color:red"/>
+			<h:message for="selectRol" style="color:red"/>
 			
 
 		</h:panelGrid>

@@ -21,27 +21,27 @@
 			<h:inputText id="cod"
 				value="#{administrador_bean2.tarea.codigo_tarea}"
 				disabled="#{administrador_bean2.campo_cod}"
-				validatorMessage="Solo admite numeros y como máximo 5 cifras">
+				validatorMessage="Solo admite numeros y como máximo 5 cifras.">
 				<f:convertNumber type="number" maxIntegerDigits="5" integerOnly="true" />
 			</h:inputText>
-			<h:message for="eti_cod" />
+			<h:message for="cod" style="color:red" />
 
 			<!-- 2º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_name" value="Nombre tarea: " />
 			<h:inputText id="name"
 				value="#{administrador_bean2.tarea.nombre_tarea}"
-				converterMessage="Máximo 100 caracteres">
+				converterMessage="Máximo 100 caracteres.">
 				<f:validateLength maximum="100" />
 			</h:inputText>
-			<h:message for="eti_name" />
+			<h:message for="name" style="color:red" />
 
 			<!-- 3º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_desc" value="Descripcion: " />
 			<h:inputText id="desc" value="#{administrador_bean2.tarea.desc}"
-				validatorMessage="Nombre: El maximo de caracteres permitidos son 200 y solo se permiten letras">
+				validatorMessage="El maximo de caracteres permitidos son 200.">
 				<f:validateLength maximum="200" />
 			</h:inputText>
-			<h:message for="eti_desc" />
+			<h:message for="desc" style="color:red" />
 
 			<!-- 4º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_estado" value="Estado: " />
@@ -49,7 +49,7 @@
 				<f:selectItem itemLabel="Deshabilitada" itemValue="0" />
 				<f:selectItem itemLabel="Habilitada" itemValue="1" />
 			</h:selectOneRadio>
-			<h:message for="eti_estado" />
+			<h:message for="eti_estado" style="color:red" />
 
 		</h:panelGrid>
 		<h:panelGrid id="panel_botones" columns="5">

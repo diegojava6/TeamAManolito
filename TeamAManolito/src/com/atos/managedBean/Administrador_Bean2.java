@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.ValueChangeEvent;
 
-import com.atos.hibernate.Roles;
 import com.atos.hibernate.Tareas;
 import com.atos.hibernate.modelo.IGestion_Tareas;
 import com.atos.util.IAcceso_Contextos;
@@ -66,6 +63,7 @@ public class Administrador_Bean2 implements Serializable {
 				tarea = tarea_nueva;
 
 			} else {
+
 				// llama al metodo de alta de usuario
 				gestion_tareas.alta_Tarea(tarea);
 				System.out.println("correcta alta");
@@ -86,10 +84,10 @@ public class Administrador_Bean2 implements Serializable {
 			tarea.setEstado(0);
 			gestion_tareas.baja_Tarea(tarea);
 			System.out.println("Baja correcta");
-			// accesos_contextos.addMensaje("baja correcta", "mensaje");
+
 		} catch (Exception e) {
 			System.out.println("Baja incorrecta");
-			// accesos_contextos.addMensaje("baja incorrecta", "mensaje");
+
 		}
 
 	}
