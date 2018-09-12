@@ -13,7 +13,7 @@
 <h:body>
 	<h:form id="formu_usuario">
 
-		<h:panelGrid id="panel_articulo" columns="2">
+		<h:panelGrid id="panel_articulo" columns="3">
 
 
 			<!-- 1º FILA DEL FORMULARIO -->
@@ -49,8 +49,8 @@
 			<h:outputText id="eti_apellidos" value="Apellidos: " />
 			<h:inputText id="apellido"
 				value="#{administrador_bean.usuario.apellidos}"
-				validatorMessage="El nombre como máximo ha de tener 10 caracteres y solo se permiten letras">
-				<f:validateRegex pattern="[a-zA-Z ]*$" />
+				validatorMessage="El apellido como máximo ha de tener 10 caracteres y solo se permiten letras">
+				<f:validateRegex pattern="[a-zA-Z]*$" />
 				<f:validateLength maximum="10" />
 			</h:inputText>
 			<h:message for="apellido" style="color:red"/>

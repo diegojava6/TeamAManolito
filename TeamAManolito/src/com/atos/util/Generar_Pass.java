@@ -1,4 +1,4 @@
-package com.atos.util;
+	package com.atos.util;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class Generar_Pass {
 				"x", "y", "z" };
 
 		for (int i = 0; i <= 10; i++) {
-			int numero = (int) Math.round(Math.random() * 62);
+			int numero = (int) Math.round(Math.random() * abecedario.length);
 			password += abecedario[numero];	
 		}
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -63,8 +62,6 @@ public class Administrador_Bean implements Serializable {
 		usuario = new Usuarios();
 		roles = new Roles();
 
-		// generar pass no funciona por el momento
-		generar_pass = new Generar_Pass();
 		lista_usuarios = gestion_usuarios.consultar_Todos();
 		lista_roles = gestion_roles.consultar_Roles();
 		modo_seleccion = 1;
@@ -80,7 +77,7 @@ public class Administrador_Bean implements Serializable {
 	public void alta(ActionEvent evento) {
 
 		
-
+		//comprobar si el campo correo tiene algo escrito o no
 		if (correo.hashCode() != 0) {
 
 			try {
