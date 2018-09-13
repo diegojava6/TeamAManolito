@@ -66,17 +66,16 @@
 
 		
 
-			<!-- COMANDO SELECT  -->
-			<h:outputText id="eti_roles" value="Rol desarollado: " />
+		<h:outputText id="eti_roles" value="Rol desarollado: " />
 			<h:selectOneMenu id="selectRol"
-				value="#{administrador_bean.roles.descRol}"
+				value="#{administrador_bean.seleccionRol}"
 				valueChangeListener="#{administrador_bean.carga_Roles}">
 				<f:selectItem itemLabel="Seleccione un rol" itemValue="0" />
 				<f:selectItems value="#{administrador_bean.lista_roles}"
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
-			</h:selectOneMenu> 
-			<h:message for="selectRol" style="color:red"/>
+			</h:selectOneMenu>
+			<h:message for="selectRol" style="color:red" /> 
 			
 
 		</h:panelGrid>

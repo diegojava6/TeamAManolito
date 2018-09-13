@@ -52,6 +52,8 @@ public class Administrador_Bean implements Serializable {
 	private boolean bot_bm;
 	private boolean bot_alt;
 	private boolean campo_das;
+	private List<Roles> lista_r;
+	private List<String> lista_rvista;
 
 	// UTILIDAD GENERAL PARA LA GESTION DE MENSAJES EN MANAGEDBEAN
 	@ManagedProperty("#{accesos_contextos}")
@@ -70,7 +72,11 @@ public class Administrador_Bean implements Serializable {
 		bot_bm = true;
 		bot_alt = false;
 		campo_das = false;
-
+		/*lista_r = gestion_roles.consultar_Roles();
+		
+		for(int i=0; i < lista_r.size(); i++)
+		lista_rvista.add(i,lista_r.get(0).getDescRol());*/
+		
 	}
 
 	// opcion de alta
@@ -132,6 +138,7 @@ public class Administrador_Bean implements Serializable {
 		roles = gestion_roles.consultar_ID(seleccionRol);
 
 	}
+	
 
 	public void modificacion(ActionEvent evento) {
 
@@ -221,10 +228,10 @@ public class Administrador_Bean implements Serializable {
 		}
 	}
 	
-	public List<String> carga_roles (){
+	public List<Roles> carga_roles (){
 		
-		lista_roles = gestion_roles.consultar_Roles();
-		return lista_roles;
+		
+		return lista_r;
 		
 	}
 
@@ -392,6 +399,22 @@ public class Administrador_Bean implements Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public List<Roles> getLista_r() {
+		return lista_r;
+	}
+
+	public void setLista_r(List<Roles> lista_r) {
+		this.lista_r = lista_r;
+	}
+
+	public List<String> getLista_rvista() {
+		return lista_rvista;
+	}
+
+	public void setLista_rvista(List<String> lista_rvista) {
+		this.lista_rvista = lista_rvista;
 	}
 
 }
