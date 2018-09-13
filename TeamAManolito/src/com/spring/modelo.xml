@@ -24,7 +24,7 @@
 	<!-- CONEXION A LA BASE DE DATOS -->
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="configLocation"
 			value="classpath:com/atos/hibernate/hibernate.cfg.xml">
 		</property>
@@ -32,7 +32,7 @@
 
 
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager" />
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager" />
 
 
 	<tx:annotation-driven
@@ -47,6 +47,8 @@
 		<property name="username" value="${spring.datasource.nombre}" />
 		<property name="password" value="${spring.datasource.clave}" />
 	</bean>
+	
+	
 
 	<!-- PAQUETES CON ANOTACIONES PARA SPRING PARA LA GESTION DEL MODELO -->
 	

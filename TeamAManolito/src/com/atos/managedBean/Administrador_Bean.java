@@ -64,12 +64,12 @@ public class Administrador_Bean implements Serializable {
 
 		lista_usuarios = gestion_usuarios.consultar_Todos();
 		lista_roles = gestion_roles.consultar_Roles();
-		modo_seleccion = 1;
+		modo_seleccion = 2;
 		correo = "";
 		// ESTADO INICIAL DE LOS BOTONES DEL FORMULARIO
 		bot_bm = true;
 		bot_alt = false;
-		setCampo_das(false);
+		campo_das = false;
 
 	}
 
@@ -179,7 +179,7 @@ public class Administrador_Bean implements Serializable {
 			seleccionRol = 0;
 			bot_bm = true;
 			bot_alt = false;
-			setCampo_das(false);
+			campo_das = false;
 
 			System.out.println("limpiado completado");
 		} catch (Exception e) {
@@ -219,6 +219,13 @@ public class Administrador_Bean implements Serializable {
 			filtrado_apellido = "exact";
 			filtrado_rol = "exact";
 		}
+	}
+	
+	public List<String> carga_roles (){
+		
+		lista_roles = gestion_roles.consultar_Roles();
+		return lista_roles;
+		
 	}
 
 	// boton refrescar tabla
@@ -377,6 +384,14 @@ public class Administrador_Bean implements Serializable {
 
 	public void setSeleccionRol(Integer seleccionRol) {
 		this.seleccionRol = seleccionRol;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 }
