@@ -25,32 +25,34 @@ public class Roles {
 	public Roles() {
 		super();
 	}
-	public Roles(Integer codRol) {
+	/*public Roles(Integer codRol) {
 		super();
 		this.codRol = codRol;
-	}
+	}*/
 	
 	public Roles(Integer codRol, String descRol) {
 		super();
 		this.codRol = codRol;
 		this.descRol = descRol;
 	}
-	public Roles(Integer codRol, String descRol, Set<Usuarios> usuarios) {
+	
+	/*public Roles(Integer codRol, String descRol, Set<Usuarios> usuarios) {
 		super();
 		this.codRol = codRol;
 		this.descRol = descRol;
 		this.usuarios = usuarios;
-	}
-	/*public Roles(Integer codRol, String descRol, Set<Tareas> tareas, Set<Usuarios> usuarios) {
+	}*/
+	
+	public Roles(Integer codRol, String descRol, Set<Tareas> tareas, Set<Usuarios> usuarios) {
 		super();
 		this.codRol = codRol;
 		this.descRol = descRol;
 		this.tareas = tareas;
 		this.usuarios = usuarios;
-	}*/
+	}
 	
 	@Id
-	@Column(name = "codigo_rol", unique = true, nullable = false, precision = 5, scale = 0)
+	@Column(name = "codigo_rol", unique = true, nullable = false, precision = 11, scale = 0)
 	public Integer getCodRol() {
 		return codRol;
 	}
@@ -65,22 +67,24 @@ public class Roles {
 		this.descRol = descRol;
 	}
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+
 	public Set<Tareas> getTareas() {
-		return tareas;
+		return this.tareas;
 	}
+
 	public void setTareas(Set<Tareas> tareas) {
 		this.tareas = tareas;
 	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+
 	public Set<Usuarios> getUsuarios() {
-		return usuarios;
+		return this.usuarios;
 	}
+
 	public void setUsuarios(Set<Usuarios> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
-	
-	
 	
 
 }

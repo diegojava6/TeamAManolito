@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.atos.dao.UsuariosDAO;
+
 import com.atos.dao_ext.UsuarioDAO_EXT;
 import com.atos.hibernate.Usuarios;
 
@@ -72,7 +72,6 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	public Usuarios consultar_conRol(String correo) {
 		// TODO Auto-generated method stub
 
-		System.out.println("aqui");
 		return usuariosdao.consultar_ConRol(correo);
 	}
 
@@ -103,5 +102,6 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	}
 
 	// ACCESOR PARA SPRING
+	
 
 }

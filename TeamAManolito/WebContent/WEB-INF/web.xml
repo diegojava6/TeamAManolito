@@ -105,6 +105,6 @@
 
 	<!-- ***** esto luego se quita para la seguridad -->
 	<welcome-file-list>
-		<welcome-file>xhtml/Login.xhtml</welcome-file>
+		<welcome-file>xhtml/Administrador2.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>
