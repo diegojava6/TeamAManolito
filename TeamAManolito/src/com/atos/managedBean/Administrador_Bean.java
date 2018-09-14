@@ -52,6 +52,8 @@ public class Administrador_Bean implements Serializable {
 	private boolean bot_bm;
 	private boolean bot_alt;
 	private boolean campo_das;
+	private List<Roles> lista_r;
+	private List<String> lista_rvista;
 
 	// UTILIDAD GENERAL PARA LA GESTION DE MENSAJES EN MANAGEDBEAN
 	@ManagedProperty("#{accesos_contextos}")
@@ -64,13 +66,17 @@ public class Administrador_Bean implements Serializable {
 
 		lista_usuarios = gestion_usuarios.consultar_Todos();
 		lista_roles = gestion_roles.consultar_Roles();
-		modo_seleccion = 1;
+		modo_seleccion = 2;
 		correo = "";
 		// ESTADO INICIAL DE LOS BOTONES DEL FORMULARIO
 		bot_bm = true;
 		bot_alt = false;
-		setCampo_das(false);
-
+		campo_das = false;
+		/*lista_r = gestion_roles.consultar_Roles();
+		
+		for(int i=0; i < lista_r.size(); i++)
+		lista_rvista.add(i,lista_r.get(0).getDescRol());*/
+		
 	}
 
 	// opcion de alta
@@ -132,6 +138,7 @@ public class Administrador_Bean implements Serializable {
 		roles = gestion_roles.consultar_ID(seleccionRol);
 
 	}
+	
 
 	public void modificacion(ActionEvent evento) {
 
@@ -179,7 +186,7 @@ public class Administrador_Bean implements Serializable {
 			seleccionRol = 0;
 			bot_bm = true;
 			bot_alt = false;
-			setCampo_das(false);
+			campo_das = false;
 
 			System.out.println("limpiado completado");
 		} catch (Exception e) {
@@ -219,6 +226,13 @@ public class Administrador_Bean implements Serializable {
 			filtrado_apellido = "exact";
 			filtrado_rol = "exact";
 		}
+	}
+	
+	public List<Roles> carga_roles (){
+		
+		
+		return lista_r;
+		
 	}
 
 	// boton refrescar tabla
@@ -377,6 +391,30 @@ public class Administrador_Bean implements Serializable {
 
 	public void setSeleccionRol(Integer seleccionRol) {
 		this.seleccionRol = seleccionRol;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public List<Roles> getLista_r() {
+		return lista_r;
+	}
+
+	public void setLista_r(List<Roles> lista_r) {
+		this.lista_r = lista_r;
+	}
+
+	public List<String> getLista_rvista() {
+		return lista_rvista;
+	}
+
+	public void setLista_rvista(List<String> lista_rvista) {
+		this.lista_rvista = lista_rvista;
 	}
 
 }

@@ -13,7 +13,7 @@
 <h:body>
 	<h:form id="formu_usuario">
 
-		<h:panelGrid id="panel_articulo" columns="3">
+		<h:panelGrid id="panel_articulo" columns="4">
 
 
 			<!-- 1º FILA DEL FORMULARIO -->
@@ -64,19 +64,9 @@
 			</h:selectOneRadio>
 			<h:message for="acceso" style="color:red"/>
 
-			<!-- 6º FILA DEL FORMULARIO -->
-			<!-- COMANDO RADIO BUTTON -->
-			<!-- <h:outputText id="eti_roles" value="Rol desarollado: " />
-			<h:selectOneRadio id="selectRol" value="#{administrador_bean.seleccionRol}"
-				valueChangeListener="#{administrador_bean.carga_Roles}">
-				<f:selectItems value="#{administrador_bean.lista_roles}"
-					var="lroles" itemLabel="#{lroles.descRol}"
-					itemValue="#{lroles.codRol}" />
-			</h:selectOneRadio>
-			<h:message for="selectRol" style="color:red"/> -->
+		
 
-			<!-- COMANDO SELECT  -->
-			<h:outputText id="eti_roles" value="Rol desarollado: " />
+		<h:outputText id="eti_roles" value="Rol desarollado: " />
 			<h:selectOneMenu id="selectRol"
 				value="#{administrador_bean.seleccionRol}"
 				valueChangeListener="#{administrador_bean.carga_Roles}">
@@ -84,8 +74,8 @@
 				<f:selectItems value="#{administrador_bean.lista_roles}"
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
-			</h:selectOneMenu> 
-			<h:message for="selectRol" style="color:red"/>
+			</h:selectOneMenu>
+			<h:message for="selectRol" style="color:red" /> 
 			
 
 		</h:panelGrid>
