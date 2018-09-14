@@ -13,7 +13,7 @@
 <h:body>
 	<h:form id="formu_tarea">
 
-		<h:panelGrid id="panel_articulo" columns="3">
+		<h:panelGrid id="panel_articulo" columns="4">
 
 
 			<!-- 1º FILA DEL FORMULARIO -->
@@ -75,21 +75,21 @@
 			var="tarea" rows="#{administrador_bean2.numero_filas}"
 			paginator="true" paginatorPosition="bottom">
 
-			<ace:column id="col_cod" headerText="Codigo"
+			<ace:column id="col_cod" headerText="Codigo" sortBy="#{tarea.codigo_tarea}"
 				filterBy="#{tarea.codigo_tarea}">
 				<h:outputText id="codigo" value="#{tarea.codigo_tarea}" />
 			</ace:column>
 
-			<ace:column id="col_nombre" headerText="Tarea"
+			<ace:column id="col_nombre" headerText="Tarea" sortBy="#{tarea.nombre_tarea}"
 				filterBy="#{tarea.nombre_tarea}">
 				<h:outputText id="tarea" value="#{tarea.nombre_tarea}" />
 			</ace:column>
 
-			<ace:column headerText="Descripción" filterBy="#{tarea.desc}">
+			<ace:column headerText="Descripción" sortBy="#{tarea.desc}" filterBy="#{tarea.desc}">
 				<h:outputText id="desc" value="#{tarea.desc}" />
 			</ace:column>
 
-			<ace:column headerText="Estado" filterBy="#{tarea.estado}">
+			<ace:column headerText="Estado" sortBy="#{tarea.estado}">
 				<h:outputText id="estado" value="#{tarea.estado}">
 				</h:outputText>
 			</ace:column>
