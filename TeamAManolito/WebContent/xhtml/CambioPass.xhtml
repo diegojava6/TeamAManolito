@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+</head>
+<h:body style="text-align:center">
+	<h:outputText>Es necesario cambiar la contraseña</h:outputText>
+	<h:form id="formu_login">
+
+		<h:panelGrid id="panel_pass" columns="4">
+
+			<h:outputText id="eti_pass"
+				value="Escriba la contraseña actual de nuevo:" />
+			<h:inputText id="pass_original" value="#{cambiar_password.usuario.password}" validatorMessage="La contraseña introducida no es la actual.">
+				<f:validateRegex pattern="" />
+			</h:inputText>
+			<h:message for="pass_original" style="color:red" />
+			</h:inputText>
+
+			<h:outputText id="eti_passnueva" value="Escriba la contraseña nueva:" />
+			<h:inputText id="pass_nueva" value="#{cambiar_password.pass}" validatorMessage="No es una contraseña válida.">
+				<f:validateRegex pattern="" />
+			</h:inputText>
+			<h:message for="pass_nueva" style="color:red" />
+			</h:inputText>
+
+			<h:outputText id="eti_passagain"
+				value="Vuelva a escribir la contraseña nueva:" />
+			<h:inputText id="pass_nuevagain" value="#{cambiar_password.passagain}" validatorMessage="Las dos contraseñas no son idénticas.">
+				<f:validateRegex pattern="" />
+			</h:inputText>
+			<h:message for="pass_nuevagain" style="color:red" />
+			</h:inputText>
+
+		</h:panelGrid>
+
+		<h:commandButton id="Cambiar" value="Aceptar"
+			disabled="#{}"
+			actionListener="#{}" />
+			
+	</h:form>
+</h:body>
+</html>
