@@ -2,6 +2,7 @@ package com.atos.managedBean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -17,14 +18,25 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
+
 import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
 import com.atos.util.IAcceso_Contextos;
 
 @ManagedBean(name = "login_bean")
 @SessionScoped
-
 public class Login_bean implements Serializable, Validator {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
 
@@ -46,6 +58,7 @@ public class Login_bean implements Serializable, Validator {
 	public void metodo_Inicio() {
 		System.out.println("SOY EL METODO DE INICIO DE LOGIN_BEAN");
 		usuario_login = new Usuarios();
+		loggedin = false;
 
 	}
 
@@ -82,12 +95,19 @@ public class Login_bean implements Serializable, Validator {
 						"mensaje");
 			} else {
 				accesos_contextos.addMensaje("Reedireccionar a cambiar la pass!!", "mensaje");
+				loggedin = true;
 			}
 
 		}
 		return navegacion_Bean.redirectToAdministrador2();
 
 	}
+	
+	
+	
+
+	
+	
 
 	public void metodo_EventoCambioClave(ValueChangeEvent evento) {
 		System.out.println("SOY EL EVENTO DEL CAMBIO DE CLAVE");
@@ -143,5 +163,7 @@ public class Login_bean implements Serializable, Validator {
 		// TODO Auto-generated method stub
 
 	}
+
+	
 
 }

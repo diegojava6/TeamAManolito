@@ -17,27 +17,31 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-	
-	
 
-<!-- ***** MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION WEB (OBLIGATORIO)***** -->
+
+
+	<!-- ***** MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION WEB (OBLIGATORIO)***** -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!-- PARAMETRO QUE INDICA NOMBRE Y RUTA DEL FICHERO DE CONFIGURACION DE 
-		SPRING -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:com/spring/modelo.xml</param-value>
-	</context-param>
-	<!-- ***** FIN MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION -->
+		<param-value>classpath:com/spring/modelo.xml
+		</param-value>
+	</context-param> 
+	<!-- PARAMETRO QUE INDICA NOMBRE Y RUTA DEL FICHERO DE CONFIGURACION DE 
+		SPRING -->
 	
 
+	<!-- ***** FIN MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION -->
 	
-	<!-- ***** esto luego se quita para la seguridad -->
+		
+
+
+	<!-- ***** esto luego se quita para la seguridad 
 	<welcome-file-list>
   	<welcome-file>xhtml/Administrador2.xhtml</welcome-file>
-	</welcome-file-list> 
+	</welcome-file-list> -->
 	
 	
 	

@@ -68,8 +68,15 @@
 		<context:component-scan
 		base-package="com.atos.util" />
 		
+		<context:component-scan
+		base-package="com.atos.springSecurity" />
 		
 		
+		
+	<!--   <beans>
+    <context:annotation-config/>
+    <bean class="com.atos.springSecurity.SecurityConfig"/>
+	 </beans> -->
 
 
 
