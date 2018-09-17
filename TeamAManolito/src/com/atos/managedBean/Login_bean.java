@@ -34,9 +34,6 @@ public class Login_bean implements Serializable, Validator {
 	@ManagedProperty("#{navegacionBean}")
 	private Navegacion_Bean navegacion_Bean;
 
-	/*
-	 * private String correo_usuario; private String clave_usuario;
-	 */
 	private Usuarios usuario_login;
 
 	private boolean loggedin;

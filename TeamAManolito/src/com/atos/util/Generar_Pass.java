@@ -1,4 +1,4 @@
-package com.atos.util;
+	package com.atos.util;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class Generar_Pass {
 
-	private String password;
+	private String password="";
 	
 	//Metodo para generar una contraseña automatica al dar de alta un usuario nuevo
 	public String generar_Pass() {
@@ -18,12 +18,8 @@ public class Generar_Pass {
 				"x", "y", "z" };
 
 		for (int i = 0; i <= 10; i++) {
-			int numero = (int) Math.round(Math.random() * 62);
-			if (i==0) {
-				password = abecedario[numero];
-			} else {
-				password += abecedario[numero];
-			}
+			int numero = (int) Math.round(Math.random() * abecedario.length);
+			password += abecedario[numero];	
 		}
 
 		return password;

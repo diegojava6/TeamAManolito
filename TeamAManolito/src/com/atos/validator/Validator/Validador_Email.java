@@ -4,15 +4,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.ValidatorException;
 import javax.faces.validator.Validator;
 
-@FacesValidator("validador_Email")
+@ManagedBean(name = "validador_Email")
 public class Validador_Email implements Validator {
-	 private final static String EMAIL_CARACTERES= "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	 private final static String EMAIL_CARACTERES= "^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(.[a-zA-Z]{2,4})$";
      
 	    private final static Pattern EMAIL_PATRON_COMPILADO= Pattern.compile(EMAIL_CARACTERES);
 	    
@@ -28,8 +29,8 @@ public class Validador_Email implements Validator {
 	        // The email matcher
 	        Matcher matcher = EMAIL_PATRON_COMPILADO.matcher((String)objeto);
 	         
-	        if (!matcher.matches()) {   // nocincide
-	            FacesMessage msg = new FacesMessage("valor invalido en el email, no caracteres especiales!", "Error");
+	        if (!matcher.matches()) {   // no coincide
+	            FacesMessage msg = new FacesMessage("valor invalido en el email!", "Error");
 	            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 	            throw new ValidatorException(msg);
 	        }
