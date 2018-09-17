@@ -18,6 +18,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,8 @@ import com.atos.hibernate.modelo.IGestion_Usuarios;
 import com.atos.util.IAcceso_Contextos;
 
 @ManagedBean(name = "login_bean")
+@Component("login_bean")
+@Scope("prototype")
 @SessionScoped
 public class Login_bean implements Serializable, Validator {
 	/**

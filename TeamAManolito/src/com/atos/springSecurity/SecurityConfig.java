@@ -1,8 +1,11 @@
 package com.atos.springSecurity;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedProperty;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Component;
 
@@ -22,24 +27,20 @@ import com.atos.managedBean.Login_bean;
 @Component
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@ManagedProperty("#{login_bean}")
-	private Login_bean authProvider;
+
+	
+	@Autowired
+	@Qualifier("userDetailsService")
+	UserDetailsService userDetailsService;
+	
+	
 	 
 	 @Autowired
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	        auth
-	            .inMemoryAuthentication()
-	                .withUser("user").password("password").roles("USER");
+	      auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	        
 	    }
-	 // with default password encoder
-	/* @Bean
-		public UserDetailsService userDetailsService() {
-			InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-			manager.createUser(User.withDefaultPasswordEncoder().username("user").password("password").roles("USER").build());
-			return manager;
-		}*/
-	 
+	
 	 
 
 	@Override
@@ -58,13 +59,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// TODO Auto-generated method stub
-	//if(authProvider.isLoggedin()==true)
-		//System.out.println("entra generador usuario builder");
-	// auth.inMemoryAuthentication().withUser(authProvider.getUsuario_login().getDas()).password(authProvider.getUsuario_login().getPassword()).roles(authProvider.getUsuario_login().getRoles().getDescRol());
+	
+
+	
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
 	}
+
+
+
+	public UserDetailsService getUserDetailsService() {
+		return userDetailsService;
+	}
+
+
+
+	public void setUserDetailsService(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
+
+
+
+	
+
+
+
 
 	
 	
