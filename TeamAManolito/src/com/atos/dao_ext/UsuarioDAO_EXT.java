@@ -19,13 +19,13 @@ public class UsuarioDAO_EXT extends UsuariosDAO {
 	
 	
 	
-	public Usuarios consultar_ConRol(String correo_usuario) {
+	public Usuarios consultar_ConRol(String das) {
 		// APERTURA DE CRITERIA PARA LA CONSULTA
 		Criteria consulta = getCurrentSession().createCriteria(Usuarios.class);
 		// MODO DE RESOLUCION DE CARGA VAGA
 		consulta.setFetchMode("roles", FetchMode.JOIN);
 		// CONDICIONES DE LA CONSULTA
-		consulta.add(Restrictions.idEq(correo_usuario));
+		consulta.add(Restrictions.idEq(das));
 		// SE EJECUTA LA CONSULTA
 		Usuarios usuario = (Usuarios) consulta.uniqueResult();
 		return usuario;

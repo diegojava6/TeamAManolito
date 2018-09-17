@@ -9,7 +9,7 @@
 		
 		<!-- AJUSTES -->
 		<property name="dialect">
-			org.hibernate.dialect.Oracle10gDialect
+			org.hibernate.dialect.MySQL5Dialect
 		</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>

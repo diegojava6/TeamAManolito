@@ -11,8 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USUARIOS_A")
+@Table(name = "usuarios")
 public class Usuarios {
+	private String das;
 	private String nombre;
 	private String apellidos;
 	private String correo;
@@ -33,9 +34,10 @@ public class Usuarios {
 
 	
 
-	public Usuarios(String nombre, String apellidos, String correo, String password, Integer primerLogin,
+	public Usuarios(String das, String nombre, String apellidos, String correo, String password, Integer primerLogin,
 			Integer accesoAplicacion, Roles roles) {
 		super();
+		this.das = das;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
@@ -45,7 +47,7 @@ public class Usuarios {
 		this.roles = roles;
 	}
 
-	@Column(name = "nombre", nullable = false, length = 10)
+	@Column(name = "nombre", nullable = false, length = 20)
 	public String getNombre() {
 		return nombre;
 	}
@@ -54,7 +56,7 @@ public class Usuarios {
 		this.nombre = nombre;
 	}
 
-	@Column(name = "apellido", nullable = false, length = 10)
+	@Column(name = "apellido", nullable = false, length = 100)
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -64,6 +66,16 @@ public class Usuarios {
 	}
 
 	@Id
+	@Column(name = "das", unique = true, nullable = false, length = 7)
+	public String getDas() {
+		return das;
+	}
+
+	
+	public void setDas(String das) {
+		this.das = das;
+	}
+
 	@Column(name = "correo", unique = true, nullable = false, length = 50)
 	public String getCorreo() {
 		return correo;
@@ -73,7 +85,7 @@ public class Usuarios {
 		this.correo = correo;
 	}
 
-	@Column(name = "password", nullable = false, length = 10)
+	@Column(name = "password", nullable = false, length = 20)
 	public String getPassword() {
 		return password;
 	}

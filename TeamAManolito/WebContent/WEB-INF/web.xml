@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>TeamAManolito</display-name>
-  
-  
-  <!-- CONTROLADOR FRONTAL DE JSF -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>TestManolito4</display-name>
+
+
+	<!-- CONTROLADOR FRONTAL DE JSF -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -15,85 +18,33 @@
 	</servlet-mapping>
 
 
-	<!-- CONTROLADOR ESPECIFICO PARA ICEFACES -->
-	<servlet>
-		<servlet-name>Resource Servlet</servlet-name>
-		<servlet-class>com.icesoft.faces.webapp.CompatResourceServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Resource Servlet</servlet-name>
-		<url-pattern>/xmlhttp/*</url-pattern>
-	</servlet-mapping>
-	
-	<!-- PARAMETROS DE INICIO DE LA APLICACION -->
-	<!-- INTERESANTES PARA JSF -->
-	<context-param>
-		<description>ACTIVA LAS OPCIONES DE SEGUIMIENTO EXTRAS EN DESARROLLO JSF 2</description>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
-	<!-- EN VERSION JSF 2.2 POR DEFECTO FALSE -->
-	<context-param>
-		<description>ACTIVA/DESACTIVA QUE SE MANDEN/USEN LOS COMENTARIOS EN LAS VISTAS</description>
-		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
-		<param-value>true</param-value>
-	</context-param>
-	<!-- INTERESANTES PARA ICEFACES -->
-	<!-- CAMBIO DE TEMA COMPONENTES ICEFACES -->
-	<context-param>
-		<param-name>org.icefaces.ace.theme</param-name>
-		<param-value>cupertino</param-value>
-	</context-param>
-	<!-- CONFIGURACION INTERNA DE ICEFACES -->
-	<context-param>
-		<param-name>org.icefaces.mandatoryResourceConfiguration</param-name>
-		<param-value>all</param-value>
-	</context-param>
-	<context-param>
-		<param-name>org.icefaces.coalesceResources</param-name>
-		<param-value>false</param-value>
-	</context-param>
-	<context-param>
-		<param-name>org.icefaces.strictSessionTimeout</param-name>
-		<param-value>true</param-value>
-	</context-param>
 
-	<!-- PARAMETROS DE INICIO DE LA APLICACION -->
-	<!-- INTERESANTES PARA JSF -->
-	<context-param>
-		<description>ACTIVA LAS OPCIONES DE SEGUIMIENTO EXTRAS EN DESARROLLO JSF 2</description>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
-	<!-- EN VERSION JSF 2.2 POR DEFECTO FALSE -->
-	<context-param>
-		<description>ACTIVA/DESACTIVA QUE SE MANDEN/USEN LOS COMENTARIOS EN LAS VISTAS</description>
-		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
-		<param-value>true</param-value>
-	</context-param>
-	<!-- EN VERSION JSF 2.2 POR DEFECTO FALSE -->
-	<context-param>
-		<description>ACTIVA LA VALIDACION DE CAMPOS VACIOS</description>
-		<param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>
-		<param-value>true</param-value>
-	</context-param>
-	<!-- ** FIN ZONA PARAMETROS INICIALES CONFIGURACION DE LA APLICACION ** -->
-  
-  	<!-- ***** MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION WEB (OBLIGATORIO)***** -->
+
+	<!-- ***** MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION WEB (OBLIGATORIO)***** -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!-- PARAMETRO QUE INDICA NOMBRE Y RUTA DEL FICHERO DE CONFIGURACION DE 
-		SPRING -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:com/spring/modelo.xml</param-value>
-	</context-param>
+		<param-value>classpath:com/spring/modelo.xml
+		</param-value>
+	</context-param> 
+	<!-- PARAMETRO QUE INDICA NOMBRE Y RUTA DEL FICHERO DE CONFIGURACION DE 
+		SPRING -->
+	
+
 	<!-- ***** FIN MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION -->
-  
-  
-  
-  <welcome-file-list>
-    <welcome-file>xhtml/Administrador2.xhtml</welcome-file>
-  </welcome-file-list>
+	
+		
+
+
+	<!-- ***** esto luego se quita para la seguridad 
+	<welcome-file-list>
+  	<welcome-file>xhtml/Administrador2.xhtml</welcome-file>
+	</welcome-file-list> -->
+	
+	
+	
+		
+	
 </web-app>

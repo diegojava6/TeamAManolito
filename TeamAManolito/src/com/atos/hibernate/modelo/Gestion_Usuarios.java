@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.atos.dao.UsuariosDAO;
+
 import com.atos.dao_ext.UsuarioDAO_EXT;
 import com.atos.hibernate.Usuarios;
 
@@ -16,10 +16,7 @@ import com.atos.hibernate.Usuarios;
 @Scope("prototype")
 public class Gestion_Usuarios implements IGestion_Usuarios {
 
-	
-	
 	private UsuarioDAO_EXT usuariosdao;
-	private boolean credenciales;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -31,9 +28,16 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Override
 	@Transactional(readOnly = true)
 	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
+	public Usuarios consultar_Das(String das) {
+		// TODO Auto-generated method stub
+
+		return usuariosdao.findById(das);
+
+	}
+
 	public Usuarios consultar_Correo(String correo) {
 		// TODO Auto-generated method stub
-		
+
 		return usuariosdao.findById(correo);
 
 	}
@@ -42,33 +46,34 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Transactional(readOnly = true)
 	// Metodo para comprobar si el correo y la password existe en la BBDD y devolver
 	// un true o false en su comprobacion
-	public boolean consultar_Login(String correo, String password) {
+	public Usuarios consultar_Login(String das, String password) {
 		// TODO Auto-generated method stub
-		Usuarios usu = usuariosdao.findById(correo);
-
-		credenciales = false;
+		Usuarios usu = usuariosdao.findById(das);
+		Usuarios usu2 = null;
 
 		if (usu != null) {
 
-			if (usu.getCorreo().equals(correo) && usu.getPassword().equals(password)) {
+			if (usu.getDas().equals(das) && usu.getPassword().equals(password)) {
 
-				credenciales = true;
+				return usu;
 
+			} else {
+				return usu2;
 			}
+
+		} else {
+			return usu2;
 		}
 
-		return credenciales;
 	}
-	
+
 	@Override
 	@Transactional
 	public Usuarios consultar_conRol(String correo) {
 		// TODO Auto-generated method stub
-		
-		System.out.println("aqui");
+
 		return usuariosdao.consultar_ConRol(correo);
 	}
-
 
 	@Override
 	@Transactional
@@ -96,12 +101,7 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		this.usuariosdao = usuariosdao;
 	}
 
-	
-	
-
 	// ACCESOR PARA SPRING
-
 	
-
 
 }

@@ -171,5 +171,10 @@ public class UsuariosDAO {
 	public static UsuariosDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (UsuariosDAO) ctx.getBean("UsuariosDAO");
 	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
 	
 }
