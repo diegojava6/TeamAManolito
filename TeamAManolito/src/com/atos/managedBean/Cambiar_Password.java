@@ -38,26 +38,23 @@ public class Cambiar_Password implements Serializable {
 
 	public void comprobar_pass() {
 
-		if (oldpassword.equals(usuario.getPassword())) {
+		//if (oldpassword.equals(usuario.getPassword())) {
 			if (pass.equals(passagain)) {
-				// seguir con el cambio de pass
+				System.out.println("seguir con el cambio de pass");
 
 				// usuario.setPassword(pass);
 				// gestion_usuarios.modificacion_Usuario(usuario);
 
 			} else {
 				FacesContext.getCurrentInstance().addMessage("Las contraseñas nuevas no son iguales.",
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas nuevas no son iguales", null));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas nuevas no son iguales", "Reperror"));
 			}
-		} else {
-			FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", null));
-		}
+
+		//} else {
+		//	FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
+		//			new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", "mensaje"));
+		//}
 	}
-	
-	
-	
-	
 
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
@@ -107,6 +104,4 @@ public class Cambiar_Password implements Serializable {
 		this.oldpassword = oldpassword;
 	}
 
-
-	
 }

@@ -62,9 +62,9 @@ public class Login_bean implements Serializable, Validator {
 
 		if (resultado == null) {
 
-			FacesMessage msg = new FacesMessage("Usuario y/o contraseña incorrectos");
+			FacesMessage msg = new FacesMessage("Usuario y/o contraseña incorrectos", "ERROR MSG");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage("mensaje", msg);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 
 			return navegacion_Bean.redirectToLogin();
 
