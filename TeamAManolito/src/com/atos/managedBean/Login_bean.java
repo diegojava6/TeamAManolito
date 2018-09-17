@@ -34,9 +34,6 @@ public class Login_bean implements Serializable, Validator {
 	@ManagedProperty("#{navegacionBean}")
 	private Navegacion_Bean navegacion_Bean;
 
-	/*
-	 * private String correo_usuario; private String clave_usuario;
-	 */
 	private Usuarios usuario_login;
 
 	private boolean loggedin;
@@ -65,9 +62,9 @@ public class Login_bean implements Serializable, Validator {
 
 		if (resultado == null) {
 
-			FacesMessage msg = new FacesMessage("Usuario y/o contraseña incorrectos", "ERROR MSG");
+			FacesMessage msg = new FacesMessage("Usuario y/o contraseña incorrectos");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			FacesContext.getCurrentInstance().addMessage(null, msg);
+			FacesContext.getCurrentInstance().addMessage("mensaje", msg);
 
 			return navegacion_Bean.redirectToLogin();
 

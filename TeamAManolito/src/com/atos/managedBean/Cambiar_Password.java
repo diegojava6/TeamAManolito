@@ -3,9 +3,11 @@ package com.atos.managedBean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
@@ -22,30 +24,41 @@ public class Cambiar_Password implements Serializable {
 	private IAcceso_Contextos accesos_contextos;
 
 	private Usuarios usuario;
-	
+	private String oldpassword;
 	private String pass;
 	private String passagain;
 
 	@PostConstruct
 	public void metodo_Inicio() {
-		
-		//El usuario deberia de cogerlo por sesion
+
+		// El usuario deberia de cogerlo por sesion
 		usuario = new Usuarios();
-		
-		
 
 	}
 
-	
-	
 	public void comprobar_pass() {
-		
+
+		if (oldpassword.equals(usuario.getPassword())) {
+			if (pass.equals(passagain)) {
+				// seguir con el cambio de pass
+
+				// usuario.setPassword(pass);
+				// gestion_usuarios.modificacion_Usuario(usuario);
+
+			} else {
+				FacesContext.getCurrentInstance().addMessage("Las contraseñas nuevas no son iguales.",
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas nuevas no son iguales", null));
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", null));
+		}
 	}
 	
 	
 	
 	
-	
+
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
 	}
@@ -85,5 +98,15 @@ public class Cambiar_Password implements Serializable {
 	public void setPassagain(String passagain) {
 		this.passagain = passagain;
 	}
+
+	public String getOldpassword() {
+		return oldpassword;
+	}
+
+	public void setOldpassword(String oldpassword) {
+		this.oldpassword = oldpassword;
+	}
+
+
 	
 }

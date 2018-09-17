@@ -11,37 +11,37 @@
 	<h:outputText>Es necesario cambiar la contraseña</h:outputText>
 	<h:form id="formu_login">
 
-		<h:panelGrid id="panel_pass" columns="4">
+		<h:panelGrid id="panel_pass" columns="3">
 
 			<h:outputText id="eti_pass"
 				value="Escriba la contraseña actual de nuevo:" />
-			<h:inputText id="pass_original" value="#{cambiar_password.usuario.password}" validatorMessage="La contraseña introducida no es la actual.">
-				<f:validateRegex pattern="" />
-			</h:inputText>
+			<h:inputSecret id="pass_original"
+				value="#{cambiar_password.oldpassword}">
+			</h:inputSecret>
 			<h:message for="pass_original" style="color:red" />
-			</h:inputText>
+			
 
 			<h:outputText id="eti_passnueva" value="Escriba la contraseña nueva:" />
-			<h:inputText id="pass_nueva" value="#{cambiar_password.pass}" validatorMessage="No es una contraseña válida.">
-				<f:validateRegex pattern="" />
-			</h:inputText>
+			<h:inputSecret id="pass_nueva" value="#{cambiar_password.pass}"
+				validatorMessage="La contraseña ha de tener min 5 y max 20 caracteres.">
+				<f:validateRegex pattern="[\w-.,]{5,20}" />
+			</h:inputSecret>
 			<h:message for="pass_nueva" style="color:red" />
-			</h:inputText>
+
 
 			<h:outputText id="eti_passagain"
 				value="Vuelva a escribir la contraseña nueva:" />
-			<h:inputText id="pass_nuevagain" value="#{cambiar_password.passagain}" validatorMessage="Las dos contraseñas no son idénticas.">
-				<f:validateRegex pattern="" />
-			</h:inputText>
+			<h:inputSecret id="pass_nuevagain"
+				value="#{cambiar_password.passagain}">
+			</h:inputSecret>
 			<h:message for="pass_nuevagain" style="color:red" />
-			</h:inputText>
 
 		</h:panelGrid>
 
-		<h:commandButton id="Cambiar" value="Aceptar"
-			disabled="#{}"
-			actionListener="#{}" />
-			
+
+		<h:commandButton id="Cambiar" value="Aceptar" disabled=""
+			actionListener="#{cambiar_password.comprobar_pass}" />
+
 	</h:form>
 </h:body>
 </html>
