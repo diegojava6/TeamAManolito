@@ -1,5 +1,6 @@
 package com.atos.hibernate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,31 +14,41 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "ROLES_A")
+@Table(name = "roles")
 public class Roles {
 	private Integer codRol;
 	private String descRol;
-	private Set<Tareas> tareas;
-	private Set<Usuarios> usuarios;
+	private Set<Tareas> tareas = new HashSet<Tareas>(0);
+	private Set<Usuarios> usuarios = new HashSet<Usuarios>(0);
 	
 	
 	public Roles() {
 		super();
 	}
-	public Roles(Integer codRol) {
+	/*public Roles(Integer codRol) {
 		super();
 		this.codRol = codRol;
-	}
-	public Roles(Integer codRol, Set<Tareas> tareas) {
+	}*/
+	
+	public Roles(Integer codRol, String descRol) {
 		super();
 		this.codRol = codRol;
-		this.tareas = tareas;
+		this.descRol = descRol;
 	}
-	public Roles(Integer codRol, String descRol, Set<Tareas> tareas) {
+	
+	/*public Roles(Integer codRol, String descRol, Set<Usuarios> usuarios) {
+		super();
+		this.codRol = codRol;
+		this.descRol = descRol;
+		this.usuarios = usuarios;
+	}*/
+	
+	public Roles(Integer codRol, String descRol, Set<Tareas> tareas, Set<Usuarios> usuarios) {
 		super();
 		this.codRol = codRol;
 		this.descRol = descRol;
 		this.tareas = tareas;
+		this.usuarios = usuarios;
 	}
 	
 	@Id
@@ -56,20 +67,24 @@ public class Roles {
 		this.descRol = descRol;
 	}
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+
 	public Set<Tareas> getTareas() {
-		return tareas;
+		return this.tareas;
 	}
+
 	public void setTareas(Set<Tareas> tareas) {
 		this.tareas = tareas;
 	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
+
 	public Set<Usuarios> getUsuarios() {
-		return usuarios;
+		return this.usuarios;
 	}
+
 	public void setUsuarios(Set<Usuarios> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
 	
 
 }

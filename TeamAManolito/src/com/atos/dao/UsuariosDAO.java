@@ -30,8 +30,7 @@ import com.atos.hibernate.Usuarios;
  * @see com.atrium.hibernate.Usuarios
  * @author MyEclipse Persistence Tools
  */
-@Repository("usuariosdao")
-@Scope("prototype")
+
 public class UsuariosDAO {
 	private static final Logger log = LoggerFactory.getLogger(UsuariosDAO.class);
 	public static final String PASSWORD = "password";
@@ -172,4 +171,10 @@ public class UsuariosDAO {
 	public static UsuariosDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (UsuariosDAO) ctx.getBean("UsuariosDAO");
 	}
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	
+	
 }
