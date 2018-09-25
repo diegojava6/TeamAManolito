@@ -26,69 +26,33 @@ import com.atos.hibernate.modelo.IGestion_Usuarios;
 @EnableGlobalAuthentication
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-	
- 
-	/* @Autowired
-	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	      auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	        
-	    }*/
-	/*
-	 @Bean
-	 public UserDetailsService userDetailsService() {
-		 return new UserDetails();
-	 }
-	*/
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.csrf().disable();
-		http
-		.authorizeRequests()
-			.anyRequest().authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/xhtml/Login.xhtml").permitAll();
-		http.formLogin().failureUrl("/xhtml/Login.xhtml");
-		http.formLogin().defaultSuccessUrl("/xhtml/Administrador2.xhtml",true);
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/Login.jsp").permitAll();
+		http.formLogin().failureUrl("/Login.jsp?error");
+		http.formLogin().usernameParameter("username").passwordParameter("password");
+		http.authorizeRequests().antMatchers("/admin/**").hasRole("Administrador").anyRequest().authenticated().and()
+				.formLogin().defaultSuccessUrl("/xhtml/admin/Administrador2.xhtml");
+		http.authorizeRequests().antMatchers("/usuario/**").hasAnyRole("Usuario").anyRequest().authenticated().and()
+				.formLogin().defaultSuccessUrl("/xhtml/usuario/inicio.xhtml");
+//		http.logout().logoutUrl("/Login.jsp");
 	}
 
-
-
-	
-
-	
-	
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		// TODO Auto-generated method stub
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
 	}
-
-
-
 
 	@Bean
-	public PasswordEncoder passwordEncoder(){
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
+	public BCryptPasswordEncoder encoder() {
+		return new BCryptPasswordEncoder();
 	}
-
-
-
-
-
-
-
-
-	
-	
-	
 
 }

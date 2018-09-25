@@ -19,7 +19,6 @@
 
 
 
-
 	<!-- ***** MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION WEB (OBLIGATORIO)***** -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -28,23 +27,23 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:com/spring/modelo.xml
 		</param-value>
-	</context-param> 
+	</context-param>
 	<!-- PARAMETRO QUE INDICA NOMBRE Y RUTA DEL FICHERO DE CONFIGURACION DE 
 		SPRING -->
-	
+
 
 	<!-- ***** FIN MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION -->
-	
-		
+
+
 
 
 	<!-- ***** esto luego se quita para la seguridad -->
 	<welcome-file-list>
-  	<welcome-file>xhtml/Login.xhtml</welcome-file>
-	</welcome-file-list> 
-	
-	
-	
-		
-	
+		<welcome-file>Login.jsp</welcome-file>
+	</welcome-file-list>
+
+
+
+
+
 </web-app>
