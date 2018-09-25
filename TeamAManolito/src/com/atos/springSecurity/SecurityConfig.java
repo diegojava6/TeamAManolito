@@ -40,15 +40,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
-		http.authorizeRequests().anyRequest().authenticated()
-			.and().formLogin().loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler()).permitAll()
-			.and().formLogin().failureUrl("/Login.jsp?error")
-			.and().formLogin().usernameParameter("username").passwordParameter("password")
-			.and().authorizeRequests().antMatchers("/xhtml/admin/**").access("hasRole('administrador')")
-            .antMatchers("/xhtml/usuario/**").access("hasRole('usuario')")
-			.and().csrf().disable();
+
+		http
+        .authorizeRequests()                                                                
+            .antMatchers("/Login.jsp", "/xhtml/CambioPass.xhtml").permitAll()                  
+            .antMatchers("/xhtml/admin/**").hasRole("administrador")                                      
+            .antMatchers("/xhtml/usuario/**").access("hasRole('administrador') and hasRole('usuario')")            
+            .anyRequest().authenticated()                                                   
+            .and()
+        .formLogin()
+        	.loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler())
+        	.failureUrl("/Login.jsp?error")
+        	.usernameParameter("username").passwordParameter("password")
+        .and()
+//	        .logout()                                                                
+//	        .logoutUrl("/Login.jsp")                                                 
+//	        .logoutSuccessUrl("/Login.jsp")                                           
+//	        .logoutSuccessHandler(logoutSuccessHandler)                              
+//	        .invalidateHttpSession(true)                                             
+//	        .addLogoutHandler(logoutHandler)                                         
+//	        .deleteCookies(cookieNamesToClear)
+        ;
 		
+//		http.authorizeRequests().anyRequest().authenticated()
+//			.and().formLogin().loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler()).permitAll()
+//			.and().formLogin().failureUrl("/Login.jsp?error")
+//			.and().formLogin().usernameParameter("username").passwordParameter("password")
+//			.and().authorizeRequests().antMatchers("/xhtml/admin/**").hasRole("administrador")
+//									.antMatchers("/xhtml/usuario/**").hasRole("usuario");
+
 		// http.logout().logoutUrl("/Login.jsp");
 	}
 
@@ -71,5 +91,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
+	
 }
