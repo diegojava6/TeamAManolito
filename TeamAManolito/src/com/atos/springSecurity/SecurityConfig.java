@@ -41,13 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
-		http.csrf().disable();
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/Login.jsp")
-				.successHandler(customizeAuthenticationSuccessHandler()).permitAll();
-		http.formLogin().failureUrl("/Login.jsp?error");
-		http.formLogin().usernameParameter("username").passwordParameter("password");
-		http.authorizeRequests().antMatchers("/admin/**").hasRole("administrador").antMatchers("/usuario/**")
-				.hasAnyRole("usuario", "administrador");
+		http.authorizeRequests().anyRequest().authenticated()
+			.and().formLogin().loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler()).permitAll()
+			.and().formLogin().failureUrl("/Login.jsp?error")
+			.and().formLogin().usernameParameter("username").passwordParameter("password")
+			.and().authorizeRequests().antMatchers("/xhtml/admin/**").access("hasRole('administrador')")
+            .antMatchers("/xhtml/usuario/**").access("hasRole('usuario')")
+			.and().csrf().disable();
+		
 		// http.logout().logoutUrl("/Login.jsp");
 	}
 
