@@ -46,8 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(customizeAuthenticationSuccessHandler()).permitAll();
 		http.formLogin().failureUrl("/Login.jsp?error");
 		http.formLogin().usernameParameter("username").passwordParameter("password");
-		// http.authorizeRequests().antMatchers("/admin/**").hasRole("Administrador").anyRequest().authenticated();
-		// http.authorizeRequests().antMatchers("/usuario/**").hasAnyRole("Usuario").anyRequest().authenticated();
+		http.authorizeRequests().antMatchers("/admin/**").hasRole("administrador").antMatchers("/usuario/**")
+				.hasAnyRole("usuario", "administrador");
 		// http.logout().logoutUrl("/Login.jsp");
 	}
 
