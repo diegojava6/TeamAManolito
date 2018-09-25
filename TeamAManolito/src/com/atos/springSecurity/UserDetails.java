@@ -76,59 +76,6 @@ public class UserDetails implements UserDetailsService, Serializable {
 
 	}
 
-//	private User buildUserForAuthentication(Usuarios user, List<GrantedAuthority> authorities) {
-//		return new User(user.getDas(), user.getPassword(), true, true, true, true, authorities);
-//	}
-//
-//	private List<GrantedAuthority> buildUserAuthority(Roles roles) {
-//		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-//
-//		setAuths.add(new SimpleGrantedAuthority("Adminisitrador"));
-//
-//		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
-//		return Result;
-//
-//	}
-
-//	public void verificacion_usuario(String das, String pass) {
-//		// optimizar consulta apra traer roles de una vez malditasea**criteria
-//		System.out.println("el das de verificaicon usuario " + das);
-//		System.out.println("elpass de verificaicon usuario " + pass);
-//		// usus = gestion_usuarios.consultar_Login(das,pass);
-//		Usuarios usus = gestion_usuarios.consultar_Das(das);
-//		Integer primerLogin = usus.getPrimerLogin();
-//		Integer acceso_app = usus.getAccesoAplicacion();
-//		if (usus != null) {
-//			switch (acceso_app) {
-//			case 0:
-//				// Statements
-//				// no tiene acceso
-//				System.out.println("sacar mensaje no tieen acceos a la app");
-//				break; // optional
-//
-//			case 1:
-//				// Statements
-//				// si tiene acceso
-//				System.out.println("tiene acceso");
-//				if (primerLogin == 1) {
-//					System.out.println("se debe redireccionar a cambio de password");
-//				} else {
-//
-//					Usuarios usu = gestion_usuarios.consultar_Das(usus.getDas());
-//					usu = gestion_usuarios.consultar_conRol(usus.getDas());
-//					System.out.println("correcto");
-//				}
-//				break; // optional
-//
-//			// You can have any number of case statements.
-//			default: // Optional
-//				System.out.println("no deberia tener este valor , ergo no tiene acceso");
-//
-//			}
-//		}
-//	}
-	
-
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
 	}

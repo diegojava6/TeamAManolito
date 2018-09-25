@@ -11,19 +11,10 @@
 
 	<http use-expressions="true">
 		<intercept-url pattern="/Login.jsp" access="permitAll" />
-		<intercept-url pattern="/xhtml/**" access="isAuthenticated()" />
-		<intercept-url pattern="/admin/**" access="hasRole('Administrador')" />
-		<intercept-url pattern="/usuario/**" access="hasRole('Usuario')" />
-
-		<form-login login-page='Login.jsp'
-			authentication-failure-url="/Login.jsp?error=true"
-			authentication-success-handler-ref="myAuthenticationSuccessHandler" />
-		<logout />
+		<intercept-url pattern="/xhtml/CambioPass.xhtml" access="isAuthenticated()" />
+		<intercept-url pattern="/xhtml/admin/**" access="hasRole('Administrador')" />
+		<intercept-url pattern="/xhtml/usuario/**" access="isAuthenticated()" />
 	</http>
-
-	<beans:bean id="myAuthenticationSuccessHandler"
-		class="org.baeldung.security.MySimpleUrlAuthenticationSuccessHandler" />
-
 
 	<authentication-manager>
 		<authentication-provider ref="login_bean" />
