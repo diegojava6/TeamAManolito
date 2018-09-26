@@ -43,6 +43,7 @@ public class Cambiar_Password implements Serializable {
 				System.out.println("seguir con el cambio de pass");
 
 				// usuario.setPassword(pass);
+				// usuario.setPrimerLogin(1);
 				// gestion_usuarios.modificacion_Usuario(usuario);
 
 			} else {

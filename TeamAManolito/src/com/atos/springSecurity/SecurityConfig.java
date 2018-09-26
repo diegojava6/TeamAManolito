@@ -43,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
         .authorizeRequests()                                                                
-            .antMatchers("/Login.jsp", "/xhtml/CambioPass.xhtml").permitAll()                  
-            .antMatchers("/xhtml/admin/*").hasAuthority("administrador")                                      
-            .antMatchers("/xhtml/usuario/*").hasAnyAuthority("administrador","usuario")            
+            .antMatchers("/Login.jsp").permitAll()                  
+            .antMatchers("/xhtml/admin/**").hasAuthority("administrador")                                      
+            .antMatchers("/xhtml/usuario/**").hasAnyAuthority("administrador","usuario")            
             .anyRequest().authenticated()                                                   
             .and()
         .formLogin()
@@ -63,14 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	        .deleteCookies(cookieNamesToClear)
         ;
 		
-//		http.authorizeRequests().anyRequest().authenticated()
-//			.and().formLogin().loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler()).permitAll()
-//			.and().formLogin().failureUrl("/Login.jsp?error")
-//			.and().formLogin().usernameParameter("username").passwordParameter("password")
-//			.and().authorizeRequests().antMatchers("/xhtml/admin/**").hasRole("administrador")
-//									.antMatchers("/xhtml/usuario/**").hasRole("usuario");
-
-		// http.logout().logoutUrl("/Login.jsp");
 	}
 
 	@Override
