@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()                                                                
             .antMatchers("/Login.jsp", "/xhtml/CambioPass.xhtml").permitAll()                  
             .antMatchers("/xhtml/admin/**").hasRole("administrador")                                      
-            .antMatchers("/xhtml/usuario/**").access("hasRole('administrador') and hasRole('usuario')")            
+            .antMatchers("/xhtml/usuario/**").access("hasRole('administrador') and hasRole('role_usuario')")            
             .anyRequest().authenticated()                                                   
             .and()
         .formLogin()
@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.failureUrl("/Login.jsp?error")
         	.usernameParameter("username").passwordParameter("password")
         .and()
+        
 //	        .logout()                                                                
 //	        .logoutUrl("/Login.jsp")                                                 
 //	        .logoutSuccessUrl("/Login.jsp")                                           
