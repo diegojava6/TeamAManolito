@@ -9,6 +9,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
 import com.atos.util.IAcceso_Contextos;
@@ -16,7 +19,7 @@ import com.atos.util.IAcceso_Contextos;
 @ManagedBean(name = "cambiar_password")
 @SessionScoped
 public class Cambiar_Password implements Serializable {
-
+	
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
 
@@ -28,33 +31,37 @@ public class Cambiar_Password implements Serializable {
 	private String pass;
 	private String passagain;
 
+	
+
 	@PostConstruct
 	public void metodo_Inicio() {
+		
+	/*	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		// El usuario deberia de cogerlo por sesion
-		usuario = new Usuarios();
-
+	    usuario = gestion_usuarios.consultar_Das(auth.getName()) ;*/
+	
 	}
 
 	public void comprobar_pass() {
 
-		//if (oldpassword.equals(usuario.getPassword())) {
-			if (pass.equals(passagain)) {
+	
+		/*if (oldpassword.equals(usuario.getPassword())) {
+			if (pass.equals(passagain)) {*/
 				System.out.println("seguir con el cambio de pass");
-
-				// usuario.setPassword(pass);
-				// usuario.setPrimerLogin(1);
-				// gestion_usuarios.modificacion_Usuario(usuario);
+/*
+				usuario.setPassword(pass);
+				usuario.setPrimerLogin(1);
+				gestion_usuarios.modificacion_Usuario(usuario);
 
 			} else {
 				FacesContext.getCurrentInstance().addMessage("mensaje",
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas nuevas no son iguales","mensaje"));
 			}
 
-		//} else {
-		//	FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
-		//			new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", "mensaje"));
-		//}
+		} else {
+			FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", "mensaje"));
+		}*/
 	}
 
 	public IGestion_Usuarios getGestion_usuarios() {
