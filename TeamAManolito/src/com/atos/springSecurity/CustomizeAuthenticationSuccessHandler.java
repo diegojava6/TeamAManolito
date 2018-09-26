@@ -22,8 +22,8 @@ import com.atos.hibernate.modelo.IGestion_Usuarios;
 
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-	@ManagedProperty("#{gestion_usuarios}")
 	@Autowired
+	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

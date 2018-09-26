@@ -39,22 +39,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(final HttpSecurity http) throws Exception {
 
 		http
         .authorizeRequests()                                                                
             .antMatchers("/Login.jsp", "/xhtml/CambioPass.xhtml").permitAll()                  
-            .antMatchers("/xhtml/admin/**").hasRole("administrador")                                      
-            .antMatchers("/xhtml/usuario/**").access("hasRole('administrador') and hasRole('role_usuario')")            
+            .antMatchers("/xhtml/admin/*").hasAuthority("administrador")                                      
+            .antMatchers("/xhtml/usuario/*").hasAnyAuthority("administrador","usuario")            
             .anyRequest().authenticated()                                                   
             .and()
         .formLogin()
         	.loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler())
         	.failureUrl("/Login.jsp?error")
         	.usernameParameter("username").passwordParameter("password")
-        .and()
-        
-//	        .logout()                                                                
+        	
+//        	.and()
+//	    .logout()                                                                
 //	        .logoutUrl("/Login.jsp")                                                 
 //	        .logoutSuccessUrl("/Login.jsp")                                           
 //	        .logoutSuccessHandler(logoutSuccessHandler)                              
