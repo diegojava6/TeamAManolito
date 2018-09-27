@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,19 +37,19 @@ public class Cambiar_Password implements Serializable {
 	@PostConstruct
 	public void metodo_Inicio() {
 		
-	/*	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-	    usuario = gestion_usuarios.consultar_Das(auth.getName()) ;*/
+	    usuario = gestion_usuarios.consultar_Das(auth.getName()) ;
 	
 	}
 
-	public void comprobar_pass() {
+	public void comprobar_pass(ActionEvent actionevent) {
 
 	
-		/*if (oldpassword.equals(usuario.getPassword())) {
-			if (pass.equals(passagain)) {*/
+		if (oldpassword.equals(usuario.getPassword())) {
+			if (pass.equals(passagain)) {
 				System.out.println("seguir con el cambio de pass");
-/*
+
 				usuario.setPassword(pass);
 				usuario.setPrimerLogin(1);
 				gestion_usuarios.modificacion_Usuario(usuario);
@@ -61,9 +62,11 @@ public class Cambiar_Password implements Serializable {
 		} else {
 			FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", "mensaje"));
-		}*/
+		}
 	}
 
+	
+	
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
 	}

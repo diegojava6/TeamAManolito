@@ -34,13 +34,12 @@
 			<h:inputSecret id="pass_nuevagain"
 				value="#{cambiar_password.passagain}">
 			</h:inputSecret>
-			<h:message for="mensaje" showSummary="true" />
+			<!-- <h:message for="mensaje" showSummary="true" /> -->
 
 		</h:panelGrid>
 
-
-		<h:commandButton id="Cambiar" value="Aceptar"
-			actionListener="#{cambiar_password.comprobar_pass}" />
+		 <h:commandButton value="Aceptar"
+			actionListener="#{cambiar_password.comprobar_pass}" /> 
 
 	</h:form>
 </h:body>
