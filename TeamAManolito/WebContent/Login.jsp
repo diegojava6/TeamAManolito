@@ -19,10 +19,12 @@
 				<td>Contraseña:</td>
 				<td><input type='password' name='password' /></td>
 			</tr>
+
 			<tr>
 				<td><input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" /></td>
 			</tr>
+
 			<tr>
 				<td><input name="submit" type="submit" value="Entrar" /></td>
 			</tr>

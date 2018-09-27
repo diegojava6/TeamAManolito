@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-	<display-name>TestManolito4</display-name>
+	<display-name>TeamA-Manolito</display-name>
 
 
 	<!-- CONTROLADOR FRONTAL DE JSF -->
@@ -28,13 +28,6 @@
 		<param-value>classpath:com/spring/modelo.xml
 		</param-value>
 	</context-param>
-	<!-- PARAMETRO QUE INDICA NOMBRE Y RUTA DEL FICHERO DE CONFIGURACION DE 
-		SPRING -->
-
-
-	<!-- ***** FIN MECANISMO DE ARRANQUE DE SPRING EN UNA APLICACION -->
-
-
 
 
 	<!-- ***** esto luego se quita para la seguridad -->

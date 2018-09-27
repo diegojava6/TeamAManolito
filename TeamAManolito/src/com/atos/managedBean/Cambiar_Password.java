@@ -3,11 +3,9 @@ package com.atos.managedBean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.springframework.security.core.Authentication;
@@ -17,10 +15,10 @@ import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
 import com.atos.util.IAcceso_Contextos;
 
+@ViewScoped
 @ManagedBean(name = "cambiar_password")
-@SessionScoped
 public class Cambiar_Password implements Serializable {
-	
+
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
 
@@ -32,22 +30,26 @@ public class Cambiar_Password implements Serializable {
 	private String pass;
 	private String passagain;
 
-	
-
 	@PostConstruct
 	public void metodo_Inicio() {
+
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		 
 
-	    usuario = gestion_usuarios.consultar_Das(auth.getName()) ;
-	
+		usuario = gestion_usuarios.consultar_conRol(auth.getName());
+
 	}
 
 	public void comprobar_pass(ActionEvent actionevent) {
 
-	
-		if (oldpassword.equals(usuario.getPassword())) {
+		if(oldpassword=="" || pass=="" || passagain=="") {
+			
+			System.out.println("Todos los campos son obligatorios");
+			
+		}else if (oldpassword.equals(usuario.getPassword())) {
 			if (pass.equals(passagain)) {
+				
 				System.out.println("seguir con el cambio de pass");
 
 				usuario.setPassword(pass);
@@ -55,18 +57,14 @@ public class Cambiar_Password implements Serializable {
 				gestion_usuarios.modificacion_Usuario(usuario);
 
 			} else {
-				FacesContext.getCurrentInstance().addMessage("mensaje",
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas nuevas no son iguales","mensaje"));
+				System.out.println("las contraseñas no son identicas");
 			}
 
 		} else {
-			FacesContext.getCurrentInstance().addMessage("La contraseña original no es la correcta.",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña original no es la correcta.", "mensaje"));
+			System.out.println("no es tu contraseña");
 		}
 	}
 
-	
-	
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
 	}

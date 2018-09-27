@@ -7,13 +7,17 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:icecore="http://www.icefaces.org/icefaces/core"
 	xmlns:ace="http://www.icefaces.org/icefaces/components"
-	style="background-color: #3f90d0">
+	xmlns:sec="http://www.springframework.org/security/tags">
 
 <h:head>
 </h:head>
 
 <h:body>
 	TEXTO PLANOOOOOOOOOO PA' USUARIOS
+	
+	<h:form action="#{request.contextPath}/logout">
+		<h:commandButton type="submit" value="Logout" />
+	</h:form>
 
 </h:body>
 </html>

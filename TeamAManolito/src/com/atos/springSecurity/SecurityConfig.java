@@ -52,16 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler())
         	.failureUrl("/Login.jsp?error")
         	.usernameParameter("username").passwordParameter("password")
-        	
-//        	.and()
-//	    .logout()                                                                
-//	        .logoutUrl("/Login.jsp")                                                 
-//	        .logoutSuccessUrl("/Login.jsp")                                           
-//	        .logoutSuccessHandler(logoutSuccessHandler)                              
-//	        .invalidateHttpSession(true)                                             
-//	        .addLogoutHandler(logoutHandler)                                         
-//	        .deleteCookies(cookieNamesToClear)
-        ;
+          	.and()
+	    .logout()                                                                
+	        .logoutUrl("/logout")                                                 
+	        .logoutSuccessUrl("/Login.jsp")                                           
+	        .and()
+      	.csrf().disable();
 		
 	}
 
