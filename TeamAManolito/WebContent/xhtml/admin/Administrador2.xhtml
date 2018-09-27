@@ -39,9 +39,9 @@
 			<!-- 3º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_nombre" value="Nombre: " />
 			<h:inputText id="nombre" value="#{administrador_bean.usuario.nombre}"
-				validatorMessage="El nombre como máximo ha de tener 10 caracteres y solo se permiten letras">
-				<f:validateLength maximum="10" />
-				<f:validateRegex pattern="[a-zA-Z]*$" />
+				validatorMessage="El nombre como máximo ha de tener 20 caracteres y solo se permiten letras">
+				<f:validateLength maximum="20" />
+				<f:validateRegex pattern="[a-zA-Z\s-]*$" />
 			</h:inputText>
 			<h:message for="nombre" style="color:red"/>
 
@@ -49,9 +49,9 @@
 			<h:outputText id="eti_apellidos" value="Apellidos: " />
 			<h:inputText id="apellido"
 				value="#{administrador_bean.usuario.apellidos}"
-				validatorMessage="El apellido como máximo ha de tener 10 caracteres y solo se permiten letras">
-				<f:validateRegex pattern="[a-zA-Z]*$" />
-				<f:validateLength maximum="10" />
+				validatorMessage="El apellido como máximo ha de tener 100 caracteres y solo se permiten letras">
+				<f:validateRegex pattern="[a-zA-Z\s-]*$" />
+				<f:validateLength maximum="100" />
 			</h:inputText>
 			<h:message for="apellido" style="color:red"/>
 

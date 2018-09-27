@@ -1,58 +1,81 @@
 package com.atos.springSecurity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedProperty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.atos.hibernate.Roles;
 import com.atos.hibernate.Usuarios;
-import com.atos.managedBean.Login_bean;
-
-import net.bytebuddy.asm.Advice.OffsetMapping.Target.ForArray.ReadOnly;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import com.atos.hibernate.modelo.IGestion_Usuarios;
 
 
 @Service("userDetailsService")
-public class UserDetails implements UserDetailsService {
-	@Autowired
-	private Login_bean login_bean;
+public class UserDetails implements UserDetailsService, Serializable {
 
-	@Transactional(readOnly = true)
-	@Override
+
+	private static final long serialVersionUID = 1L;
+
+	@ManagedProperty("#{gestion_usuarios}")
+	private IGestion_Usuarios gestion_usuarios;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		if(login_bean.isLoggedin()==true) {
-			Usuarios user = login_bean.getUsuario_login();
-			List<GrantedAuthority> authorities = 
-                    buildUserAuthority(login_bean.getUsuario_login().getRoles());
-			return buildUserForAuthentication(user, authorities);
+		
+		Usuarios usu = gestion_usuarios.consultar_conRol(username);
+
+		if(usu==null) {
+			System.out.println("Usario inexistente!");
 		}
-		return null;
-	}
-	private User buildUserForAuthentication ( Usuarios user, List<GrantedAuthority> authorities) {
-		return new User(user.getDas(),user.getPassword(),authorities);
+		
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		Roles rol = usu.getRoles();
+		
+		GrantedAuthority lista = new GrantedAuthority() {
+
+			@Override
+			public String getAuthority() {
+				return rol.getDescRol();
+			}
+		};
+		authorities.add(lista);
+
+		User userDetails = new User(usu.getDas(),encoder.encode(usu.getPassword()), authorities);
+
+		return userDetails;
+
 	}
 
-	private List<GrantedAuthority> buildUserAuthority(Roles roles) {
-		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-		
-			setAuths.add(new SimpleGrantedAuthority(roles.getDescRol()));
-		
-		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
-		return Result;
-		
+	public org.springframework.security.core.userdetails.UserDetails loadUserByPassword(
+			org.springframework.security.core.userdetails.UserDetails password) {
+
+		System.out.println(password);
+
+		return password;
+
 	}
+
+	public IGestion_Usuarios getGestion_usuarios() {
+		return gestion_usuarios;
+	}
+
+	public void setGestion_usuarios(IGestion_Usuarios gestion_usuarios) {
+		this.gestion_usuarios = gestion_usuarios;
+	}
+
+	
 	
 }
