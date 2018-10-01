@@ -33,6 +33,12 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 			Authentication authentication) throws IOException {
 
 		handle(request, response, authentication);
+		
+		HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.setMaxInactiveInterval(10);
+	    }
+
 		clearAuthenticationAttributes(request);
 	}
 

@@ -41,24 +41,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 
-		http
-        .authorizeRequests()                                                                
-            .antMatchers("/Login.jsp").permitAll()                  
-            .antMatchers("/xhtml/admin/**").hasAuthority("administrador")                                      
-            .antMatchers("/xhtml/usuario/**").hasAnyAuthority("administrador","usuario")            
-            .anyRequest().authenticated()                                                   
-            .and()
-        .formLogin()
-        	.loginPage("/Login.jsp").successHandler(customizeAuthenticationSuccessHandler())
-        	.failureUrl("/Login.jsp?error")
-        	.usernameParameter("username").passwordParameter("password")
-          	.and()
-	    .logout()                                                                
-	        .logoutUrl("/logout")                                                 
-	        .logoutSuccessUrl("/Login.jsp")                                           
-	        .and()
-      	.csrf().disable();
-		
+		http.authorizeRequests()
+				.antMatchers("/Login.jsp").permitAll()
+				.antMatchers("/xhtml/admin/**").hasAuthority("administrador")
+				.antMatchers("/xhtml/usuario/**").hasAnyAuthority("administrador", "usuario").anyRequest()
+				.authenticated()
+				.and()
+			.formLogin()
+				.loginPage("/Login.jsp")
+				.successHandler(customizeAuthenticationSuccessHandler())
+				.failureUrl("/Login.jsp?error")
+				.usernameParameter("username").passwordParameter("password")
+				.and()
+			.logout()
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/Login.jsp?logout")
+				.invalidateHttpSession(true)
+				.and()
+			.csrf().disable();
+
 	}
 
 	@Override
@@ -80,6 +81,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	
+
 }
