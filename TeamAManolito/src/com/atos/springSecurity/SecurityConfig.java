@@ -41,8 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-				.antMatchers("/Login.jsp").permitAll()
+		http.csrf().disable()
+			.authorizeRequests()
+				.antMatchers("/Login.xhtml").permitAll()
 				.antMatchers("/xhtml/admin/**").hasAuthority("administrador")
 				.antMatchers("/xhtml/usuario/**").hasAnyAuthority("administrador", "usuario").anyRequest()
 				.authenticated()
@@ -56,10 +57,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/Login.jsp?logout")
+				.deleteCookies("remove")
 				.invalidateHttpSession(true)
+//				.and()
+//				.exceptionHandling().accessDeniedPage("/Access_Denied")
 				.and()
-			.csrf().disable();
-
+			.sessionManagement()
+				.invalidSessionUrl("/Login.jsp").maximumSessions(1).expiredUrl("/Login.jsp");
+				
+			
 	}
 
 	@Override

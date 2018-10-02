@@ -17,7 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.atos.hibernate.Usuarios;
 import com.atos.hibernate.modelo.IGestion_Usuarios;
 import com.atos.util.IAcceso_Contextos;
-import com.atos.util.Logout;
 
 @ViewScoped
 @ManagedBean(name = "cambiar_password")
@@ -28,9 +27,6 @@ public class Cambiar_Password implements Serializable {
 
 	@ManagedProperty("#{accesos_contextos}")
 	private IAcceso_Contextos accesos_contextos;
-	
-	@ManagedProperty("#{logout}")
-	private Logout logout;
 
 	private Usuarios usuario;
 	private String oldpassword;
@@ -72,6 +68,10 @@ public class Cambiar_Password implements Serializable {
 		}
 	}
 
+	public void salir(ActionEvent actionevent) {		
+		
+		
+	}
 	
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
@@ -121,13 +121,6 @@ public class Cambiar_Password implements Serializable {
 		this.oldpassword = oldpassword;
 	}
 
-	public Logout getLogout() {
-		return logout;
-	}
-
-	public void setLogout(Logout logout) {
-		this.logout = logout;
-	}
 	
 	
 }
