@@ -11,6 +11,10 @@
 
 </h:head>
 <h:body>
+	<center>
+		<a href="Administrador3.xhtml">Gestionar Tareas</a><br/>
+		<a href="${request.contextPath}/logout">Logout</a>
+	</center>
 	<h:form id="formu_usuario">
 
 		<h:panelGrid id="panel_articulo" columns="4">
@@ -24,17 +28,18 @@
 				validatorMessage="El DAS introducido no es válido">
 				<f:validateRegex pattern="^[Mm]\d{6}" />
 			</h:inputText>
-			<h:message for="das" style="color:red"/>
+			<h:message for="das" style="color:red" />
 
 			<!-- 2º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_correo" value="Correo: " />
 			<h:inputText id="correo" value="#{administrador_bean.usuario.correo}"
-				validatorMessage="Correo inválido" valueChangeListener="#{administrador_bean.actualizacion_correo}">
+				validatorMessage="Correo inválido"
+				valueChangeListener="#{administrador_bean.actualizacion_correo}">
 				<f:validateLength maximum="50" />
 				<f:validateRegex
 					pattern="(^[_\w\d-]+(.[_\w\d-]+)*@[\w\d-]+(.[\w\d-]+)*(.[\w]{2,4})$)?" />
 			</h:inputText>
-			<h:message for="correo" style="color:red"/>
+			<h:message for="correo" style="color:red" />
 
 			<!-- 3º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_nombre" value="Nombre: " />
@@ -43,7 +48,7 @@
 				<f:validateLength maximum="20" />
 				<f:validateRegex pattern="[a-zA-Z\s-]*$" />
 			</h:inputText>
-			<h:message for="nombre" style="color:red"/>
+			<h:message for="nombre" style="color:red" />
 
 			<!-- 4º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_apellidos" value="Apellidos: " />
@@ -53,7 +58,7 @@
 				<f:validateRegex pattern="[a-zA-Z\s-]*$" />
 				<f:validateLength maximum="100" />
 			</h:inputText>
-			<h:message for="apellido" style="color:red"/>
+			<h:message for="apellido" style="color:red" />
 
 			<!-- 5º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_acceso" value="Acceso a aplicacion: " />
@@ -62,11 +67,11 @@
 				<f:selectItem itemLabel="No" itemValue="0" />
 				<f:selectItem itemLabel="Si" itemValue="1" />
 			</h:selectOneRadio>
-			<h:message for="acceso" style="color:red"/>
+			<h:message for="acceso" style="color:red" />
 
-		
 
-		<h:outputText id="eti_roles" value="Rol desarollado: " />
+
+			<h:outputText id="eti_roles" value="Rol desarollado: " />
 			<h:selectOneMenu id="selectRol"
 				value="#{administrador_bean.seleccionRol}"
 				valueChangeListener="#{administrador_bean.carga_Roles}">
@@ -75,8 +80,8 @@
 					var="lroles" itemLabel="#{lroles.descRol}"
 					itemValue="#{lroles.codRol}" />
 			</h:selectOneMenu>
-			<h:message for="selectRol" style="color:red" /> 
-			
+			<h:message for="selectRol" style="color:red" />
+
 
 		</h:panelGrid>
 		<h:panelGrid id="panel_botones" columns="5">
@@ -154,6 +159,11 @@
 			<f:ajax execute="@this" render="tabla" />
 		</h:commandButton>
 	</h:form>
+
+<!-- 	<form action="${request.contextPath}/logout" method="post">
+		<input type="submit" value="Cerrar Sesión" />
+	</form> -->
+
 </h:body>
 
 </html>

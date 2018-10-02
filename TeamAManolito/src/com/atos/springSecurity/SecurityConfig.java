@@ -43,27 +43,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable()
 			.authorizeRequests()
-				.antMatchers("/Login.jsp").permitAll()
+				.antMatchers("/Login.xhtml").permitAll()
 				.antMatchers("/xhtml/admin/**").hasAuthority("administrador")
 				.antMatchers("/xhtml/usuario/**").hasAnyAuthority("administrador", "usuario").anyRequest()
 				.authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/Login.jsp")
+				.loginPage("/Login.xhtml")
+				.loginProcessingUrl("/login")
 				.successHandler(customizeAuthenticationSuccessHandler())
-				.failureUrl("/Login.jsp?error")
-				.usernameParameter("username").passwordParameter("password")
+				.failureUrl("/Login.xhtml?error")
+				.usernameParameter("das").passwordParameter("password")
 				.and()
 			.logout()
 				.logoutUrl("/logout")
-				.logoutSuccessUrl("/Login.jsp?logout")
+				.logoutSuccessUrl("/Login.xhtml?logout")
 				.deleteCookies("remove")
 				.invalidateHttpSession(true)
-//				.and()
-//				.exceptionHandling().accessDeniedPage("/Access_Denied")
+				.and()
+				.exceptionHandling().accessDeniedPage("/xhtml/AccessDenied.xhtml")
 				.and()
 			.sessionManagement()
-				.invalidSessionUrl("/Login.jsp").maximumSessions(1).expiredUrl("/Login.jsp");
+				.invalidSessionUrl("/Login.xhtml").maximumSessions(1).expiredUrl("/Login.xhtml");
 				
 			
 	}

@@ -11,6 +11,11 @@
 
 </h:head>
 <h:body>
+
+	<center>
+		<a href="Administrador2.xhtml">Gestionar Usuarios</a>
+	</center>
+
 	<h:form id="formu_tarea">
 
 		<h:panelGrid id="panel_articulo" columns="4">
@@ -22,7 +27,8 @@
 				value="#{administrador_bean2.tarea.codigo_tarea}"
 				disabled="#{administrador_bean2.campo_cod}"
 				validatorMessage="Solo admite numeros y como máximo 5 cifras.">
-				<f:convertNumber type="number" maxIntegerDigits="5" integerOnly="true" />
+				<f:convertNumber type="number" maxIntegerDigits="5"
+					integerOnly="true" />
 			</h:inputText>
 			<h:message for="cod" style="color:red" />
 
@@ -102,6 +108,11 @@
 		</h:commandButton>
 
 	</h:form>
+
+	<form action="${request.contextPath}/logout" method="post">
+		<input type="submit" value="Cerrar Sesión" />
+	</form>
+
 </h:body>
 
 </html>

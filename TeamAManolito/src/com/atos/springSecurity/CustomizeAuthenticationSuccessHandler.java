@@ -37,7 +37,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 		HttpSession session = request.getSession(false);
 		
 	    if (session != null) {
-	       session.setMaxInactiveInterval(5);
+	       session.setMaxInactiveInterval(50);
 	      
 	    }
 
@@ -70,7 +70,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 		}
 
 		if (usuario.getAccesoAplicacion() == 0) {
-			return "/Login.jsp?error";
+			return "/Login.xhtml?error";
 		} else {
 			if (usuario.getPrimerLogin() == 0) {
 				return "/xhtml/CambioPass.xhtml";
