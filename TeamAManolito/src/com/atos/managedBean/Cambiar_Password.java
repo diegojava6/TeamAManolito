@@ -3,9 +3,12 @@ package com.atos.managedBean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.springframework.security.core.Authentication;
@@ -65,6 +68,11 @@ public class Cambiar_Password implements Serializable {
 		}
 	}
 
+	public void salir(ActionEvent actionevent) {		
+		
+		
+	}
+	
 	public IGestion_Usuarios getGestion_usuarios() {
 		return gestion_usuarios;
 	}
@@ -113,4 +121,6 @@ public class Cambiar_Password implements Serializable {
 		this.oldpassword = oldpassword;
 	}
 
+	
+	
 }
