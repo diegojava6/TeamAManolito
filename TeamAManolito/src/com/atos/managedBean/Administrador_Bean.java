@@ -72,10 +72,7 @@ public class Administrador_Bean implements Serializable {
 		bot_bm = true;
 		bot_alt = false;
 		campo_das = false;
-		/*lista_r = gestion_roles.consultar_Roles();
-		
-		for(int i=0; i < lista_r.size(); i++)
-		lista_rvista.add(i,lista_r.get(0).getDescRol());*/
+
 		
 	}
 

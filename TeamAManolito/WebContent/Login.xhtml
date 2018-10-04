@@ -10,14 +10,17 @@
 </h:head>
 <h:body>
 
-	<h3>Manolito is here!</h3>
+	<h3>Manolito is alive!</h3>
+	
 	<font color="red"> <h:outputLabel value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </font>
+	
 	<form action="${request.contextPath}/login" method="post">
 		<h:outputLabel value="DAS:" />
-		<input type="text" name="das" /><br /> <br />
+		<input type="text" name="das" />
+		<br /><br />
 		<h:outputLabel value="Contraseña:" />
 		<input type="password" name="password" />
-		<br /> <br />
+		<br /><br />
 		<input type="submit" value="Acceder" />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>

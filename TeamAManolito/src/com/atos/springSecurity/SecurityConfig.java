@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedProperty;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,11 +28,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import com.atos.hibernate.modelo.IGestion_Usuarios;
 
-@EnableGlobalAuthentication
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -64,11 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.exceptionHandling().accessDeniedPage("/xhtml/AccessDenied.xhtml")
 				.and()
 			.sessionManagement()
-				.invalidSessionUrl("/Login.xhtml").maximumSessions(1).expiredUrl("/Login.xhtml");
-				
+				.maximumSessions(1).expiredUrl("/Login.xhtml");
 			
 	}
-
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
@@ -78,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-
+	
 	@Bean
 	public AuthenticationSuccessHandler customizeAuthenticationSuccessHandler() {
 		return new CustomizeAuthenticationSuccessHandler();

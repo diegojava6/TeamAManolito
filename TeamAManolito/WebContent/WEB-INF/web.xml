@@ -32,7 +32,7 @@
 
 	<!-- ***** esto luego se quita para la seguridad -->
 	<welcome-file-list>
-		<welcome-file>Login.jsp</welcome-file>
+		<welcome-file>Login.xhtml</welcome-file>
 	</welcome-file-list>
 
 
