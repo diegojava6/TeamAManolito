@@ -107,6 +107,9 @@
 			<f:ajax execute="@this" render="tabla" />
 		</h:commandButton>
 
+		<ace:growlMessages id="error" displayDuration="5000" />
+		<ace:growlMessages id="fine" displayDuration="5000" />
+		
 	</h:form>
 
 	<form action="${request.contextPath}/logout" method="post">

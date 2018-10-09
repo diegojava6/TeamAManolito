@@ -24,6 +24,8 @@ public class UserDetails implements UserDetailsService, Serializable {
 
 
 	private static final long serialVersionUID = 1L;
+	
+	User userDetails;
 
 	@ManagedProperty("#{gestion_usuarios}")
 	private IGestion_Usuarios gestion_usuarios;
@@ -33,13 +35,11 @@ public class UserDetails implements UserDetailsService, Serializable {
 
 	public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
+		
 		
 		Usuarios usu = gestion_usuarios.consultar_conRol(username);
 
-		if(usu==null) {
-			System.out.println("Usario inexistente!");
-		}
+		if(usu!=null) {
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		Roles rol = usu.getRoles();
@@ -53,19 +53,15 @@ public class UserDetails implements UserDetailsService, Serializable {
 		};
 		authorities.add(lista);
 
-		User userDetails = new User(usu.getDas(),encoder.encode(usu.getPassword()), authorities);
-
+		userDetails = new User(usu.getDas(),encoder.encode(usu.getPassword()), authorities);
+		
+		}else {
+			System.out.println("Usuario inexistente!");
+		}
+		
 		return userDetails;
-
-	}
-
-	public org.springframework.security.core.userdetails.UserDetails loadUserByPassword(
-			org.springframework.security.core.userdetails.UserDetails password) {
-
-		System.out.println(password);
-
-		return password;
-
+		
+	
 	}
 
 	public IGestion_Usuarios getGestion_usuarios() {

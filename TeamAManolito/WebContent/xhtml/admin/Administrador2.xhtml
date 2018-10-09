@@ -12,8 +12,8 @@
 </h:head>
 <h:body>
 	<center>
-		<a href="Administrador3.xhtml">Gestionar Tareas</a><br/>
-		<a href="${request.contextPath}/logout">Logout</a>
+		<a href="Administrador3.xhtml">Gestionar Tareas</a><br /> <a
+			href="${request.contextPath}/logout">Logout</a>
 	</center>
 	<h:form id="formu_usuario">
 
@@ -158,11 +158,11 @@
 			actionListener="#{administrador_bean.refresh_tabla}">
 			<f:ajax execute="@this" render="tabla" />
 		</h:commandButton>
-	</h:form>
 
-<!-- 	<form action="${request.contextPath}/logout" method="post">
-		<input type="submit" value="Cerrar Sesión" />
-	</form> -->
+		<ace:growlMessages id="error" displayDuration="5000" />
+		<ace:growlMessages id="fine" displayDuration="5000" />
+
+	</h:form>
 
 </h:body>
 

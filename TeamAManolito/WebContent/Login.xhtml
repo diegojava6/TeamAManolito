@@ -12,8 +12,6 @@
 
 	<h3>Manolito is alive!</h3>
 	
-	<font color="red"> <h:outputLabel value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </font>
-	
 	<form action="${request.contextPath}/login" method="post">
 		<h:outputLabel value="DAS:" />
 		<input type="text" name="das" />
@@ -23,6 +21,9 @@
 		<br /><br />
 		<input type="submit" value="Acceder" />
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		
+		<ace:growlMessages globalOnly="true" displayDuration="5000" />
+		
 	</form>
 
 </h:body>

@@ -3,6 +3,7 @@ package com.atos.managedBean;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.application.ViewHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -32,6 +33,9 @@ public class Cambiar_Password implements Serializable {
 	private String oldpassword;
 	private String pass;
 	private String passagain;
+	
+	FacesContext facesContext = FacesContext.getCurrentInstance();
+	FacesMessage facesMessage = new FacesMessage("");
 
 	@PostConstruct
 	public void metodo_Inicio() {
@@ -48,23 +52,27 @@ public class Cambiar_Password implements Serializable {
 
 		if(oldpassword=="" || pass=="" || passagain=="") {
 			
-			System.out.println("Todos los campos son obligatorios");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Todos los campos son obligatorios!");
+			facesContext.addMessage(null , facesMessage);
 			
 		}else if (oldpassword.equals(usuario.getPassword())) {
 			if (pass.equals(passagain)) {
-				
-				System.out.println("seguir con el cambio de pass");
 
 				usuario.setPassword(pass);
 				usuario.setPrimerLogin(1);
 				gestion_usuarios.modificacion_Usuario(usuario);
 
 			} else {
-				System.out.println("las contraseñas no son identicas");
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				FacesMessage facesMessage = new FacesMessage("las contraseñas no son identicas.");
+				facesContext.addMessage(null , facesMessage);
 			}
 
 		} else {
-			System.out.println("no es tu contraseña");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("la contraseña original no es correcta.");
+			facesContext.addMessage(null , facesMessage);
 		}
 	}
 

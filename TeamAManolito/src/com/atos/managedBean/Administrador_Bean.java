@@ -90,17 +90,24 @@ public class Administrador_Bean implements Serializable {
 				usuario.setRoles(roles);
 				// llama al metodo de alta de usuario
 				gestion_usuarios.alta_Usuario(usuario);
-				System.out.println("correcta alta");
+				
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				FacesMessage facesMessage = new FacesMessage("Alta correcta!");
+				facesContext.addMessage("fine" , facesMessage);
+
 				bot_alt = true;
 				bot_bm = false;
 
 			} catch (Exception e) {
-				System.out.println("error alta");
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				FacesMessage facesMessage = new FacesMessage("Fallo al realizar el alta. DAS o/y correo pueden estar ya registrados");
+				facesContext.addMessage("error" , facesMessage);
 
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage("correo necesario", 
-			        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Correo necesario", correo));
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("El correo es obligatorio!");
+			facesContext.addMessage("error" , facesMessage);
 		}
 
 	}
@@ -112,10 +119,14 @@ public class Administrador_Bean implements Serializable {
 			// llama al metodo de alta de usuario
 			usuario.setAccesoAplicacion(0);
 			gestion_usuarios.baja_Usuario(usuario);
-			System.out.println("Baja correcta");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Baja correcta!");
+			facesContext.addMessage("fine" , facesMessage);
 
 		} catch (Exception e) {
-			System.out.println("Baja incorrecta");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la baja.");
+			facesContext.addMessage(null , facesMessage);
 
 		}
 
@@ -140,16 +151,19 @@ public class Administrador_Bean implements Serializable {
 	public void modificacion(ActionEvent evento) {
 
 		try {
+			
 			// llama al metodo de alta de usuario
-
 			usuario.setRoles(roles);
-
 			gestion_usuarios.modificacion_Usuario(usuario);
-			System.out.println("correcta modificacion");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Modificación realizada!");
+			facesContext.addMessage("fine" , facesMessage);
 
 		} catch (Exception e) {
 
-			System.out.println("error modificacion");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Fallo al guardar la modificación. Correo posiblemente ya registrado!");
+			facesContext.addMessage(null , facesMessage);
 		}
 	}
 
@@ -160,36 +174,35 @@ public class Administrador_Bean implements Serializable {
 			usuario = gestion_usuarios.consultar_conRol(usuario.getDas());
 			roles = usuario.getRoles();
 			seleccionRol = usuario.getRoles().getCodRol();
-			System.out.println("ok");
+			
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Consulta realizada!");
+			facesContext.addMessage("fine" , facesMessage);
+		
 			bot_bm = false;
 			bot_alt = true;
 			setCampo_das(true);
-
-			// mensaje = new FacesMessage("consulta correcta", "mensaje");
+			
 		} catch (Exception e) {
-			// mensaje = new FacesMessage("consulta incorrecta", "mensaje");
-			System.out.println("no ok");
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("DAS no registrado.");
+			facesContext.addMessage("error" , facesMessage);
+
 		}
-		// FacesContext.getCurrentInstance().addMessage("mensaje", mensaje);
-		// ((HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false)).getAttribute("");
+		
 	}
 
-	// limapia el formulario
+	// limpia el formulario
 	public void clear(ActionEvent evento) {
-		System.out.println("limpiar formulario");
-		try {
+		
 			usuario = new Usuarios();
 			roles = new Roles();
 			seleccionRol = 0;
 			bot_bm = true;
 			bot_alt = false;
 			campo_das = false;
-
-			System.out.println("limpiado completado");
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("como puede haber un erorr aquí...");
-		}
+			
 	}
 
 	// metodo tipo filtrado datatable
@@ -235,6 +248,9 @@ public class Administrador_Bean implements Serializable {
 	// boton refrescar tabla
 	public void refresh_tabla(ActionEvent event) {
 		lista_usuarios = gestion_usuarios.consultar_Todos();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesMessage facesMessage = new FacesMessage("Tabla refrescada!");
+		facesContext.addMessage(null , facesMessage);
 	}
 
 	public Usuarios getUsuario() {

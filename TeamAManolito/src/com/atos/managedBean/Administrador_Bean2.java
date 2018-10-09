@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.atos.hibernate.Tareas;
@@ -52,26 +54,32 @@ public class Administrador_Bean2 implements Serializable {
 
 			if (tarea.getCodigo_tarea() != null) {
 
-				System.out.println("El código no se puede elegir, es automático");
+				FacesContext facesContext = FacesContext.getCurrentInstance();
+				FacesMessage facesMessage = new FacesMessage("El código de la tarea no se puede elegir, es automático");
+				facesContext.addMessage("fine" , facesMessage);
 
 				tarea_nueva.setNombre_tarea(tarea.getNombre_tarea());
 				tarea_nueva.setDesc(tarea.getDesc());
 				tarea_nueva.setEstado(tarea.getEstado());
 
 				gestion_tareas.alta_Tarea(tarea_nueva);
-				System.out.println("correcta alta");
 				tarea = tarea_nueva;
 
 			} else {
 
-				// llama al metodo de alta de usuario
 				gestion_tareas.alta_Tarea(tarea);
-				System.out.println("correcta alta");
 			}
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Alta realizada correctamente!");
+			facesContext.addMessage("fine" , facesMessage);
+			
 			bot_alt = true;
 			bot_bm = false;
 		} catch (Exception e) {
-			System.out.println("error alta");
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Error en el alta.");
+			facesContext.addMessage("error" , facesMessage);
 
 		}
 
@@ -83,10 +91,17 @@ public class Administrador_Bean2 implements Serializable {
 
 			tarea.setEstado(0);
 			gestion_tareas.baja_Tarea(tarea);
-			System.out.println("Baja correcta");
+			
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Baja realizada correctamente!");
+			facesContext.addMessage("fine" , facesMessage);
+
 
 		} catch (Exception e) {
-			System.out.println("Baja incorrecta");
+			
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la baja.");
+			facesContext.addMessage("error" , facesMessage);
 
 		}
 
@@ -95,13 +110,17 @@ public class Administrador_Bean2 implements Serializable {
 	public void modificacion(ActionEvent evento) {
 
 		try {
-			// llama al metodo de alta de usuario
+		
 			gestion_tareas.modificacion_Tarea(tarea);
-			System.out.println("correcta modificacion");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Modificación realizada!");
+			facesContext.addMessage("fine" , facesMessage);
 
 		} catch (Exception e) {
 
-			System.out.println("error modificacion");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la modificación");
+			facesContext.addMessage("error" , facesMessage);
 		}
 	}
 
@@ -111,36 +130,37 @@ public class Administrador_Bean2 implements Serializable {
 
 			tarea = gestion_tareas.consultar_Codigo(tarea.getCodigo_tarea());
 
-			System.out.println("ok");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Consulta realizada!");
+			facesContext.addMessage("fine" , facesMessage);
+			
 			bot_bm = false;
 			bot_alt = true;
 			setCampo_cod(true);
 
 		} catch (Exception e) {
 
-			System.out.println("no ok");
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la consulta.");
+			facesContext.addMessage("error" , facesMessage);
 		}
 	}
 
 	// limapia el formulario
 	public void clear(ActionEvent evento) {
-		System.out.println("limpiar formulario");
-		try {
+
 			tarea = new Tareas();
 			bot_bm = true;
 			bot_alt = false;
 			setCampo_cod(false);
-
-			System.out.println("limpiado completado");
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("como puede haber un error aquí...");
-		}
 	}
 
 	// boton refrescar tabla
 	public void refresh_tabla(ActionEvent event) {
 		lista_tareas = gestion_tareas.consultar_Todos();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesMessage facesMessage = new FacesMessage("Tabla refrescada!");
+		facesContext.addMessage("fine" , facesMessage);
 	}
 
 	public Tareas getTarea() {

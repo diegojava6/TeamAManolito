@@ -45,6 +45,8 @@
 		<h:commandButton id="procesar" value="Aceptar"
 			actionListener="#{cambiar_password.comprobar_pass}" />
 
+		<ace:growlMessages globalOnly="true" displayDuration="5000" />
+
 	</h:form>
 
 	<form action="${request.contextPath}/logout" method="post">
