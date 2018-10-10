@@ -26,13 +26,11 @@ public class Usuarios {
 		super();
 	}
 
-	public Usuarios(String correo, String password) {
+	public Usuarios(String das, String correo) {
 		super();
+		this.das = das;
 		this.correo = correo;
-		this.password = password;
 	}
-
-	
 
 	public Usuarios(String das, String nombre, String apellidos, String correo, String password, Integer primerLogin,
 			Integer accesoAplicacion, Roles roles) {
@@ -45,24 +43,6 @@ public class Usuarios {
 		this.primerLogin = primerLogin;
 		this.accesoAplicacion = accesoAplicacion;
 		this.roles = roles;
-	}
-
-	@Column(name = "nombre", nullable = false, length = 20)
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	@Column(name = "apellido", nullable = false, length = 100)
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
 	}
 
 	@Id
@@ -84,6 +64,25 @@ public class Usuarios {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+	
+	@Column(name = "nombre", nullable = false, length = 20)
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	@Column(name = "apellido", nullable = false, length = 100)
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
 
 	@Column(name = "password", nullable = false, length = 20)
 	public String getPassword() {

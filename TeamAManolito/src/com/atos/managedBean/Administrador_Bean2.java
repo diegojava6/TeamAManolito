@@ -14,6 +14,7 @@ import javax.faces.event.ActionEvent;
 import com.atos.hibernate.Tareas;
 import com.atos.hibernate.modelo.IGestion_Tareas;
 import com.atos.util.IAcceso_Contextos;
+import com.atos.util.Mensajes;
 
 @ManagedBean(name = "administrador_bean2")
 @ViewScoped
@@ -24,6 +25,9 @@ public class Administrador_Bean2 implements Serializable {
 
 	@ManagedProperty("#{gestion_tareas}")
 	private IGestion_Tareas gestion_tareas;
+
+	@ManagedProperty("#{mensajes}")
+	private Mensajes mensaje;
 
 	// propiedades auxiliares test
 	private boolean bot_bm;
@@ -50,13 +54,12 @@ public class Administrador_Bean2 implements Serializable {
 	// opcion de alta
 	public void alta(ActionEvent evento) {
 
-		try {
+		Tareas t = gestion_tareas.consultar_Nombre(tarea.getNombre_tarea());
 
+		if (t == null) {
 			if (tarea.getCodigo_tarea() != null) {
 
-				FacesContext facesContext = FacesContext.getCurrentInstance();
-				FacesMessage facesMessage = new FacesMessage("El código de la tarea no se puede elegir, es automático");
-				facesContext.addMessage("fine" , facesMessage);
+				mensaje.crear_mensajes("info", "El código de la tarea no se puede elegir, es automático");
 
 				tarea_nueva.setNombre_tarea(tarea.getNombre_tarea());
 				tarea_nueva.setDesc(tarea.getDesc());
@@ -69,17 +72,13 @@ public class Administrador_Bean2 implements Serializable {
 
 				gestion_tareas.alta_Tarea(tarea);
 			}
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Alta realizada correctamente!");
-			facesContext.addMessage("fine" , facesMessage);
-			
+			mensaje.crear_mensajes("info", "Alta realizada");
+
 			bot_alt = true;
 			bot_bm = false;
-		} catch (Exception e) {
+		} else {
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Error en el alta.");
-			facesContext.addMessage("error" , facesMessage);
+			mensaje.crear_mensajes("error", "Error en el alta!");
 
 		}
 
@@ -87,80 +86,51 @@ public class Administrador_Bean2 implements Serializable {
 
 	public void baja(ActionEvent evento) {
 
-		try {
+		tarea.setEstado(0);
+		gestion_tareas.baja_Tarea(tarea);
 
-			tarea.setEstado(0);
-			gestion_tareas.baja_Tarea(tarea);
-			
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Baja realizada correctamente!");
-			facesContext.addMessage("fine" , facesMessage);
-
-
-		} catch (Exception e) {
-			
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la baja.");
-			facesContext.addMessage("error" , facesMessage);
-
-		}
+		mensaje.crear_mensajes("info", "Baja realizada!");
 
 	}
 
 	public void modificacion(ActionEvent evento) {
 
-		try {
-		
-			gestion_tareas.modificacion_Tarea(tarea);
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Modificación realizada!");
-			facesContext.addMessage("fine" , facesMessage);
+		gestion_tareas.modificacion_Tarea(tarea);
+		mensaje.crear_mensajes("info", "Modificación realizada");
 
-		} catch (Exception e) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la modificación");
-			facesContext.addMessage("error" , facesMessage);
-		}
 	}
 
 	public void consulta(ActionEvent evento) {
 
-		try {
+		tarea = gestion_tareas.consultar_Codigo(tarea.getCodigo_tarea());
+		if (tarea == null) {
 
-			tarea = gestion_tareas.consultar_Codigo(tarea.getCodigo_tarea());
+			mensaje.crear_mensajes("error", "Tarea no registrada!");
 
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Consulta realizada!");
-			facesContext.addMessage("fine" , facesMessage);
-			
+		} else {
+
+			mensaje.crear_mensajes("info", "Consulta realizada!");
+
 			bot_bm = false;
 			bot_alt = true;
 			setCampo_cod(true);
-
-		} catch (Exception e) {
-
-			FacesContext facesContext = FacesContext.getCurrentInstance();
-			FacesMessage facesMessage = new FacesMessage("Fallo al realizar la consulta.");
-			facesContext.addMessage("error" , facesMessage);
 		}
 	}
 
 	// limapia el formulario
 	public void clear(ActionEvent evento) {
 
-			tarea = new Tareas();
-			bot_bm = true;
-			bot_alt = false;
-			setCampo_cod(false);
+		tarea = new Tareas();
+		mensaje.crear_mensajes("info", "Formulario limpiado!");
+		bot_bm = true;
+		bot_alt = false;
+		setCampo_cod(false);
 	}
 
 	// boton refrescar tabla
 	public void refresh_tabla(ActionEvent event) {
 		lista_tareas = gestion_tareas.consultar_Todos();
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		FacesMessage facesMessage = new FacesMessage("Tabla refrescada!");
-		facesContext.addMessage("fine" , facesMessage);
+		mensaje.crear_mensajes("info", "Tabla refrescada!");
 	}
 
 	public Tareas getTarea() {

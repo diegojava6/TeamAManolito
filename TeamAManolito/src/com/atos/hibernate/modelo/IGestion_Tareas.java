@@ -16,5 +16,6 @@ public interface IGestion_Tareas {
 	public void alta_Tarea(Tareas tarea) throws DataAccessException;
 	public void baja_Tarea(Tareas tarea) throws DataAccessException;
 	public void modificacion_Tarea(Tareas tarea);
+	public Tareas consultar_Nombre(String nombre);
 
 }

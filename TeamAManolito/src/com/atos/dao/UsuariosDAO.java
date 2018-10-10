@@ -19,18 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.atos.hibernate.Usuarios;
 
-/**
- * A data access object (DAO) providing persistence and search support for
- * Usuarios entities. Transaction control of the save(), update() and delete()
- * operations can directly support Spring container-managed transactions or they
- * can be augmented to handle user-managed Spring transactions. Each of these
- * methods provides additional information for how to configure it for the
- * desired type of transaction control.
- * 
- * @see com.atrium.hibernate.Usuarios
- * @author MyEclipse Persistence Tools
- */
-
 public class UsuariosDAO {
 	private static final Logger log = LoggerFactory.getLogger(UsuariosDAO.class);
 	public static final String PASSWORD = "password";
@@ -45,10 +33,6 @@ public class UsuariosDAO {
 
 	protected Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
-	}
-
-	protected void initDao() {
-		// do nothing
 	}
 
 	public void save(Usuarios transientInstance) {
@@ -84,42 +68,36 @@ public class UsuariosDAO {
 		}
 	}
 
+	public boolean findByProperty(String username, String dir) {
+		log.debug("finding Usuarios instance with property: das, value: " + username + " OR property: correo, value: "
+				+ dir);
+		try {
+			String queryString = "from Usuarios as model where model.das = :das or model.correo = :correo";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+			queryObject.setParameter("das", username);
+			queryObject.setParameter("correo", dir);
+			Usuarios usu = (Usuarios) queryObject.uniqueResult();
+			if (usu != null )
+				return true;
+			else
+				return false;
+		} catch (RuntimeException re) {
+			log.error("find by property das or correo failed", re);
+			throw re;
+		}
+	}
+
 	public List<Usuarios> findByExample(Usuarios instance) {
 		log.debug("finding Usuarios instance by example");
 		try {
-			List<Usuarios> results = (List<Usuarios>) getCurrentSession()
-					.createCriteria("com.atos.hibernate.Usuarios").add(create(instance)).list();
+			List<Usuarios> results = (List<Usuarios>) getCurrentSession().createCriteria("com.atos.hibernate.Usuarios")
+					.add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;
 		}
-	}
-
-	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Usuarios instance with property: " + propertyName + ", value: " + value);
-		try {
-			String queryString = "from Usuarios as model where model." + propertyName + "= ?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
-			queryObject.setParameter(0, value);
-			return queryObject.list();
-		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
-			throw re;
-		}
-	}
-
-	public List<Usuarios> findByPassword(Object password) {
-		return findByProperty(PASSWORD, password);
-	}
-
-	public List<Usuarios> findByCarpetaDocumentacion(Object carpetaDocumentacion) {
-		return findByProperty(CARPETA_DOCUMENTACION, carpetaDocumentacion);
-	}
-
-	public List<Usuarios> findByIdioma(Object idioma) {
-		return findByProperty(IDIOMA, idioma);
 	}
 
 	public List findAll() {
@@ -175,6 +153,5 @@ public class UsuariosDAO {
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-	
-	
+
 }

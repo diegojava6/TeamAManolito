@@ -32,6 +32,13 @@ public class Gestion_Tareas implements IGestion_Tareas {
 		return tareasdao.findById(codigo);
 
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Tareas consultar_Nombre(String nombre) {
+		return tareasdao.findByProperty(nombre);
+	}
+	
 
 	@Override
 	@Transactional

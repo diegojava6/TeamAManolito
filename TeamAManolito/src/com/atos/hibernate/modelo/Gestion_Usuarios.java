@@ -44,26 +44,11 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 
 	@Override
 	@Transactional(readOnly = true)
-	// Metodo para comprobar si el correo y la password existe en la BBDD y devolver
-	// un true o false en su comprobacion
-	public Usuarios consultar_Login(String das, String password) {
-		// TODO Auto-generated method stub
-		Usuarios usu = usuariosdao.findById(das);
-		Usuarios usu2 = null;
+	public boolean consultar_Existencia(String das, String correo) {
+		
+		boolean usu = usuariosdao.findByProperty(das, correo);
 
-		if (usu != null) {
-
-			if (usu.getDas().equals(das) && usu.getPassword().equals(password)) {
-
-				return usu;
-
-			} else {
-				return usu2;
-			}
-
-		} else {
-			return usu2;
-		}
+		return usu;
 
 	}
 

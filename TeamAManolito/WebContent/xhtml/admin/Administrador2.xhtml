@@ -9,6 +9,7 @@
 
 <h:head>
 
+
 </h:head>
 <h:body>
 	<center>
@@ -46,7 +47,7 @@
 			<h:inputText id="nombre" value="#{administrador_bean.usuario.nombre}"
 				validatorMessage="El nombre como máximo ha de tener 20 caracteres y solo se permiten letras">
 				<f:validateLength maximum="20" />
-				<f:validateRegex pattern="[a-zA-Z\s-ñ]*$" />
+				<f:validateRegex pattern="[a-zA-ZÁ-Úá-ú\s-ñ]*$" />
 			</h:inputText>
 			<h:message for="nombre" style="color:red" />
 
@@ -55,7 +56,7 @@
 			<h:inputText id="apellido"
 				value="#{administrador_bean.usuario.apellidos}"
 				validatorMessage="El apellido como máximo ha de tener 100 caracteres y solo se permiten letras">
-				<f:validateRegex pattern="[a-zA-Z\s-ñ]*$" />
+				<f:validateRegex pattern="[a-zA-ZÁ-Úá-ú\s-ñ]*$" />
 				<f:validateLength maximum="100" />
 			</h:inputText>
 			<h:message for="apellido" style="color:red" />
@@ -98,7 +99,6 @@
 				actionListener="#{administrador_bean.consulta}" />
 			<h:commandButton id="boton_clear" value="Clear"
 				actionListener="#{administrador_bean.clear}">
-				<f:ajax execute="@this" render="formu_usuario" />
 			</h:commandButton>
 
 		</h:panelGrid>
@@ -156,11 +156,11 @@
 
 		<h:commandButton id="boton_tabla" value="refresh table"
 			actionListener="#{administrador_bean.refresh_tabla}">
-			<f:ajax execute="@this" render="tabla" />
+			<!-- <f:ajax execute="@this" render="tabla" /> -->
 		</h:commandButton>
 
+		<ace:growlMessages id="info" displayDuration="5000" />
 		<ace:growlMessages id="error" displayDuration="5000" />
-		<ace:growlMessages id="fine" displayDuration="5000" />
 
 	</h:form>
 

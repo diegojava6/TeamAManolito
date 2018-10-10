@@ -85,13 +85,13 @@ public class TareasDAO {
 		}
 	}
 
-	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Tareas instance with property: " + propertyName + ", value: " + value);
+	public Tareas findByProperty(String nombre) {
+		log.debug("finding Tareas instance with value: "+nombre);
 		try {
-			String queryString = "from Tareas as model where model." + propertyName + "= ?";
+			String queryString = "from Tareas as model where model.nombre_tarea= :tarea";
 			Query queryObject = getCurrentSession().createQuery(queryString);
-			queryObject.setParameter(0, value);
-			return queryObject.list();
+			queryObject.setParameter("tarea", nombre);
+			return (Tareas) queryObject.uniqueResult();
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
 			throw re;

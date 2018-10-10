@@ -11,7 +11,7 @@ public interface IGestion_Usuarios {
 
 	public List<Usuarios> consultar_Todos();
 	public Usuarios consultar_Das(String das);
-	public Usuarios consultar_Login(String das, String password);
+	public boolean consultar_Existencia(String das, String correo);
 	public void alta_Usuario(Usuarios usuario) throws DataAccessException;
 	public void baja_Usuario(Usuarios usuario) throws DataAccessException;
 	public void modificacion_Usuario(Usuarios usuario);
