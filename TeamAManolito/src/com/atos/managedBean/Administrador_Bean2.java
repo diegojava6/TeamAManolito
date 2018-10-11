@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.atos.hibernate.Tareas;
@@ -19,6 +17,9 @@ import com.atos.util.Mensajes;
 @ManagedBean(name = "administrador_bean2")
 @ViewScoped
 public class Administrador_Bean2 implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private Tareas tarea;
 	private Tareas tarea_nueva;
 	private List<Tareas> lista_tareas;
@@ -131,6 +132,28 @@ public class Administrador_Bean2 implements Serializable {
 	public void refresh_tabla(ActionEvent event) {
 		lista_tareas = gestion_tareas.consultar_Todos();
 		mensaje.crear_mensajes("info", "Tabla refrescada!");
+	}
+
+	
+	
+	
+	
+	
+	
+	public Tareas getTarea_nueva() {
+		return tarea_nueva;
+	}
+
+	public void setTarea_nueva(Tareas tarea_nueva) {
+		this.tarea_nueva = tarea_nueva;
+	}
+
+	public Mensajes getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(Mensajes mensaje) {
+		this.mensaje = mensaje;
 	}
 
 	public Tareas getTarea() {

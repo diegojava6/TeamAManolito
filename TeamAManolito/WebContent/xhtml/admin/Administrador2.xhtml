@@ -9,7 +9,6 @@
 
 <h:head>
 
-
 </h:head>
 <h:body>
 	<center>
@@ -70,8 +69,7 @@
 			</h:selectOneRadio>
 			<h:message for="acceso" style="color:red" />
 
-
-
+			<!-- 6º FILA DEL FORMULARIO -->
 			<h:outputText id="eti_roles" value="Rol desarollado: " />
 			<h:selectOneMenu id="selectRol"
 				value="#{administrador_bean.seleccionRol}"
@@ -82,8 +80,6 @@
 					itemValue="#{lroles.codRol}" />
 			</h:selectOneMenu>
 			<h:message for="selectRol" style="color:red" />
-
-
 		</h:panelGrid>
 		<h:panelGrid id="panel_botones" columns="5">
 			<h:commandButton id="boton_alta" value="Alta"
@@ -97,12 +93,24 @@
 				actionListener="#{administrador_bean.modificacion}" />
 			<h:commandButton id="boton_consulta" value="Consulta"
 				actionListener="#{administrador_bean.consulta}" />
+
 			<h:commandButton id="boton_clear" value="Clear"
 				actionListener="#{administrador_bean.clear}">
 			</h:commandButton>
 
 		</h:panelGrid>
 
+		<ace:growlMessages id="info" style="background-color:green"
+			displayDuration="5000" />
+		<ace:growlMessages id="error" style="background-color:red"
+			displayDuration="5000" />
+
+	</h:form>
+
+
+	<br />
+	<br />
+	<h:form id="tabla_usuarios">
 		<h:outputText value="Numero de filas: " />
 		<h:inputText value="#{administrador_bean.numero_filas}" />
 		<h:selectOneRadio value="#{administrador_bean.modo_seleccion}"
@@ -156,12 +164,7 @@
 
 		<h:commandButton id="boton_tabla" value="refresh table"
 			actionListener="#{administrador_bean.refresh_tabla}">
-			<!-- <f:ajax execute="@this" render="tabla" /> -->
 		</h:commandButton>
-
-		<ace:growlMessages id="info" displayDuration="5000" />
-		<ace:growlMessages id="error" displayDuration="5000" />
-
 	</h:form>
 
 </h:body>

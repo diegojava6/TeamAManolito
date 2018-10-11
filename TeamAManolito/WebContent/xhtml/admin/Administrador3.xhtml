@@ -77,6 +77,9 @@
 
 		</h:panelGrid>
 
+		<br />
+		<br />
+
 		<ace:dataTable id="tabla" value="#{administrador_bean2.lista_tareas}"
 			var="tarea" rows="#{administrador_bean2.numero_filas}"
 			paginator="true" paginatorPosition="bottom">
@@ -109,7 +112,7 @@
 
 		<ace:growlMessages id="info" displayDuration="5000" />
 		<ace:growlMessages id="error" displayDuration="5000" />
-		
+
 	</h:form>
 
 	<form action="${request.contextPath}/logout" method="post">

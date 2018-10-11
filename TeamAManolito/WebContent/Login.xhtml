@@ -11,19 +11,27 @@
 <h:body>
 
 	<h3>Manolito is alive!</h3>
-	
+
 	<form action="${request.contextPath}/login" method="post">
-		<h:outputLabel value="DAS:" />
-		<input type="text" name="das" />
-		<br /><br />
-		<h:outputLabel value="Contraseña:" />
-		<input type="password" name="password" />
-		<br /><br />
-		<input type="submit" value="Acceder" />
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		
+
+		<ace:textEntry label="DAS: " name="das" required="true"
+			labelPosition="left"
+			validatorMessage="El DAS no cumple los requisitos.">
+			<f:validateRegex pattern="^[Mm]\d{6}" />
+		</ace:textEntry>
+		<br /> <br />
+
+		<ace:textEntry label="Contraseña: " secret="true" name="password"
+			required="true" labelPosition="left"
+			validatorMessage="La contraseña tiene que tener mínimo 5 caractéres">
+			<f:validateLength minimum="5" />
+		</ace:textEntry>
+		<br /> <br />
+		<h:commandButton type="submit" value="Acceder" />
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+
 		<ace:growlMessages globalOnly="true" displayDuration="5000" />
-		
 	</form>
 
 </h:body>

@@ -21,6 +21,9 @@ import com.atos.util.Mensajes;
 @ManagedBean(name = "administrador_bean")
 @ViewScoped
 public class Administrador_Bean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private Usuarios usuario;
 	private Roles roles;
 
@@ -54,8 +57,6 @@ public class Administrador_Bean implements Serializable {
 	private boolean bot_bm;
 	private boolean bot_alt;
 	private boolean campo_das;
-	private List<Roles> lista_r;
-	private List<String> lista_rvista;
 
 	// UTILIDAD GENERAL PARA LA GESTION DE MENSAJES EN MANAGEDBEAN
 	@ManagedProperty("#{accesos_contextos}")
@@ -80,14 +81,20 @@ public class Administrador_Bean implements Serializable {
 	// opcion de alta
 	public void alta(ActionEvent evento) {
 
-		// comprobar si el campo correo tiene algo escrito o no
-		if (correo.hashCode() != 0) {
+		if (!comprobar_campos()) {
+
+			mensaje.crear_mensajes("error", "Completa todos los campos!");
+
+		} else {
 
 			boolean resultado = gestion_usuarios.consultar_Existencia(usuario.getDas(), usuario.getCorreo());
 
 			if (!resultado) {
 
+				// Generar pass dinánima o estática
 				usuario.setPassword(generar_pass.generar_Pass());
+				// usuario.setPassword("ATOS2018");
+
 				usuario.setPrimerLogin(0);
 				usuario.setRoles(roles);
 				// llama al metodo de alta de usuario
@@ -101,17 +108,15 @@ public class Administrador_Bean implements Serializable {
 			} else {
 				mensaje.crear_mensajes("error", "Fallo al realizar el alta. DAS o/y correo estan ya registrados");
 			}
-		} else {
-			mensaje.crear_mensajes("error", "El correo es obligatorio!");
 		}
-
 	}
 
 	public void baja(ActionEvent evento) {
 
-		// llama al metodo de alta de usuario
-		usuario.setAccesoAplicacion(0);
-		gestion_usuarios.baja_Usuario(usuario);
+		//Cogemos nuevo objeto para no modificar a la vez los campos del usuario a dar la baja
+		Usuarios usu = gestion_usuarios.consultar_Das(usuario.getDas());
+		usu.setAccesoAplicacion(0);
+		gestion_usuarios.baja_Usuario(usu);
 		mensaje.crear_mensajes("info", "Baja correcta!");
 
 	}
@@ -133,17 +138,21 @@ public class Administrador_Bean implements Serializable {
 
 	public void modificacion(ActionEvent evento) {
 
+		if (comprobar_campos()) {
 			usuario.setRoles(roles);
 			gestion_usuarios.modificacion_Usuario(usuario);
 			mensaje.crear_mensajes("info", "Modificación realizada!");
-
+		} else {
+			mensaje.crear_mensajes("error", "Completa todos los campos!");
+		}
 	}
 
 	public void consulta(ActionEvent evento) {
 
-		usuario = gestion_usuarios.consultar_conRol(usuario.getDas());
+		usuario = gestion_usuarios.consultar_Das(usuario.getDas());
 		if (usuario != null) {
-			roles = usuario.getRoles();
+			roles = usuario.getRoles();// esto es para al modificar el obj siga manteniendo su rol a no ser que se
+										// modifique
 			seleccionRol = usuario.getRoles().getCodRol();
 			mensaje.crear_mensajes("info", "Consulta realizada!");
 
@@ -154,6 +163,7 @@ public class Administrador_Bean implements Serializable {
 		} else {
 
 			mensaje.crear_mensajes("error", "DAS no registrado!");
+			usuario = new Usuarios();
 
 		}
 
@@ -161,14 +171,14 @@ public class Administrador_Bean implements Serializable {
 
 	// limpia el formulario
 	public void clear(ActionEvent evento) {
-		
-			usuario = new Usuarios();
-			roles = new Roles();
-			seleccionRol = 0;
-			mensaje.crear_mensajes("info", "Formulario limpiado!");
-			bot_bm = true;
-			bot_alt = false;
-			campo_das = false;
+
+		usuario = new Usuarios();
+		roles = new Roles();
+		seleccionRol = 0;
+		mensaje.crear_mensajes("info", "Formulario limpiado!");
+		bot_bm = true;
+		bot_alt = false;
+		campo_das = false;
 
 	}
 
@@ -205,18 +215,23 @@ public class Administrador_Bean implements Serializable {
 		}
 	}
 
-	public List<Roles> carga_roles() {
+	// boton refrescar tabla
+	public void refresh_tabla(ActionEvent event) {
 
-		return lista_r;
+		lista_usuarios = gestion_usuarios.consultar_Todos();
+		mensaje.crear_mensajes("info", "Tabla reiniciada!");
 
 	}
 
-	// boton refrescar tabla
-	public void refresh_tabla(ActionEvent event) {
-		
-			lista_usuarios = gestion_usuarios.consultar_Todos();
-			mensaje.crear_mensajes("info", "Tabla reiniciada!");
-		
+	public boolean comprobar_campos() {
+		if (usuario.getDas() == "" || usuario.getCorreo() == "" || usuario.getAccesoAplicacion() == null
+				|| usuario.getNombre() == "" || usuario.getApellidos() == "" || seleccionRol == 0) {
+
+			return false;
+
+		} else {
+			return true;
+		}
 	}
 
 	public Mensajes getMensaje() {
@@ -386,22 +401,6 @@ public class Administrador_Bean implements Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
-	}
-
-	public List<Roles> getLista_r() {
-		return lista_r;
-	}
-
-	public void setLista_r(List<Roles> lista_r) {
-		this.lista_r = lista_r;
-	}
-
-	public List<String> getLista_rvista() {
-		return lista_rvista;
-	}
-
-	public void setLista_rvista(List<String> lista_rvista) {
-		this.lista_rvista = lista_rvista;
 	}
 
 }

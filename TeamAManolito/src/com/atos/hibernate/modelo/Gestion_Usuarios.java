@@ -29,14 +29,12 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 	@Transactional(readOnly = true)
 	// Metodo que recibe un objeto usuario en base a un string recibido (PK-correo)
 	public Usuarios consultar_Das(String das) {
-		// TODO Auto-generated method stub
 
 		return usuariosdao.findById(das);
 
 	}
 
 	public Usuarios consultar_Correo(String correo) {
-		// TODO Auto-generated method stub
 
 		return usuariosdao.findById(correo);
 
