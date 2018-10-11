@@ -33,10 +33,12 @@ public class Gestion_Usuarios implements IGestion_Usuarios {
 		return usuariosdao.findById(das);
 
 	}
-
+	
+	@Override
+	@Transactional(readOnly = true)
 	public Usuarios consultar_Correo(String correo) {
 
-		return usuariosdao.findById(correo);
+		return usuariosdao.findByEmail(correo);
 
 	}
 

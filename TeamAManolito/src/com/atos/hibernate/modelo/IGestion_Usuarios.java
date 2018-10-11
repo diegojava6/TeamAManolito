@@ -16,5 +16,6 @@ public interface IGestion_Usuarios {
 	public void baja_Usuario(Usuarios usuario) throws DataAccessException;
 	public void modificacion_Usuario(Usuarios usuario);
 	public Usuarios consultar_conRol(String correo);
+	public Usuarios consultar_Correo(String correo);
 	
 }

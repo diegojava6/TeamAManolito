@@ -21,9 +21,6 @@ import com.atos.hibernate.Usuarios;
 
 public class UsuariosDAO {
 	private static final Logger log = LoggerFactory.getLogger(UsuariosDAO.class);
-	public static final String PASSWORD = "password";
-	public static final String CARPETA_DOCUMENTACION = "carpetaDocumentacion";
-	public static final String IDIOMA = "idioma";
 
 	private SessionFactory sessionFactory;
 
@@ -99,6 +96,21 @@ public class UsuariosDAO {
 			throw re;
 		}
 	}
+	
+	public Usuarios findByEmail(String correo) {
+
+		try {
+			String queryString = "from Usuarios as model where model.correo = :correo";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+			queryObject.setParameter("correo", correo);
+			return (Usuarios) queryObject.uniqueResult();
+
+		} catch (RuntimeException re) {
+			
+			throw re;
+		}
+	}
+
 
 	public List findAll() {
 		log.debug("finding all Usuarios instances");

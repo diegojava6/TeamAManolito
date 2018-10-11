@@ -113,7 +113,8 @@ public class Administrador_Bean implements Serializable {
 
 	public void baja(ActionEvent evento) {
 
-		//Cogemos nuevo objeto para no modificar a la vez los campos del usuario a dar la baja
+		// Cogemos nuevo objeto para no modificar a la vez los campos del usuario a dar
+		// la baja
 		Usuarios usu = gestion_usuarios.consultar_Das(usuario.getDas());
 		usu.setAccesoAplicacion(0);
 		gestion_usuarios.baja_Usuario(usu);
@@ -139,12 +140,28 @@ public class Administrador_Bean implements Serializable {
 	public void modificacion(ActionEvent evento) {
 
 		if (comprobar_campos()) {
-			usuario.setRoles(roles);
-			gestion_usuarios.modificacion_Usuario(usuario);
-			mensaje.crear_mensajes("info", "Modificación realizada!");
+
+			Usuarios usu = gestion_usuarios.consultar_Correo(usuario.getCorreo());
+			//CONTROLAR ESTO YA QUE ME SALE NULL AL MOD UN USER CON UN NUEVO CORREO NO REGISTRADO AUN!!
+			ATENCION!!!!
+			if (usu == null) {
+				if (usu.getCorreo().equals(usuario.getCorreo())
+						&& usu.getDas().toLowerCase().equals(usuario.getDas().toLowerCase())) {
+
+					// Guardar los roles de la consulta para que al no modificarlos los siga leyendo
+					usuario.setRoles(roles);
+					gestion_usuarios.modificacion_Usuario(usuario);
+					mensaje.crear_mensajes("info", "Modificación realizada!");
+				} else {
+					mensaje.crear_mensajes("error", "El correo ya esta en uso!");
+				}
+			}else {
+				mensaje.crear_mensajes("error", "El correo ya esta en uso");
+			}
 		} else {
 			mensaje.crear_mensajes("error", "Completa todos los campos!");
 		}
+
 	}
 
 	public void consulta(ActionEvent evento) {
