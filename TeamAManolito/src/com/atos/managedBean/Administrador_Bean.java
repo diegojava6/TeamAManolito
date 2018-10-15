@@ -142,9 +142,15 @@ public class Administrador_Bean implements Serializable {
 		if (comprobar_campos()) {
 
 			Usuarios usu = gestion_usuarios.consultar_Correo(usuario.getCorreo());
-			//CONTROLAR ESTO YA QUE ME SALE NULL AL MOD UN USER CON UN NUEVO CORREO NO REGISTRADO AUN!!
-			ATENCION!!!!
+
 			if (usu == null) {
+
+				// Guardar los roles de la consulta para que al no modificarlos los siga leyendo
+				usuario.setRoles(roles);
+				gestion_usuarios.modificacion_Usuario(usuario);
+				mensaje.crear_mensajes("info", "Modificación realizada!");
+			} else {
+				
 				if (usu.getCorreo().equals(usuario.getCorreo())
 						&& usu.getDas().toLowerCase().equals(usuario.getDas().toLowerCase())) {
 
@@ -152,11 +158,10 @@ public class Administrador_Bean implements Serializable {
 					usuario.setRoles(roles);
 					gestion_usuarios.modificacion_Usuario(usuario);
 					mensaje.crear_mensajes("info", "Modificación realizada!");
+
 				} else {
-					mensaje.crear_mensajes("error", "El correo ya esta en uso!");
+					mensaje.crear_mensajes("error", "El correo ya esta en uso");
 				}
-			}else {
-				mensaje.crear_mensajes("error", "El correo ya esta en uso");
 			}
 		} else {
 			mensaje.crear_mensajes("error", "Completa todos los campos!");
