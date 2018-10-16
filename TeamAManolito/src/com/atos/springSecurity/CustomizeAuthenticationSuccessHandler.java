@@ -37,7 +37,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 		HttpSession session = request.getSession(false);
 		
 	    if (session != null) {
-	       session.setMaxInactiveInterval(600);
+	       session.setMaxInactiveInterval(6);
 	    }
 
 		clearAuthenticationAttributes(request);

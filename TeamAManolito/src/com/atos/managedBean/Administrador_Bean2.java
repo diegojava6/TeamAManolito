@@ -19,7 +19,7 @@ import com.atos.util.Mensajes;
 public class Administrador_Bean2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Tareas tarea;
 	private Tareas tarea_nueva;
 	private List<Tareas> lista_tareas;
@@ -54,33 +54,44 @@ public class Administrador_Bean2 implements Serializable {
 
 	// opcion de alta
 	public void alta(ActionEvent evento) {
+		
+		boolean estado=false;
+		if(tarea.getEstado() != null) {
+			estado = true;
+		}
+		
+		if (tarea.getDesc() != "" || estado || tarea.getNombre_tarea() != "") {
 
-		Tareas t = gestion_tareas.consultar_Nombre(tarea.getNombre_tarea());
+			Tareas t = gestion_tareas.consultar_Nombre(tarea.getNombre_tarea());
 
-		if (t == null) {
-			if (tarea.getCodigo_tarea() != null) {
+			if (t == null) {
+				if (tarea.getCodigo_tarea() != null) {
 
-				mensaje.crear_mensajes("info", "El código de la tarea no se puede elegir, es automático");
+					tarea_nueva.setNombre_tarea(tarea.getNombre_tarea());
+					tarea_nueva.setDesc(tarea.getDesc());
+					tarea_nueva.setEstado(tarea.getEstado());
 
-				tarea_nueva.setNombre_tarea(tarea.getNombre_tarea());
-				tarea_nueva.setDesc(tarea.getDesc());
-				tarea_nueva.setEstado(tarea.getEstado());
+					gestion_tareas.alta_Tarea(tarea_nueva);
+					tarea = tarea_nueva;
+					
+					mensaje.crear_mensajes("info", "El código de la tarea no se puede elegir, es automático");
 
-				gestion_tareas.alta_Tarea(tarea_nueva);
-				tarea = tarea_nueva;
+				} else {
 
+					gestion_tareas.alta_Tarea(tarea);
+				}
+				
+				mensaje.crear_mensajes("info", "Alta realizada");
+
+				bot_alt = true;
+				bot_bm = false;
 			} else {
 
-				gestion_tareas.alta_Tarea(tarea);
+				mensaje.crear_mensajes("error", "Error en el alta!");
+
 			}
-			mensaje.crear_mensajes("info", "Alta realizada");
-
-			bot_alt = true;
-			bot_bm = false;
 		} else {
-
-			mensaje.crear_mensajes("error", "Error en el alta!");
-
+			mensaje.crear_mensajes("error", "Todos los campos menos el código son obligatorios!");
 		}
 
 	}
@@ -134,12 +145,6 @@ public class Administrador_Bean2 implements Serializable {
 		mensaje.crear_mensajes("info", "Tabla refrescada!");
 	}
 
-	
-	
-	
-	
-	
-	
 	public Tareas getTarea_nueva() {
 		return tarea_nueva;
 	}
