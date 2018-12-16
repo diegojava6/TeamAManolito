@@ -1,43 +1,24 @@
 package com.atos.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import static org.hibernate.criterion.Example.create;
-
+import org.hibernate.criterion.Criterion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.atos.hibernate.Roles;
 
-
-
-/**
- * A data access object (DAO) providing persistence and search support for Roles
- * entities. Transaction control of the save(), update() and delete() operations
- * can directly support Spring container-managed transactions or they can be
- * augmented to handle user-managed Spring transactions. Each of these methods
- * provides additional information for how to configure it for the desired type
- * of transaction control.
- * 
- * @see com.atrium.hibernate.Roles
- * @author MyEclipse Persistence Tools
- */
-@Repository("roles_dao")
-@Scope("prototype")
 public class RolesDAO {
 	private static final Logger log = LoggerFactory.getLogger(RolesDAO.class);
 	// property constants
-	public static final String DESCRIPCION_ROL = "descripcionRol";
+	public static final String DESCRIPCION_ROL = "descRol";
 
 	private SessionFactory sessionFactory;
 
@@ -75,11 +56,11 @@ public class RolesDAO {
 		}
 	}
 
-	public Roles findById(java.lang.Byte id) {
+	public Roles findById(Integer id) {
 		log.debug("getting Roles instance with id: " + id);
 		try {
 			Roles instance = (Roles) getCurrentSession().get(
-					"com.atrium.hibernate.Roles", id);
+					"com.atos.hibernate.Roles", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -87,11 +68,11 @@ public class RolesDAO {
 		}
 	}
 
-	public List<Roles> findByExample(Roles instance) {
+	/*public List<Roles> findByExample(Roles instance) {
 		log.debug("finding Roles instance by example");
 		try {
 			List<Roles> results = (List<Roles>) getCurrentSession()
-					.createCriteria("com.atrium.hibernate.Roles")
+					.createCriteria("com.atos.hibernate.Roles")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -100,9 +81,10 @@ public class RolesDAO {
 			log.error("find by example failed", re);
 			throw re;
 		}
-	}
+	}*/
 
-	public List findByProperty(String propertyName, Object value) {
+
+	public List<Roles> findByProperty(String propertyName, Object value) {
 		log.debug("finding Roles instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
@@ -117,14 +99,14 @@ public class RolesDAO {
 		}
 	}
 
-	public List<Roles> findByDescripcionRol(Object descripcionRol) {
-		return findByProperty(DESCRIPCION_ROL, descripcionRol);
+	public List<Roles> findByDescripcionRol(Object descRol) {
+		return findByProperty(DESCRIPCION_ROL, descRol);
 	}
 
 	public List findAll() {
 		log.debug("finding all Roles instances");
 		try {
-			String queryString = "from roles";
+			String queryString = "from Roles";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -171,4 +153,6 @@ public class RolesDAO {
 	public static RolesDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (RolesDAO) ctx.getBean("RolesDAO");
 	}
+	
+	
 }
